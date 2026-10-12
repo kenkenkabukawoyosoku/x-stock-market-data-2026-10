@@ -44,7 +44,7 @@
 | `1y` | 252営業日 | 追加 |
 | `earnings` | 次回決算発表を織り込んだ最初の終値 | 引け後発表なら翌営業日終値。発表日が63営業日超先なら `3m` 扱い |
 | `target_only` | 63営業日（上限） | 目標株価だけで期間なし。§3.3 参照 |
-| `unspecified` | 評価しない | メインスコア対象外 |
+| （期間も目標もない long/short） | — | v2 では記録しない（`predictions/schema.md` §1） |
 
 ### 2.3 ベンチマーク
 
@@ -94,6 +94,7 @@
 
 - **short ではない。** 「買わんでいい」は「空売りしろ」ではないため、新しい `direction: avoid` を作る。
 - 判定は short と同じ `dir = −1` で、超過リターンだけを見る（ベンチマークに劣後すれば hit）。
+- 期間が書かれていない avoid は既定 `1m`（`horizon_source: default`）。
 - ただし重みは 0.5（§スコアリング参照）。根拠: 逆張りの主張としては弱く、多くの銘柄が指数に劣後するという基準率の影響を受けやすい。
 
 ### 3.3 目標株価つきの予想
@@ -163,7 +164,7 @@ def evaluate(pred, prices, bench, cal):
         t0 = first_close_meeting(pred.entry_condition, after=t0, within=63) or VOID
     t1 = horizon_end(t0, pred.time_horizon, pred.ticker, cal)  # §2.2
     if t1 is None:
-        return VOID("unspecified horizon")
+        return VOID("no horizon")  # v2 では抽出段階で除外済みのはず
     if today < t1:
         return OPEN
 

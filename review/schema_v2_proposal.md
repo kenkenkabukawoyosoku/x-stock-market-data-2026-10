@@ -1,6 +1,8 @@
 # スキーマ改訂案 v2（P1-5）
 
-対象: `predictions/schema.md`（v1）。機械検証用の定義は [`prediction.schema.v2.json`](./prediction.schema.v2.json)（JSON Schema 2020-12）。
+> **採用済み（2026-10-13）**。最新の定義は [`predictions/schema.md`](../predictions/schema.md)。採用時に「期間なしの avoid は既定 1m」「promo_flags は語彙を固定」を追加した。
+
+対象: `predictions/schema.md`（v1）。機械検証用の定義は [`predictions/prediction.schema.json`](../predictions/prediction.schema.json)（JSON Schema 2020-12）。
 適用する場合は HANDOFF §12 のとおり、`predictions/schema.md` と HANDOFF.md を先に更新すること。
 
 ---
@@ -99,4 +101,4 @@ v1 の `evaluated_at` / `actual_move_pct` はこのオブジェクトに移す�
   - `predictions/raw/YYYY-MM-DD.jsonl` … 抽出結果（追記のみ、書き換えない）
   - `predictions/evaluations/YYYY-MM-DD.jsonl` … 評価結果（`id` で紐付け）
 - 抽出（Grok）と評価（別プロセス）が同じファイルを書き換えないようにすると、責任範囲（HANDOFF §2）とも一致する。
-- 追記前に `prediction.schema.v2.json` で検証し、通らないレコードは `predictions/rejected/` に理由つきで退避する。
+- 追記前に `predictions/prediction.schema.json` で検証し、通らないレコードは `predictions/rejected/` に理由つきで退避する。

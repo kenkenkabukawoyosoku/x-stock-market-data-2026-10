@@ -8,7 +8,7 @@
 [Grok 収集] ──► predictions/raw/YYYY-MM-DD.jsonl   （追記のみ）
                        │
                        ▼
-              (1) validate  … prediction.schema.v2.json で検証
+              (1) validate  … predictions/prediction.schema.json で検証
                        │      NG → predictions/rejected/ に理由つきで退避
                        ▼
               (2) dedupe    … 同一作者×銘柄×方向で評価期間中 → reiterations++

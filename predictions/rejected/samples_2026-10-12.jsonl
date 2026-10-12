@@ -1,0 +1,8 @@
+{"post_url": "https://x.com/FrankCurzio/status/2109616527649772006", "ticker": "SECTOR", "v1_id": "2109616527649772006-sector", "reason": "no_instrument", "detail": "セクター名が本文になく評価不能。セクター名が分かればセクターETFで再抽出（GROK_HANDOFF.md T2）", "fix_by": "grok"}
+{"post_url": "https://x.com/FrankCurzio/status/2108172662606606592", "ticker": "CEG", "v1_id": "2108172662606606592-CEG", "reason": "news_relay", "detail": "Google–Constellation の契約ニュースの紹介で予想ではない。time_horizon 3m は本文に根拠なし。「6 other nuclear stocks」が予想なら別途抽出（GROK_HANDOFF.md T2）", "fix_by": "grok"}
+{"post_url": "https://x.com/FrankCurzio/status/2108172810233557114", "ticker": "VST", "v1_id": "2108172810233557114-VST", "reason": "target_value_missing", "detail": "「高値回帰」は target_only・target_price_type prior_high で採用可能だが、投稿時点の過去最高値（終値）の数値が必要（GROK_HANDOFF.md T3）", "fix_by": "grok"}
+{"post_url": "https://x.com/fslimkn/status/2106637094357709066", "ticker": "5201,8136,5232,4528,4503", "v1_id": null, "reason": "no_horizon_no_target", "detail": "「今買うべき日本株」。方向は明確だが期間も目標もないため v2 条件3で不採用"}
+{"post_url": "https://x.com/KimizqSmile/status/2109279239925047659", "ticker": "NVDA,MSFT,GOOGL,AMZN,SPY,PLTR,TSLA", "v1_id": null, "reason": "watch_only", "detail": "Stocks to Watch / Be Careful With は方向が弱い"}
+{"post_url": "https://x.com/DeItaone/status/2109638721448358058", "ticker": "SPX", "v1_id": null, "reason": "third_party_view", "detail": "Goldman の見解の転載"}
+{"post_url": "https://x.com/tobuzou321/status/2109651826622816604", "ticker": "ARM,INTC,AMD", "v1_id": null, "reason": "post_hoc_report", "detail": "保有ポジションの事後報告。アカウント閉鎖告知"}
+{"post_url": "https://x.com/drayinvests/status/2105765410763116687", "ticker": "APP,CELH,SOFI,RDDT,ORCL,NFLX,...", "v1_id": null, "reason": "no_horizon_no_target", "detail": "ドローダウン中の優良株リスト"}

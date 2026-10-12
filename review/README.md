@@ -1,7 +1,13 @@
 # レビュー結果（収集以外）
 
 HANDOFF.md §9 の依頼（P0〜P2）に対するレビューと設計案です。
-**どれも提案で、既存の `predictions/` と `candidates/` のファイルは書き換えていません。** 採用する場合は HANDOFF §12 の手順（schema.md と HANDOFF.md を先に更新）で反映してください。
+**2026-10-13 に採用・反映済み**（`candidates/` を除く）:
+
+- `predictions/schema.md` を v2 に改訂、`predictions/prediction.schema.json` と `scripts/validate_predictions.py` を追加
+- `predictions/samples_2026-10-12.json` を v2 に移行、除外分は `predictions/rejected/`
+- X の確認が必要な作業（候補リストの整理、スレッドの再取得など）は [`GROK_HANDOFF.md`](../GROK_HANDOFF.md) で Grok に引き継ぎ
+
+`schema_v2_proposal.md` は採用時の議論の記録として残しています。最新の定義は `predictions/schema.md` が正です。
 
 レビュー日: 2026-10-13（JST）
 
@@ -13,7 +19,7 @@ HANDOFF.md §9 の依頼（P0〜P2）に対するレビューと設計案です�
 | P0-2 | スコアリング式（サンプル数ペナルティ込み） | [scoring.md](./scoring.md) |
 | P0-3 | サンプル予想の抽出品質レビュー | [samples_review_2026-10-12.md](./samples_review_2026-10-12.md) |
 | P1-4 | 候補リストの偏りと改善案 | [candidates_review.md](./candidates_review.md) |
-| P1-5 | スキーマ改訂案 | [schema_v2_proposal.md](./schema_v2_proposal.md), [prediction.schema.v2.json](./prediction.schema.v2.json) |
+| P1-5 | スキーマ改訂案 | [schema_v2_proposal.md](./schema_v2_proposal.md) → 採用版は [predictions/schema.md](../predictions/schema.md) |
 | P1-6 | 公開時の注意書き | [disclaimer.md](./disclaimer.md) |
 | P2-7, 8 | パイプライン設計・レポートのテンプレート | [pipeline_and_report.md](./pipeline_and_report.md) |
 

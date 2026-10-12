@@ -33,7 +33,7 @@ w_i = w_type × w_post × w_horizon
 |---|---|---|
 | `w_type` | long/short = 1.0、avoid = 0.5、conditional = 1.0 | avoid は主張が弱い |
 | `w_post` | 1 / `post_ticker_count` | 「今週上がる10銘柄」を1投稿で出すと10件分の重みになるのを防ぐ。1投稿＝1意見 |
-| `w_horizon` | `explicit` = 1.0、`inferred` = 0.7、`target_only` = 0.5 | 期間を自分で明示した予想を優先 |
+| `w_horizon` | `horizon_source` が `explicit` = 1.0、`inferred` = 0.7、`default`（`target_only` と期間なしの avoid）= 0.5 | 期間を自分で明示した予想を優先 |
 
 **実効サンプル数**: `n_eff = (Σw)² / Σw²`。ランキングの掲載条件は件数ではなくこの値で判定する。
 

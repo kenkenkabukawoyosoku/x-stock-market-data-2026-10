@@ -5,7 +5,8 @@ GrokでX（Twitter）から収集した**日米個別銘柄・株式市場**関�
 
 ## 他のAI向け引き継ぎ
 
-収集以外のレビュー・評価設計は **[HANDOFF.md](./HANDOFF.md)** を読んでください。
+収集以外のレビュー・評価設計は **[HANDOFF.md](./HANDOFF.md)** を読んでください。  
+Grok（収集担当）への作業依頼は **[GROK_HANDOFF.md](./GROK_HANDOFF.md)** にあります。
 
 ## データ概要
 
@@ -21,10 +22,13 @@ GrokでX（Twitter）から収集した**日米個別銘柄・株式市場**関�
 ## ファイル構成
 
 - `HANDOFF.md` … **他AI向け引き継ぎ書（収集以外のレビュー用）**
+- `GROK_HANDOFF.md` … Grok 向け作業依頼（候補リスト整理・再取得・Automation の v2 対応）
 - `data/stock_posts.json` … 構造化データ
 - `data/stock_posts.jsonl` … 1行1投稿
 - `candidates/` … 予想精度検証用の候補ユーザーリスト（JP/US 各約50人）
-- `predictions/` … 抽出スキーマ・サンプル予想
+- `predictions/` … 抽出スキーマ（v2）・サンプル予想
+- `review/` … 判定ルール・スコア設計・レビュー結果
+- `scripts/validate_predictions.py` … 予想レコードのスキーマ検証
 - `README.md` … このファイル
 
 ## 候補ユーザーリストについて
