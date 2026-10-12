@@ -35,6 +35,7 @@ X（Twitter）上で**日米の個別銘柄・投資見解を定期発信して�
 x-stock-market-data-2026-10/
 ├── README.md
 ├── HANDOFF.md                 ← 本ファイル
+├── CHANGELOG.md               # 作業ログ・Grok と他AIの相互引き継ぎ（毎回読む・書く）
 ├── GROK_HANDOFF.md            # Grok 向け収集手順と作業依頼（候補整理・再取得・Automation v2）
 ├── scripts/
 │   └── validate_predictions.py # v2 スキーマ検証
@@ -240,25 +241,30 @@ x-stock-market-data-2026-10/
 
 ## 11. 次の人間/AIが最初に読む順
 
-1. 本 `HANDOFF.md`
-2. `review/README.md`（§9 のレビュー結果の要点）。Grok は `GROK_HANDOFF.md`
-3. `predictions/schema.md`
-4. `predictions/samples_2026-10-12.json`
-5. `candidates/jp_candidates.json` / `us_candidates.json`
-6. 必要なら `data/stock_posts.json`（文脈用）
+1. `CHANGELOG.md`（相手の直近の作業と申し送り）
+2. 本 `HANDOFF.md`
+3. `review/README.md`（§9 のレビュー結果の要点）。Grok は `GROK_HANDOFF.md`
+4. `predictions/schema.md`
+5. `predictions/samples_2026-10-12.json`
+6. `candidates/jp_candidates.json` / `us_candidates.json`
+7. 必要なら `data/stock_posts.json`（文脈用）
 
 ---
 
 ## 12. 連絡・更新
 
+- **作業の前に `CHANGELOG.md` の新しいエントリを読み、作業の後にエントリを追加する**（Grok・他AI共通。ルールは同ファイル冒頭）
 - 収集結果の追記はGrok Automationが行う想定
 - スキーマや評価ルールの変更は、本ドキュメントと `predictions/schema.md` を更新してから適用すること
 - 大きな方針変更時は `HANDOFF.md` の日付と「変更履歴」を追記する
 
 ### 変更履歴
+
+この表は本文書の改訂だけを書く。日々の作業は `CHANGELOG.md`。
 | 日付 | 内容 |
 |------|------|
 | 2026-10-13 | 初版。候補リスト・抽出schema・サンプル・二重Automation（JP 08:00 / US 22:00）まで完了。収集以外を他AIレビュー用に切り出し。 |
 | 2026-10-13 | `review/` を追加。§9 の P0〜P2 に対するレビュー・設計案（Claude）。 |
 | 2026-10-13 | レビューを反映: `predictions/schema.md` を v2 に改訂、JSON Schema と検証スクリプトを追加、サンプルを v2 に移行（10件、除外8件は `rejected/`）。X 上の作業を `GROK_HANDOFF.md` で Grok に依頼（Claude）。 |
 | 2026-10-13 | Grok が main に追加した `GROK_HANDOFF.md`（収集手順）と Claude 版（作業依頼）を統合。08:00 JP 出力 `predictions/2026-10-13.json` を v2 に変換（採用2件 → `raw/2026-10-13.jsonl`、除外2件 → `rejected/`、原本は `archive_v1/`）（Claude）。 |
+| 2026-10-13 | `CHANGELOG.md` を新設し、作業ログと相互引き継ぎをそこに一本化（Claude）。 |

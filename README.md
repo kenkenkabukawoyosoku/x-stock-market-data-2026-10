@@ -9,6 +9,7 @@ GrokでX（Twitter）から収集した**日米個別銘柄・株式市場**関�
 |----------|------|
 | **[GROK_HANDOFF.md](./GROK_HANDOFF.md)** | Grok（収集・Automation・一次抽出・作業依頼） |
 | **[HANDOFF.md](./HANDOFF.md)** | 他のAI（評価設計・レビュー） |
+| **[CHANGELOG.md](./CHANGELOG.md)** | 両者共通：作業ログと申し送り（作業の前に読み、後に書く） |
 
 ## データ概要
 

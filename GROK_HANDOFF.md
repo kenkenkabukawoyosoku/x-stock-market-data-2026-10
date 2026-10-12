@@ -5,6 +5,8 @@
 **リポジトリ**: https://github.com/kenkenkabukawoyosoku/x-stock-market-data-2026-10
 **対になる文書**: [HANDOFF.md](./HANDOFF.md)（他AI向け・評価・レビュー）
 
+> **作業を始める前に必ず [CHANGELOG.md](./CHANGELOG.md) の新しいエントリを読み、終わったらエントリを追加すること**（Claude との相互引き継ぎ。ルールは CHANGELOG.md 冒頭）。
+>
 > **最初に §3 を読むこと。** 2026-10-13 に抽出ルールと出力形式が v2 に変わった。
 > 08:00 の JP Automation 出力（v1 形式）は Claude が v2 に変換済み（§3.3）。**次回の実行から Automation の指示文を §4.2 に差し替える**必要がある。
 
@@ -28,6 +30,7 @@
 
 ```
 x-stock-market-data-2026-10/
+├── CHANGELOG.md             ← ★作業ログ・相互引き継ぎ（毎回読む・書く）
 ├── GROK_HANDOFF.md          ← 本ファイル（収集手順・作業依頼）
 ├── HANDOFF.md               ← 他AI向け
 ├── README.md
@@ -100,12 +103,14 @@ v1 の `predictions/2026-10-13.json`（4件）は `predictions/archive_v1/` に�
 
 ### 4.1 Automation の流れ
 
+0. `CHANGELOG.md` の Claude からの申し送り（`→ Grok`）を確認する
 1. `from:username` で候補全員（または実用上の優先サブセット）の直近24時間を収集
 2. スレッド・ランキング形式は続きも取得（`x_thread_fetch`）
 3. §4.2 の条件で抽出し、`predictions/raw/YYYY-MM-DD.jsonl` に追記、除外分を `rejected/` に追記
 4. 前日までの `status: open` の投稿が消えていないか確認し、消えていれば `deletions.jsonl` に追記
-5. 会話に summary を返す
-6. 投資助言ではない旨を守る
+5. `CHANGELOG.md` の一番上にエントリを追加する（同じコミットで）
+6. 会話に summary を返す
+7. 投資助言ではない旨を守る
 
 ### 4.2 Automation に貼る指示文（v2・両 Automation 共通）
 
@@ -147,6 +152,13 @@ v1 の `predictions/2026-10-13.json`（4件）は `predictions/archive_v1/` に�
 - 値動きを見てから、当たっていそうな投稿を選ぶこと（36時間以上前の投稿は backfill: true）。
 - 削除された投稿のレコードを消すこと。
 - 既存の行を書き換えること（訂正は新しい行で）。
+
+【作業ログ（CHANGELOG.md）】
+- 実行の最初に CHANGELOG.md を読み、Claude からの申し送り（「→ Grok」で始まる行）で未対応のものを確認する。
+  対応できるものは対応し、できないものは理由を書く。
+- 実行の最後に、CHANGELOG.md の「ログ（新しい順）」の一番上に、冒頭のテンプレートでエントリを1つ追加する。
+  予想0件でも書く。予想を追記したファイルと同じコミットに入れる。
+- エントリに書いたファイルが実際に変更されているか確認してからコミットする。
 
 【返答の summary に書くこと】
 新規予想の件数（JP/US）、rejected の件数と主な理由、backfill の件数、削除を検知した件数、気になった傾向（2〜3文）。
@@ -363,6 +375,7 @@ US 側には下限の定義がないので、同じ基準を使う。
 - Xのレート・件数上限があるため「全員の全投稿」はベストエフォート
 - `status` は常に `open`、`evaluation` は常に `null`（評価は後工程）
 - 値動きを見てから投稿を選ばない（後知恵の防止）
+- 作業の前後に `CHANGELOG.md` を読み・書く（コミットメッセージだけで済ませない）
 - schema変更は独断でしない。変更するなら `schema.md` + `prediction.schema.json` + `HANDOFF.md` + 本ファイルを同じコミットで更新
 
 ---
@@ -405,21 +418,24 @@ python3 scripts/validate_predictions.py predictions/raw/*.jsonl
 
 | タスク | 状態 | 日付 | メモ |
 |---|---|---|---|
-| T1 JNR63 スレッド続き | 未着手 | | |
-| T2 FrankCurzio セクター・6銘柄 | 未着手 | | |
-| T3 VST 目標値 | 未着手 | | |
-| T4 原文確認 | 未着手 | | |
-| T5 候補リスト整理 | 未着手 | | |
-| T6 Automation v2 | 未着手 | | |
-| T7 削除追跡 | 未着手 | | |
-| T8 定期見直し | 未着手 | | |
-| T9 kei_toshi ランキング | 未着手 | | |
+| T1 JNR63 スレッド続き | 完了（続きなし） | 2026-10-13 | rejected に thread_not_found。銘柄数は4のまま |
+| T2 FrankCurzio セクター・6銘柄 | 完了・要確認 | 2026-10-13 | 11件追記。SKYY/SOXX/URA の期間根拠と post_ticker_count を CHANGELOG で確認依頼 |
+| T3 VST 目標値 | 完了 | 2026-10-13 | 216.67（2025-09-22 終値） |
+| T4 原文確認 | 完了 | 2026-10-13 | 差異なし（`predictions/TASK_LOG_2026-10-13.md`） |
+| T5 候補リスト整理 | 一部 | 2026-10-13 | 方針は `candidates/STATUS_UPDATES_2026-10-13.md`。**candidates/*.json は未反映**、followers 未記入 |
+| T6 Automation v2 | 完了 | 2026-10-13 | 作業ログ（CHANGELOG）の段落の追加が残り |
+| T7 削除追跡 | 継続中 | 2026-10-13 | 初回確認では削除なし |
+| T8 定期見直し | 未着手 | | 11/1 から |
+| T9 kei_toshi ランキング | 完了（他順位なし） | 2026-10-13 | |
 
 ---
 
 ## 13. 変更履歴
 
+この表は本文書の改訂だけを書く。日々の作業は [CHANGELOG.md](./CHANGELOG.md)。
+
 | 日付 | 内容 |
 |------|------|
 | 2026-10-13 | 初版（Grok）。JP 08:00 / US 22:00 の全員対象Automation、schema、candidates、日次predictions出力方針を固定。 |
 | 2026-10-13 | Claude 版（作業依頼 T1〜T8）と統合。抽出ルール・出力形式を v2 に更新（出力先 `predictions/raw/*.jsonl`）。08:00 JP 出力を v2 に変換し旧ファイルは `archive_v1/` へ。T9 を追加。 |
+| 2026-10-13 | CHANGELOG.md による相互引き継ぎのルールを追加（冒頭、§4.1、§4.2、§9）。§12 を Grok の作業結果で更新（Claude）。 |
