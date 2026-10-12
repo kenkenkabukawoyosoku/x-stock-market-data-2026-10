@@ -42,10 +42,20 @@ x-stock-market-data-2026-10/
 │   ├── README.md
 │   ├── jp_candidates.json     # 日本株候補 約50人
 │   └── us_candidates.json     # 米国株候補 約50人
-└── predictions/
-    ├── README.md
-    ├── schema.md              # 抽出ルール・JSONスキーマ
-    └── samples_2026-10-12.json # 初期サンプル予想（未評価）
+├── predictions/
+│   ├── README.md
+│   ├── schema.md              # 抽出ルール・JSONスキーマ
+│   └── samples_2026-10-12.json # 初期サンプル予想（未評価）
+└── review/                    # §9 のレビュー結果（提案。既存ファイルは未変更）
+    ├── README.md              # 要点と索引
+    ├── evaluation_rules.md    # P0-1 的中判定ルール
+    ├── scoring.md             # P0-2 スコアリング式
+    ├── samples_review_2026-10-12.md # P0-3 抽出品質レビュー
+    ├── candidates_review.md   # P1-4 候補リストの偏り
+    ├── schema_v2_proposal.md  # P1-5 スキーマ改訂案
+    ├── prediction.schema.v2.json
+    ├── disclaimer.md          # P1-6 注意書き
+    └── pipeline_and_report.md # P2-7,8 パイプライン・レポート
 ```
 
 ---
@@ -213,10 +223,11 @@ x-stock-market-data-2026-10/
 ## 11. 次の人間/AIが最初に読む順
 
 1. 本 `HANDOFF.md`
-2. `predictions/schema.md`
-3. `predictions/samples_2026-10-12.json`
-4. `candidates/jp_candidates.json` / `us_candidates.json`
-5. 必要なら `data/stock_posts.json`（文脈用）
+2. `review/README.md`（§9 のレビュー結果の要点。未採用の提案）
+3. `predictions/schema.md`
+4. `predictions/samples_2026-10-12.json`
+5. `candidates/jp_candidates.json` / `us_candidates.json`
+6. 必要なら `data/stock_posts.json`（文脈用）
 
 ---
 
@@ -230,3 +241,4 @@ x-stock-market-data-2026-10/
 | 日付 | 内容 |
 |------|------|
 | 2026-10-13 | 初版。候補リスト・抽出schema・サンプル・二重Automation（JP 08:00 / US 22:00）まで完了。収集以外を他AIレビュー用に切り出し。 |
+| 2026-10-13 | `review/` を追加。§9 の P0〜P2 に対するレビュー・設計案（Claude）。採否は未決定。既存の schema・サンプル・候補リストは未変更。 |

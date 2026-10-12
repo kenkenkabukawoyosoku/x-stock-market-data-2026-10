@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/kenkenkabukawoyosoku/x-stock-market-data-2026-10/review/prediction.schema.v2.json",
+  "title": "Prediction record v2 (proposal)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "id", "post_id", "post_url", "author", "posted_at", "collected_at",
+    "backfill", "source_type", "ticker", "market", "instrument_type", "direction",
+    "target_price", "stated_price_at_post", "time_horizon", "horizon_source",
+    "post_ticker_count", "raw_text", "status"
+  ],
+  "properties": {
+    "schema_version": { "const": "2.0" },
+    "id": { "type": "string", "pattern": "^[0-9]+-[0-9A-Z.]+-(long|short|avoid|neutral)$" },
+    "post_id": { "type": "string", "pattern": "^[0-9]+$" },
+    "post_url": { "type": "string", "pattern": "^https://x\\.com/[A-Za-z0-9_]+/status/[0-9]+$" },
+    "author": { "type": "string", "pattern": "^@[A-Za-z0-9_]{1,15}$" },
+    "posted_at": { "type": "string", "format": "date-time" },
+    "collected_at": { "type": "string", "format": "date-time" },
+    "extracted_by": { "type": "string" },
+    "backfill": { "type": "boolean" },
+    "source_type": { "enum": ["original", "quote", "reply", "thread"] },
+    "thread_root_id": { "type": ["string", "null"] },
+    "ticker": { "type": "string", "pattern": "^([0-9]{3}[0-9A-Z]|[A-Z][A-Z.]{0,5})$" },
+    "market": { "enum": ["JP", "US"] },
+    "instrument_type": { "enum": ["stock", "etf", "sector_etf"] },
+    "direction": { "enum": ["long", "short", "avoid", "neutral"] },
+    "entry_condition": { "type": ["string", "null"] },
+    "target_price": { "type": ["number", "null"], "exclusiveMinimum": 0 },
+    "target_price_type": { "enum": ["point", "lower_bound", "upper_bound", "prior_high", null] },
+    "stop_price": { "type": ["number", "null"], "exclusiveMinimum": 0 },
+    "stated_price_at_post": { "type": ["number", "null"], "exclusiveMinimum": 0 },
+    "time_horizon": {
+      "enum": ["1d", "this_week", "1w", "2w", "1m", "3m", "6m", "1y", "earnings", "target_only"]
+    },
+    "horizon_source": { "enum": ["explicit", "inferred", "default"] },
+    "horizon_raw_text": { "type": ["string", "null"] },
+    "post_ticker_count": { "type": "integer", "minimum": 1 },
+    "rank_in_post": { "type": ["integer", "null"], "minimum": 1 },
+    "raw_text": { "type": "string", "minLength": 1 },
+    "strength": { "enum": ["strong", "normal", "weak"] },
+    "promo_flags": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+    "reiterations": { "type": "integer", "minimum": 0 },
+    "post_deleted_at": { "type": ["string", "null"], "format": "date-time" },
+    "status": { "enum": ["open", "hit", "miss", "flat", "void"] },
+    "evaluation": {
+      "type": ["object", "null"],
+      "properties": {
+        "evaluated_at": { "type": "string", "format": "date-time" },
+        "entry_date": { "type": "string", "format": "date" },
+        "entry_price": { "type": "number" },
+        "exit_date": { "type": "string", "format": "date" },
+        "exit_price": { "type": "number" },
+        "price_mismatch": { "type": "boolean" },
+        "benchmark": { "type": "string" },
+        "return_pct": { "type": "number" },
+        "benchmark_return_pct": { "type": "number" },
+        "excess_return_pct": { "type": "number" },
+        "sigma_h_pct": { "type": "number", "exclusiveMinimum": 0 },
+        "z_score": { "type": "number", "minimum": -3, "maximum": 3 },
+        "theta_pct": { "type": "number" },
+        "target_reached": { "type": ["boolean", "null"] },
+        "target_reached_at": { "type": ["string", "null"], "format": "date" },
+        "target_touched_intraday": { "type": ["boolean", "null"] },
+        "progress": { "type": ["number", "null"], "minimum": -1, "maximum": 1 },
+        "max_favorable_pct": { "type": "number" },
+        "max_adverse_pct": { "type": "number" },
+        "void_reason": { "type": ["string", "null"] },
+        "corporate_action": { "type": ["string", "null"] },
+        "price_source": { "type": "string" },
+        "price_snapshot": { "type": "string" }
+      }
+    },
+    "notes": { "type": "string" }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "time_horizon": { "const": "target_only" } } },
+      "then": { "properties": { "target_price": { "type": "number" } } }
+    },
+    {
+      "if": { "properties": { "status": { "enum": ["hit", "miss", "flat", "void"] } } },
+      "then": { "required": ["evaluation"], "properties": { "evaluation": { "type": "object" } } }
+    }
+  ]
+}
