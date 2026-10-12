@@ -7,7 +7,8 @@ GrokでX（Twitter）から収集した**日米個別銘柄・株式市場**関�
 
 | ファイル | 対象 |
 |----------|------|
-| **[GROK_HANDOFF.md](./GROK_HANDOFF.md)** | Grok（収集・Automation・一次抽出・作業依頼） |
+| **[GROK_HANDOFF.md](./GROK_HANDOFF.md)** | Grok（X 上の作業：投稿収集・アカウント確認・削除確認） |
+| **[CLAUDE.md](./CLAUDE.md)** | Claude（メイン：抽出・候補リスト・評価・文書） |
 | **[HANDOFF.md](./HANDOFF.md)** | 他のAI（評価設計・レビュー） |
 | **[CHANGELOG.md](./CHANGELOG.md)** | 両者共通：作業ログと申し送り（作業の前に読み、後に書く） |
 
@@ -25,12 +26,14 @@ GrokでX（Twitter）から収集した**日米個別銘柄・株式市場**関�
 ## ファイル構成
 
 - `GROK_HANDOFF.md` … **Grok向け収集手順と作業依頼**
+- `CLAUDE.md` … Claude向け作業手順
+- `posts/` … Grok が収集した投稿スナップショット（選別なし）
 - `HANDOFF.md` … 他AI向け評価・レビュー
 - `data/` … 初期スナップショット
 - `candidates/` … 候補ユーザー（JP/US 各約50人）
 - `predictions/` … 抽出スキーマ（v2）・日次予想（`raw/`）
 - `review/` … 判定ルール・スコア設計・レビュー結果
-- `scripts/validate_predictions.py` … 予想レコードのスキーマ検証
+- `scripts/validate_*.py` … 予想・投稿・アカウント情報のスキーマ検証
 - `README.md` … このファイル
 
 ## 自動化（収集）

@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Account facts collected by Grok",
+  "oneOf": [
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "username", "checked_at", "account_state"],
+      "properties": {
+        "type": { "const": "account_check" },
+        "username": { "type": "string", "pattern": "^[A-Za-z0-9_]{1,15}$" },
+        "checked_at": { "type": "string", "format": "date-time" },
+        "account_state": { "enum": ["active", "protected", "suspended", "deleted", "closing_announced"] },
+        "followers": { "type": ["integer", "null"], "minimum": 0 },
+        "account_created_at": { "type": ["string", "null"] },
+        "posts_last_30d": { "type": ["integer", "null"], "minimum": 0 },
+        "stock_posts_last_30d": { "type": ["integer", "null"], "minimum": 0 },
+        "observations": { "type": "array", "items": { "type": "string" } },
+        "notes": { "type": "string" }
+      }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "username", "checked_at", "market", "found_by", "sample_post_urls"],
+      "properties": {
+        "type": { "const": "candidate_proposal" },
+        "username": { "type": "string", "pattern": "^[A-Za-z0-9_]{1,15}$" },
+        "checked_at": { "type": "string", "format": "date-time" },
+        "market": { "enum": ["JP", "US"] },
+        "followers": { "type": ["integer", "null"], "minimum": 0 },
+        "account_created_at": { "type": ["string", "null"] },
+        "stock_posts_last_30d": { "type": ["integer", "null"], "minimum": 0 },
+        "found_by": { "type": "string" },
+        "sample_post_urls": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+        "notes": { "type": "string" }
+      }
+    }
+  ]
+}

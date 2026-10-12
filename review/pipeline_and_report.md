@@ -5,7 +5,10 @@
 ## 1. パイプライン全体
 
 ```
-[Grok 収集] ──► predictions/raw/YYYY-MM-DD.jsonl   （追記のみ）
+[Grok 収集] ──► posts/YYYY-MM-DD.jsonl（選別なし）
+                       │
+                       ▼
+[Claude 抽出] ──► predictions/raw/YYYY-MM-DD.jsonl
                        │
                        ▼
               (1) validate  … predictions/prediction.schema.json で検証
@@ -26,7 +29,8 @@
 
 | 段階 | 実行タイミング | 入力 | 出力 | 担当 |
 |---|---|---|---|---|
-| 収集・抽出 | 毎日 JP 08:00 / US 22:00 | X | `raw/` | Grok |
+| 収集 | 毎日 JP 08:00 / US 22:00 | X | `posts/` | Grok |
+| 抽出 | 収集の後 | `posts/` | `raw/`, `rejected/` | Claude |
 | validate / dedupe | 収集直後 | `raw/` | `raw/`（確定）, `rejected/` | 評価側 |
 | prices | 毎日 JP 16:00 / US 07:00（JST） | 銘柄一覧 | `prices/` | 評価側 |
 | evaluate | prices の直後 | `raw/`, `prices/` | `evaluations/` | 評価側 |

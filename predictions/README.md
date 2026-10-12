@@ -9,16 +9,16 @@
 | `schema.md` | 抽出ルールとフィールド定義（v2） | — |
 | `prediction.schema.json` | 機械検証用 JSON Schema | — |
 | `samples_2026-10-12.json` | 初期サンプル予想（v2 移行済み・未評価） | — |
-| `raw/YYYY-MM-DD.jsonl` | 日次の抽出結果（追記のみ） | Grok |
-| `rejected/YYYY-MM-DD.jsonl` | 記録しなかった候補と理由 | Grok |
+| `raw/YYYY-MM-DD.jsonl` | 日次の抽出結果（`posts/` から抽出） | Claude |
+| `rejected/YYYY-MM-DD.jsonl` | 記録しなかった候補と理由 | Claude |
 | `deletions.jsonl` | 削除を検知した投稿（`{"id", "post_deleted_at"}`） | Grok |
 | `evaluations/YYYY-MM-DD.jsonl` | 評価結果 | 評価側 |
 | `archive_v1/` | v1 形式の旧出力（参照のみ） | — |
 
 ## 運用フロー
 
-1. **収集** … 候補ユーザーの最新投稿を取得（Grok）
-2. **抽出** … `schema.md` の条件を満たす予想だけを `raw/` に追記（Grok）
+1. **収集** … 候補ユーザーの投稿を選別せず `posts/` に保存（Grok）
+2. **抽出** … `posts/` から `schema.md` の条件を満たす予想だけを `raw/` に記録（Claude）
 3. **検証** … `python3 scripts/validate_predictions.py predictions/raw/*.jsonl`
 4. **評価** … 期間経過後に `review/evaluation_rules.md` で判定し `evaluations/` に記録
 5. **集計** … `review/scoring.md` でユーザー別に集計

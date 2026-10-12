@@ -38,7 +38,7 @@ v1 からの主な変更: `direction` に `avoid` を追加、`time_horizon` か
 | `post_url` | ✓ | `https://x.com/{user}/status/{id}` | |
 | `author` | ✓ | `@username` | |
 | `posted_at` | ✓ | ISO8601 | |
-| `collected_at` | ✓ | ISO8601 | Grok が投稿を取得した時刻 |
+| `collected_at` | ✓ | ISO8601 | Grok が投稿を取得した時刻（`posts/` の `collected_at` をそのまま使う） |
 | `extracted_by` | | 文字列 | 例 `grok-automation/daily-jp@2026-10-13` |
 | `backfill` | ✓ | bool | `collected_at − posted_at > 36時間` なら true |
 | `source_type` | ✓ | `original \| quote \| reply \| thread` | thread = スレッドの2投稿目以降 |
@@ -55,7 +55,7 @@ v1 からの主な変更: `direction` に `avoid` を追加、`time_horizon` か
 | `time_horizon` | ✓ | `1d \| this_week \| 1w \| 2w \| 1m \| 3m \| 6m \| 1y \| earnings \| target_only` | 「明日」=1d、「今週」=this_week |
 | `horizon_source` | ✓ | `explicit \| inferred \| default` | |
 | `horizon_raw_text` | | 文字列 \| null | 時間軸の根拠になった原文 |
-| `post_ticker_count` | ✓ | 整数 ≥1 | 同じ投稿（スレッドならスレッド全体）の銘柄数 |
+| `post_ticker_count` | ✓ | 整数 ≥1 | 同じ投稿（スレッドならスレッド全体）から**記録した予想の数**。重み 1/n に使う |
 | `rank_in_post` | | 整数 \| null | ランキング形式の順位 |
 | `raw_text` | ✓ | 文字列 | 予想部分の原文 |
 | `strength` | | `strong \| normal \| weak` | |
@@ -68,7 +68,9 @@ v1 からの主な変更: `direction` に `avoid` を追加、`time_horizon` か
 
 ### 担当の分け方
 
-- **収集・抽出側（Grok）が書く**: `status` / `evaluation` 以外のすべて。`status` は常に `"open"`、`evaluation` は `null`。
+- **抽出（Claude）が書く**: `status` / `evaluation` 以外のすべて。`status` は常に `"open"`、`evaluation` は `null`。抽出元は `posts/YYYY-MM-DD.jsonl`（Grok が選別せずに保存した投稿）。
+- **抽出するときに価格を見ない。** `posts/` の投稿を上から順にすべて判定し、採用は `raw/`、銘柄に触れているが不採用のものは `rejected/` に入れる。
+- **raw の訂正**: 評価前（`evaluation` が null）に限り、規則の適用ミスや事実誤りを直してよい。値動きを見て方向・目標・期間を変えることはしない。訂正したら `notes` に `[日付 Claude] 何を何に変えたか` を書き、CHANGELOG.md に記録する。
 - **評価側が書く**: `status`, `evaluation`。
 
 ---
@@ -89,8 +91,9 @@ v1 からの主な変更: `direction` に `avoid` を追加、`time_horizon` か
 
 | パス | 内容 | 書く人 |
 |---|---|---|
-| `predictions/raw/YYYY-MM-DD.jsonl` | 抽出結果。1行1レコード、**追記のみ** | Grok |
-| `predictions/rejected/YYYY-MM-DD.jsonl` | 記録しなかった候補と理由（`{"post_url", "ticker", "reason"}`） | Grok |
+| `posts/YYYY-MM-DD.jsonl` | 抽出元の投稿スナップショット（`posts/README.md`） | Grok |
+| `predictions/raw/YYYY-MM-DD.jsonl` | 抽出結果。1行1レコード。日付は抽出元の `posts/` のファイルと同じ | Claude |
+| `predictions/rejected/YYYY-MM-DD.jsonl` | 記録しなかった候補と理由（`{"post_url", "ticker", "reason"}`） | Claude |
 | `predictions/deletions.jsonl` | 削除を検知した投稿 `{"id", "post_deleted_at"}` | Grok |
 | `predictions/evaluations/YYYY-MM-DD.jsonl` | 評価結果（`id` で紐付け） | 評価側 |
 | `predictions/samples_2026-10-12.json` | 初期サンプル（v2 に移行済み） | — |

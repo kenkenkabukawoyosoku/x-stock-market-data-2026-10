@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/kenkenkabukawoyosoku/x-stock-market-data-2026-10/posts/post.schema.json",
+  "title": "X post snapshot (collected by Grok)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "post_id", "post_url", "author", "posted_at", "collected_at",
+    "collected_by", "text", "post_type", "in_reply_to_id", "thread_root_id", "quoted_post_id", "edited"
+  ],
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "post_id": { "type": "string", "pattern": "^[0-9]+$" },
+    "post_url": { "type": "string", "pattern": "^https://x\\.com/[A-Za-z0-9_]+/status/[0-9]+$" },
+    "author": { "type": "string", "pattern": "^@[A-Za-z0-9_]{1,15}$" },
+    "posted_at": { "type": "string", "format": "date-time" },
+    "collected_at": { "type": "string", "format": "date-time" },
+    "collected_by": { "type": "string", "minLength": 1 },
+    "text": { "type": "string", "minLength": 1 },
+    "post_type": { "enum": ["original", "reply", "quote", "thread"] },
+    "in_reply_to_id": { "type": ["string", "null"] },
+    "thread_root_id": { "type": ["string", "null"] },
+    "quoted_post_id": { "type": ["string", "null"] },
+    "quoted_text": { "type": ["string", "null"] },
+    "edited": { "type": "boolean" },
+    "media_note": { "type": ["string", "null"] },
+    "link_urls": { "type": "array", "items": { "type": "string" } },
+    "tickers_hint": { "type": "array", "items": { "type": "string" } },
+    "engagement": {
+      "type": ["object", "null"],
+      "properties": {
+        "likes": { "type": "integer" }, "reposts": { "type": "integer" },
+        "replies": { "type": "integer" }, "views": { "type": "integer" }
+      }
+    }
+  }
+}

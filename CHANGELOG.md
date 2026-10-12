@@ -46,6 +46,27 @@ Grok（収集）と Claude ほか他AI（評価・レビュー）が、**相手�
 
 ## ログ（新しい順）
 
+### 2026-10-13 10:00 JST — Claude — 役割分担の変更（Claude メイン、Grok は X 上の作業のみ）
+
+- **コミット**: このコミット
+- **決定（人間）**: Grok にしかできない役割以外は Claude をメインとする。
+- **やったこと**:
+  - `GROK_HANDOFF.md`: 全面改訂。Grok の担当は「投稿の取得（選別なし）」「アカウント情報の確認」「削除確認」「新候補の探索」だけ。Grok が書いてよいファイルを限定した。Automation の指示文を新しくした（§3.1）。X 上の依頼を G1〜G4 として §6 に置いた。
+  - `posts/`: 新設。Grok が投稿を選別せずに保存する場所（`README.md`, `post.schema.json`）。抽出段階での選別（後知恵）を防ぐため、キーワードで絞らず全投稿を保存する。
+  - `candidates/x_facts/schema.json`: 新設。Grok がアカウント情報と新候補の提案を書く形式。
+  - `scripts/validate_posts.py`, `scripts/validate_x_facts.py`: 新設。
+  - `candidates/*_candidates.json`: T5 の結果を反映。全員に `added_at`, `added_reason`, `status`, `removed_reason`, `review_pending`, `language`, `account_type`, `single_ticker_focus`, `followers_checked_at`, `account_created_at` を追加。removed 13件、kioxiaman を US→JP、USStockhanako を JP→US。判断保留15件は `review_pending: true`。`added_reason: reputation` は rubicon59, colne_x, pequityresearch。
+  - `predictions/raw/2026-10-13.jsonl`: Grok の抽出を訂正。SKYY / SOXX / URA を `rejected/` へ移動（期間・目標の根拠がない）。FrankCurzio のセクタースレッドの `post_ticker_count` を 4→2。UEC に目標 18.94（2倍、lower_bound）と損切り 7.10（25%）を追加。
+  - `predictions/schema.md`: 抽出は Claude が `posts/` から行うことにした。`post_ticker_count` を「記録した予想の数」と定義し直した。raw の訂正ルール（評価前・規則の適用ミスだけ・notes と CHANGELOG に記録）を追加した。
+  - `CLAUDE.md`: 毎回の作業手順（CHANGELOG 確認 → Grok 出力の検証 → 抽出 → 候補リスト反映 → 削除反映 → 検証 → CHANGELOG 記入）。
+  - `HANDOFF.md`, `README.md`, `predictions/README.md`, `review/pipeline_and_report.md`: 役割分担に合わせて更新。
+- **やっていないこと・未完**: Claude の日次抽出を自動で動かす仕組み（定期実行）は未設定。それまでは Claude のセッションを開いたときに、未抽出の `posts/` をまとめて抽出する。
+- **申し送り**:
+  - → Grok: **G1 最優先。両 Automation の指示文を `GROK_HANDOFF.md` §3.1 に全文差し替え**（候補一覧はプロンプトに書かず、毎回 `candidates/*_candidates.json` の active を読む）。以後、予想の抽出はしない。
+  - → Grok: G2〜G4（`GROK_HANDOFF.md` §6）。結果は `candidates/x_facts/YYYY-MM-DD.jsonl` に。
+  - → 人間: Claude の日次抽出を定期実行（Routine）にするか決める。
+- **対応した申し送り**: 2026-10-13 09:10 Claude エントリの「→ Grok」4件（T5 の JSON 反映、SKYY/SOXX/URA、post_ticker_count、UEC）は、役割変更により Claude が対応した。
+
 ### 2026-10-13 09:10 JST — Claude — 作業ログ（本ファイル）の導入と、Grok の T1〜T9 作業のレビュー
 
 - **コミット**: このコミット

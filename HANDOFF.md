@@ -3,7 +3,8 @@
 **対象読者**: 他のAI（Claude / GPT / Gemini など）および人間レビュアー  
 **作成日**: 2026-10-13  
 **リポジトリ**: https://github.com/kenkenkabukawoyosoku/x-stock-market-data-2026-10  
-**収集担当**: Grok（Xツール + Automation）  
+**収集担当**: Grok（X 上の作業だけ：投稿取得・アカウント確認・削除確認）  
+**メイン担当**: Claude（抽出・候補リスト・評価設計・判定・文書。2026-10-13 から）  
 **レビュー・分析担当**: 他のAI（本ドキュメントを前提に作業）
 
 ---
@@ -13,7 +14,7 @@
 X（Twitter）上で**日米の個別銘柄・投資見解を定期発信しているユーザー**のうち、
 **予想が相対的に当たっている人**を、検証可能な形で絞り込む。
 
-- 収集はGrokが担当（自動化済み）
+- 収集はGrokが担当（自動化済み）。**Grok にしかできない X 上の作業以外は Claude がメインで担当**（2026-10-13 決定）
 - **予想の妥当性評価・スコア設計・ランキング・バイアス分析**は他のAIに任せる
 
 ---
@@ -22,7 +23,8 @@ X（Twitter）上で**日米の個別銘柄・投資見解を定期発信して�
 
 | 担当 | 内容 |
 |------|------|
-| **Grok（収集）** | 候補ユーザーの投稿取得、検証可能な予想の一次抽出、GitHubへの保存、定期実行 |
+| **Grok（収集）** | X 投稿の取得（選別せず `posts/` に保存）、アカウント情報の確認、削除確認、新候補の探索、定期実行 |
+| **Claude（メイン）** | 予想の抽出、候補リストの編集、スキーマ・評価ルール・スコア、判定・集計、文書、Grok 出力の検証 |
 | **他のAI（レビュー）** | 抽出ルールの妥当性、スコアリング設計、的中判定ロジック、バイアス・サンプル数の扱い、ランキングの公平性、改善提案 |
 
 本引き継ぎ書は「収集以外」のレビュー用です。生のX収集手順の再現は不要です。
@@ -36,7 +38,9 @@ x-stock-market-data-2026-10/
 ├── README.md
 ├── HANDOFF.md                 ← 本ファイル
 ├── CHANGELOG.md               # 作業ログ・Grok と他AIの相互引き継ぎ（毎回読む・書く）
-├── GROK_HANDOFF.md            # Grok 向け収集手順と作業依頼（候補整理・再取得・Automation v2）
+├── GROK_HANDOFF.md            # Grok 向け：X 上の作業の手順と依頼
+├── CLAUDE.md                  # Claude 向け：日々の作業手順
+├── posts/                     # Grok が収集した投稿スナップショット（選別なし）
 ├── scripts/
 │   └── validate_predictions.py # v2 スキーマ検証
 ├── data/
@@ -51,7 +55,7 @@ x-stock-market-data-2026-10/
 │   ├── schema.md              # 抽出ルール・フィールド定義（v2）
 │   ├── prediction.schema.json # 機械検証用 JSON Schema
 │   ├── samples_2026-10-12.json # 初期サンプル予想（v2 移行済み・未評価）
-│   ├── raw/                   # 日次の抽出結果（Grok が追記、v2 JSONL）
+│   ├── raw/                   # 日次の抽出結果（Claude が posts/ から抽出、v2 JSONL）
 │   ├── rejected/              # 記録しなかった候補と理由
 │   └── archive_v1/            # v1 形式の旧出力（参照のみ）
 └── review/                    # §9 のレビュー結果と設計（採用済み）
@@ -203,14 +207,14 @@ x-stock-market-data-2026-10/
 出力: `predictions/schema.md`（v2）に沿った JSONL + 短いsummary。  
 保存先: `predictions/raw/YYYY-MM-DD.jsonl`（除外分は `predictions/rejected/`）。指示文の更新は `GROK_HANDOFF.md` §3。
 
-※収集ロジック自体の改修はGrok側。レビューは**出力の質と評価設計**に集中してよい。
+※ 2026-10-13 から、Grok は投稿を選別せず `posts/` に保存するだけになり、抽出は Claude が行う。詳細は `GROK_HANDOFF.md` §1。
 
 ---
 
 ## 9. 他のAIへの依頼タスク（優先順）
 
 > **進捗（2026-10-13）**: P0〜P2 はすべて `review/` に回答済み。スキーマ v2 とサンプル移行を反映済み。
-> 候補リストの整理など X 上の作業は `GROK_HANDOFF.md` で Grok に依頼中。
+> 候補リストの整理は Claude が JSON に反映済み。フォロワー数など X 上の確認は `GROK_HANDOFF.md` §6 で Grok に依頼中。
 
 ### P0（必須）
 1. **的中判定ルールの確定案**を書く  
@@ -243,7 +247,7 @@ x-stock-market-data-2026-10/
 
 1. `CHANGELOG.md`（相手の直近の作業と申し送り）
 2. 本 `HANDOFF.md`
-3. `review/README.md`（§9 のレビュー結果の要点）。Grok は `GROK_HANDOFF.md`
+3. `review/README.md`（§9 のレビュー結果の要点）。Grok は `GROK_HANDOFF.md`、Claude は `CLAUDE.md`
 4. `predictions/schema.md`
 5. `predictions/samples_2026-10-12.json`
 6. `candidates/jp_candidates.json` / `us_candidates.json`
@@ -268,3 +272,4 @@ x-stock-market-data-2026-10/
 | 2026-10-13 | レビューを反映: `predictions/schema.md` を v2 に改訂、JSON Schema と検証スクリプトを追加、サンプルを v2 に移行（10件、除外8件は `rejected/`）。X 上の作業を `GROK_HANDOFF.md` で Grok に依頼（Claude）。 |
 | 2026-10-13 | Grok が main に追加した `GROK_HANDOFF.md`（収集手順）と Claude 版（作業依頼）を統合。08:00 JP 出力 `predictions/2026-10-13.json` を v2 に変換（採用2件 → `raw/2026-10-13.jsonl`、除外2件 → `rejected/`、原本は `archive_v1/`）（Claude）。 |
 | 2026-10-13 | `CHANGELOG.md` を新設し、作業ログと相互引き継ぎをそこに一本化（Claude）。 |
+| 2026-10-13 | 役割分担を変更: Grok は X 上の作業だけ、それ以外は Claude がメイン。`posts/`（選別なしの投稿スナップショット）を新設（Claude）。 |
