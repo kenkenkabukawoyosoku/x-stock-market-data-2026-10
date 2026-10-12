@@ -1,0 +1,155 @@
+{
+  "metadata": {
+    "collected_at": "2026-10-12T23:44:00+09:00",
+    "source": "X (Twitter) via Grok tools",
+    "focus": "Japanese and US individual stocks / stock market discussion",
+    "purpose": "For analysis by other AIs",
+    "note": "Not financial advice. Public posts only. Engagement metrics as of collection time."
+  },
+  "japanese_stocks": [
+    {
+      "id": "2109653089460658249",
+      "url": "https://x.com/JNR63_nolife/status/2109653089460658249",
+      "author": {"username": "JNR63_nolife", "name": "かじ", "bio": "日本株投資(小型株多め)を頑張っています。"},
+      "created_at": "2026-10-12T14:31:06Z",
+      "text": "一度しか言いません！\n今週上昇に期待の日本株！\n安値のうちに仕込む\n第10位 藤倉（Fujikura、5803） — 光通信×AI\n第9位 ローツェ（Rorze、6323） — 半導体搬送×AI\n第8位 三菱重工業（7011） — 重工業・防衛×AI\n第7位 キオクシア（Kioxia、285A） — AI向けメモリ",
+      "engagement": {"likes": 9, "reposts": 2, "replies": 3, "views": 302},
+      "tickers_mentioned": ["5803", "6323", "7011", "285A"],
+      "theme": "AI-related Japanese stocks ranking"
+    },
+    {
+      "id": "2109653060700278996",
+      "url": "https://x.com/l6awj/status/2109653060700278996",
+      "author": {"username": "l6awj", "name": "株の買い時を考えるチャンネル"},
+      "created_at": "2026-10-12T14:30:59Z",
+      "text": "「ショーケース（3909）」\n現：389円\n予想価格：4桁\nクラスの急騰銘柄は、ローソク足や出来高の異常な兆候を見るだけで、資産価値に天と地ほどの差が生じます。",
+      "engagement": {"likes": 13, "reposts": 5, "replies": 9, "views": 59},
+      "tickers_mentioned": ["3909"],
+      "theme": "Showcase (3909) high growth potential"
+    },
+    {
+      "id": "2109652103081951380",
+      "url": "https://x.com/mad55323009/status/2109652103081951380",
+      "author": {"username": "mad55323009", "name": "珈琲と日本株のたけさん"},
+      "created_at": "2026-10-12T14:27:11Z",
+      "text": "株で家族を養っています。\n100万円から始めて→資産は30億円。\nその過程で学んだ、初心者向け投資ルール。\n（保存推奨）\nルールを守れないなら、株を買うな。\n1. 5%下落 → 何もしない\n2. 15%下落 → さらに10%買い増し\n3. 25%下落 → さらに25%買い増し",
+      "engagement": {"likes": 98, "reposts": 14, "replies": 13, "views": 140},
+      "tickers_mentioned": [],
+      "theme": "Investment rules / position sizing on dips"
+    },
+    {
+      "id": "2109648862063542398",
+      "url": "https://x.com/seikabusuki/status/2109648862063542398",
+      "author": {"username": "seikabusuki", "name": "日経うさぎ"},
+      "created_at": "2026-10-12T14:14:18Z",
+      "text": "マジとんでもないな\n岐阜が金曜日に400株の買い増したらこれだぜ？DRAM、キオクシア、200aっていう\nメモリに異次元の張り方してるもんな",
+      "engagement": {"likes": 73, "reposts": 10, "replies": 0, "views": 7960},
+      "tickers_mentioned": ["285A"],
+      "theme": "Kioxia / memory stocks, large position observation"
+    },
+    {
+      "id": "2109647532574007386",
+      "url": "https://x.com/SERIKURA/status/2109647532574007386",
+      "author": {"username": "SERIKURA", "name": "そこに、追証はあるんか？"},
+      "created_at": "2026-10-12T14:09:01Z",
+      "text": "4829 日本エンター\nまさかの悪決算でしたか🤔\n日柄達成した銘柄なので、下に飛ぶときも激しくなります。\n100円のラインが戻り高値。\n反発ラインは20,30%下げラインの80,70。\n60以下は無条件で買い。",
+      "engagement": {"likes": 15, "reposts": 0, "replies": 0, "views": 3149},
+      "tickers_mentioned": ["4829"],
+      "theme": "Nihon Enterprise (4829) post-earnings technical levels"
+    },
+    {
+      "id": "2106637094357709066",
+      "url": "https://x.com/fslimkn/status/2106637094357709066",
+      "author": {"username": "fslimkn", "name": "20倍・優良株"},
+      "created_at": "2026-10-04T06:46:37Z",
+      "text": "今買うべき日本株。150株買えば十分。\n🥉 堅実型\n・AGC（5201）（4,900円前後）\n・サンリオ（8136）（1,100円前後）\n・住友大阪セメント（5232）（3,700円前後）\n🥈 かなり好調\n・小野薬品工業（4528）（2,200円前後）\n・アステラス製薬（4503）（1,700円前後）",
+      "engagement": {"likes": 46, "reposts": 16, "replies": 8, "views": 4381},
+      "tickers_mentioned": ["5201", "8136", "5232", "4528", "4503"],
+      "theme": "Recommended Japanese stocks list"
+    }
+  ],
+  "us_stocks": [
+    {
+      "id": "2109638721448358058",
+      "url": "https://x.com/DeItaone/status/2109638721448358058",
+      "author": {"username": "DeItaone", "name": "*Walter Bloomberg"},
+      "created_at": "2026-10-12T13:34:01Z",
+      "text": "GOLDMAN SACHS TURNS BULLISH ON BOTH STOCKS AND BONDS\n\nGoldman Sachs upgrades equities to overweight over three months and bonds to overweight over 12 months, citing strong earnings and limited recession risk.\n\nAnalysts expect nearly 30% year-over-year S&P 500 earnings growth in Q3...",
+      "engagement": {"likes": 208, "reposts": 25, "replies": 34, "views": 85979},
+      "tickers_mentioned": ["SPX"],
+      "theme": "Goldman Sachs bullish on equities and bonds"
+    },
+    {
+      "id": "2109618125788389872",
+      "url": "https://x.com/whiskey_lima729/status/2109618125788389872",
+      "author": {"username": "whiskey_lima729", "name": "Whiskey Lima 🇺🇸"},
+      "created_at": "2026-10-12T12:12:10Z",
+      "text": "Premarket Overview — Monday, October 12, 2026\n\nU.S. futures are mixed... Key Premarket Movers\nGainers\n•$IREN +4% — Report of multiyear cloud deal with Anthropic\n•$CRM +4% — BofA turns bullish\nWeaker\n•Memory/semis: $MU −2.4%...",
+      "engagement": {"likes": 15, "reposts": 0, "replies": 4, "views": 2041},
+      "tickers_mentioned": ["IREN", "CRM", "MU", "SNDK", "ALB", "ADBE"],
+      "theme": "US premarket movers and week ahead (bank earnings, CPI)"
+    },
+    {
+      "id": "2109616527649772006",
+      "url": "https://x.com/FrankCurzio/status/2109616527649772006",
+      "author": {"username": "FrankCurzio", "name": "Frank Curzio"},
+      "created_at": "2026-10-12T12:05:49Z",
+      "text": "We're in a silent bear market right now.\n\n84% of S&P 500 stocks are now trading at least 10% below all-time highs.\n\nBut this crash means investors can buy GREAT companies at DIRT-CHEAP prices.\n\n3 sectors to buy right now (& 1 sector to avoid)",
+      "engagement": {"likes": 20, "reposts": 7, "replies": 6, "views": 6554},
+      "tickers_mentioned": ["SPX"],
+      "theme": "Silent bear market, value opportunities"
+    },
+    {
+      "id": "2105765410763116687",
+      "url": "https://x.com/drayinvests/status/2105765410763116687",
+      "author": {"username": "drayinvests", "name": "Dray"},
+      "created_at": "2026-10-01T21:02:51Z",
+      "text": "The market is FILLED with value right now; it's insane\n\nHere are some quality companies in a drawdown so far this year:\n\nApplovin | $APP: -59%\nCelsius | $CELH: -41%\nSoFi | $SOFI: -41%\nReddit | $RDDT: -36%\nOracle | $ORCL: -30%\nNetflix | $NFLX: -28%...",
+      "engagement": {"likes": 243, "reposts": 31, "replies": 20, "views": 29609},
+      "tickers_mentioned": ["APP", "CELH", "SOFI", "RDDT", "ORCL", "NFLX", "SPGI", "AXP", "UBER", "VST"],
+      "theme": "Quality US stocks in drawdown / value list"
+    },
+    {
+      "id": "2109279239925047659",
+      "url": "https://x.com/KimizqSmile/status/2109279239925047659",
+      "author": {"username": "KimizqSmile", "name": "James Mitchell"},
+      "created_at": "2026-10-11T13:45:33Z",
+      "text": "🚨 U.S. STOCKS: WHAT TO BUY AND WHAT TO AVOID RIGHT NOW?\n\n🟢 Stocks to Watch\n$NVDA — AI chip demand\n$MSFT — Cloud + AI growth\n$GOOGL — AI + advertising\n$AMZN — Cloud computing\n$SPY — Broad market exposure\n\n🔴 Be Careful With\n$PLTR — High valuation risk\n$TSLA — Volatility...",
+      "engagement": {"likes": 1, "reposts": 0, "replies": 0, "views": 128},
+      "tickers_mentioned": ["NVDA", "MSFT", "GOOGL", "AMZN", "SPY", "PLTR", "TSLA"],
+      "theme": "Buy/avoid recommendations for US stocks"
+    },
+    {
+      "id": "2109651826622816604",
+      "url": "https://x.com/tobuzou321/status/2109651826622816604",
+      "author": {"username": "tobuzou321", "name": "とぶぞう✈🐘株Kabu 🌏"},
+      "created_at": "2026-10-12T14:26:05Z",
+      "text": "【垢閉鎖とお礼🐘】\n今日も三羽ガラスのアーム・インテル・AMDは一層下落で先週からずっと利は拡大✨️後はみんな大好き半導体スター、エヌビディアとマイクロンの騰落で世界株の先をうらないましょう",
+      "engagement": {"likes": 5, "reposts": 0, "replies": 3, "views": 322},
+      "tickers_mentioned": ["ARM", "INTC", "AMD", "NVDA", "MU"],
+      "theme": "Semiconductor relative performance (ARM/INTC/AMD vs NVDA/MU)"
+    }
+  ],
+  "mixed_or_macro": [
+    {
+      "id": "2109651674847391871",
+      "url": "https://x.com/USStockhanako/status/2109651674847391871",
+      "author": {"username": "USStockhanako", "name": "高校生でも分かる米国株（公式）"},
+      "created_at": "2026-10-12T14:25:29Z",
+      "text": "米株市場月曜日はダウ上昇、ナスダック下落\n10月12日の米国株は、大手銀行の決算と今週のインフレ指標を見極めたいとの姿勢から、小動きで始まりました。\n\nAI関連の好決算期待が相場を支える一方、原油高と借入コストの上昇が警戒されています。... IREN, Salesforce, IonQ mentioned",
+      "engagement": {"likes": 16, "reposts": 2, "replies": 0, "views": 1895},
+      "tickers_mentioned": ["IREN", "CRM", "IONQ"],
+      "theme": "US market daily wrap + individual movers (Japanese account covering US)"
+    },
+    {
+      "id": "2109652255603609640",
+      "url": "https://x.com/FaeWojnicki/status/2109652255603609640",
+      "author": {"username": "FaeWojnicki", "name": "まなぶ"},
+      "created_at": "2026-10-12T14:27:47Z",
+      "text": "ゴールド下落して普通に焦った😱\nでもドルえもんさんがすぐファンダ解説してくれて状況理解できた！！... ドル円 USDJPY 原油 JX金属 ゴールド XAUUSD ビットコイン BTC フジクラ 半導体 FANG メタプラ ストップ高 ISM FOMC 日経先物",
+      "engagement": {"likes": 7, "reposts": 0, "replies": 0, "views": 379},
+      "tickers_mentioned": ["5803"],
+      "theme": "Gold drop reaction + mentions of Fujikura / semiconductors"
+    }
+  ]
+}
