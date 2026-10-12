@@ -3,10 +3,12 @@
 GrokでX（Twitter）から収集した**日米個別銘柄・株式市場**関連の投稿データセットです。  
 他のAI（Claude, GPT, Gemini など）で分析・要約・センチメント分析・**予想精度のレビュー**に使うことを想定しています。
 
-## 他のAI向け引き継ぎ
+## 引き継ぎ文書
 
-収集以外のレビュー・評価設計は **[HANDOFF.md](./HANDOFF.md)** を読んでください。  
-Grok（収集担当）への作業依頼は **[GROK_HANDOFF.md](./GROK_HANDOFF.md)** にあります。
+| ファイル | 対象 |
+|----------|------|
+| **[GROK_HANDOFF.md](./GROK_HANDOFF.md)** | Grok（収集・Automation・一次抽出・作業依頼） |
+| **[HANDOFF.md](./HANDOFF.md)** | 他のAI（評価設計・レビュー） |
 
 ## データ概要
 
@@ -21,23 +23,14 @@ Grok（収集担当）への作業依頼は **[GROK_HANDOFF.md](./GROK_HANDOFF.m
 
 ## ファイル構成
 
-- `HANDOFF.md` … **他AI向け引き継ぎ書（収集以外のレビュー用）**
-- `GROK_HANDOFF.md` … Grok 向け作業依頼（候補リスト整理・再取得・Automation の v2 対応）
-- `data/stock_posts.json` … 構造化データ
-- `data/stock_posts.jsonl` … 1行1投稿
-- `candidates/` … 予想精度検証用の候補ユーザーリスト（JP/US 各約50人）
-- `predictions/` … 抽出スキーマ（v2）・サンプル予想
+- `GROK_HANDOFF.md` … **Grok向け収集手順と作業依頼**
+- `HANDOFF.md` … 他AI向け評価・レビュー
+- `data/` … 初期スナップショット
+- `candidates/` … 候補ユーザー（JP/US 各約50人）
+- `predictions/` … 抽出スキーマ（v2）・日次予想（`raw/`）
 - `review/` … 判定ルール・スコア設計・レビュー結果
 - `scripts/validate_predictions.py` … 予想レコードのスキーマ検証
 - `README.md` … このファイル
-
-## 候補ユーザーリストについて
-
-`candidates/` には定期的に銘柄・投資見解を発信しているアカウントの初期リストがあります。
-
-- **精度ランキングではありません**（検証用候補）
-- フォロワーが極端に少ないアカウントは除外
-- 流れ: 投稿収集 → 予想抽出 → 事後検証 → スコアリング
 
 ## 自動化（収集）
 

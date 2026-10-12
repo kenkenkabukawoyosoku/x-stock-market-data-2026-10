@@ -35,7 +35,7 @@ X（Twitter）上で**日米の個別銘柄・投資見解を定期発信して�
 x-stock-market-data-2026-10/
 ├── README.md
 ├── HANDOFF.md                 ← 本ファイル
-├── GROK_HANDOFF.md            # Grok 向け作業依頼（候補整理・再取得・Automation v2）
+├── GROK_HANDOFF.md            # Grok 向け収集手順と作業依頼（候補整理・再取得・Automation v2）
 ├── scripts/
 │   └── validate_predictions.py # v2 スキーマ検証
 ├── data/
@@ -50,8 +50,9 @@ x-stock-market-data-2026-10/
 │   ├── schema.md              # 抽出ルール・フィールド定義（v2）
 │   ├── prediction.schema.json # 機械検証用 JSON Schema
 │   ├── samples_2026-10-12.json # 初期サンプル予想（v2 移行済み・未評価）
+│   ├── raw/                   # 日次の抽出結果（Grok が追記、v2 JSONL）
 │   ├── rejected/              # 記録しなかった候補と理由
-│   └── raw/                   # 日次の抽出結果（Grok が追記。今後作成）
+│   └── archive_v1/            # v1 形式の旧出力（参照のみ）
 └── review/                    # §9 のレビュー結果と設計（採用済み）
     ├── README.md              # 要点と索引
     ├── evaluation_rules.md    # P0-1 的中判定ルール
@@ -260,3 +261,4 @@ x-stock-market-data-2026-10/
 | 2026-10-13 | 初版。候補リスト・抽出schema・サンプル・二重Automation（JP 08:00 / US 22:00）まで完了。収集以外を他AIレビュー用に切り出し。 |
 | 2026-10-13 | `review/` を追加。§9 の P0〜P2 に対するレビュー・設計案（Claude）。 |
 | 2026-10-13 | レビューを反映: `predictions/schema.md` を v2 に改訂、JSON Schema と検証スクリプトを追加、サンプルを v2 に移行（10件、除外8件は `rejected/`）。X 上の作業を `GROK_HANDOFF.md` で Grok に依頼（Claude）。 |
+| 2026-10-13 | Grok が main に追加した `GROK_HANDOFF.md`（収集手順）と Claude 版（作業依頼）を統合。08:00 JP 出力 `predictions/2026-10-13.json` を v2 に変換（採用2件 → `raw/2026-10-13.jsonl`、除外2件 → `rejected/`、原本は `archive_v1/`）（Claude）。 |

@@ -13,6 +13,7 @@
 | `rejected/YYYY-MM-DD.jsonl` | 記録しなかった候補と理由 | Grok |
 | `deletions.jsonl` | 削除を検知した投稿（`{"id", "post_deleted_at"}`） | Grok |
 | `evaluations/YYYY-MM-DD.jsonl` | 評価結果 | 評価側 |
+| `archive_v1/` | v1 形式の旧出力（参照のみ） | — |
 
 ## 運用フロー
 

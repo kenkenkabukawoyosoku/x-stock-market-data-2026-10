@@ -1,0 +1,51 @@
+{
+  "collected_at": "2026-10-13T08:00:00+09:00",
+  "market": "JP",
+  "predictions": [
+    {
+      "post_id": "2109615158557606162",
+      "author": "@tomorotenn",
+      "ticker": "3103",
+      "market": "JP",
+      "direction": "long",
+      "target_price": 1895,
+      "time_horizon": "unspecified",
+      "raw_text": "注目の日本株 ユニチカ（3103） 現値：1454円 予測最高値：1895円。フジクラ、村田製作所、太陽誘電、キオクシア以上に来るかも",
+      "status": "open"
+    },
+    {
+      "post_id": "2109780402718318884",
+      "author": "@SERIKURA",
+      "ticker": "6857",
+      "market": "JP",
+      "direction": "long",
+      "target_price": null,
+      "time_horizon": "earnings",
+      "raw_text": "特にアドバン、レーザーは空売りの玉が捕まっているので下値を掘るリスクが少なく、買い戻しを阻止できれば踏み上げられる形。ASML、TSMCの材料も待っている状況なので今日は下に押したところは狙っていく",
+      "status": "open"
+    },
+    {
+      "post_id": "2109780402718318884",
+      "author": "@SERIKURA",
+      "ticker": "6920",
+      "market": "JP",
+      "direction": "long",
+      "target_price": null,
+      "time_horizon": "earnings",
+      "raw_text": "特にアドバン、レーザーは空売りの玉が捕まっているので下値を掘るリスクが少なく、買い戻しを阻止できれば踏み上げられる形。今日は下に押したところは狙っていく",
+      "status": "open"
+    },
+    {
+      "post_id": "2109781166144557335",
+      "author": "@kei_toshi__",
+      "ticker": "8306",
+      "market": "JP",
+      "direction": "long",
+      "target_price": null,
+      "time_horizon": "3m",
+      "raw_text": "株価を下げたら強気で集めたい銘柄 第4位 「三菱UFJ」 現在の株価は3,400円台。長期的にみたらまだまだ増配もありそうで株価も上がっていきそうなので強気で集めたい。ここから株価が大きく下落することはなさそうなのである程度の下げがきたら集めていきたい銘柄。",
+      "status": "open"
+    }
+  ],
+  "summary": "半導体関連ではアドバンテスト・レーザーテックの押し目買い期待が目立つ一方、ユニチカの目標株価提示や三菱UFJの長期買い増し意向も見られた。全体としてギャップダウン後のリバウンド狙いが意識されている。"
+}
