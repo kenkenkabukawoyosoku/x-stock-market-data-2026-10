@@ -7,8 +7,9 @@
 
 ## 定期実行（Routine）
 
-- 名前: `x-stock 予想抽出（Claude 日次）`（`trig_014vgzTvzxQvEqqxjecQwJRK`）
-- 毎日 **9:00 / 23:00 JST**（Grok の収集 08:00 / 22:00 の1時間後）。実行ごとに新しいセッションが起動し、下の手順 1〜7 を行って main に push する。
+- 名前: `x-stock 予想抽出（Claude 日次）`（`trig_01GTqAGehFfUsPo16yYhU9C6`）
+- 毎日 **9:00 / 23:00 JST**（Grok の収集 08:00 / 22:00 の1時間後）に、専用セッション `session_014pbupgtMeK9BVmEQuBdoXB`（このリポジトリを push 権限つきで組み込み済み）を起こし、下の手順 1〜7 を行って main に push する。
+- 毎回新しいセッションを起動する方式は、リポジトリへの push 権限が付かず 403 になるため使わない。
 - 変更・停止は claude.ai の Routines 画面から。
 
 ## 毎回の作業手順
