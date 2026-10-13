@@ -4,7 +4,7 @@
     "purpose": "Initial list of US stock Twitter accounts for prediction accuracy tracking",
     "filter": "Exclude extremely low followers. Regular posters of individual stock views / analysis.",
     "note": "This is a candidate list for future verification, NOT a ranked accuracy list.",
-    "updated_at": "2026-10-13T23:00:00+09:00",
+    "updated_at": "2026-10-13T09:50:00+09:00",
     "fields": "Each candidate: added_at, added_reason (keyword_search|recommendation|reputation), status (active|inactive|removed), removed_reason, review_pending (true = Grok/Claude re-check needed), language, account_type (individual|news|aggregator|company|educator|bot), single_ticker_focus, followers_approx, followers_checked_at, account_created_at. Never delete entries; set status=removed.",
     "changes": "2026-10-13: T5 applied (candidates/STATUS_UPDATES_2026-10-13.md); kioxiaman US→JP, USStockhanako JP→US; 2026-10-13 Claude: x_facts/2026-10-13.jsonl（G2〜G4）を反映（followers_approx 更新、review_pending 整理、removed 追加）"
   },
