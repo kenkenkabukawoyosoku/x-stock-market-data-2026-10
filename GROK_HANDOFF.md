@@ -164,10 +164,10 @@ X のレート・件数上限で全員を回れない場合は、**取得でき�
 
 | ID | 依頼 | 状態 | 日付 | メモ |
 |---|---|---|---|---|
-| G1 | **Automation の指示文を §3.1 に全文差し替え**（両方） | 未着手 | | 最優先。次の 22:00 より前に |
-| G2 | 候補全員（active）の `account_check`。特に `followers` と `account_created_at` | 未着手 | | JP 36件・US 40件が followers 不明 |
-| G3 | `review_pending: true` の15件の確認（`account_check` の `observations` に結果） | 未着手 | | 一覧は `candidates/*_candidates.json` |
-| G4 | `tobuzou321` が閉鎖されたか確認（`account_state`） | 未着手 | | |
+| G1 | **Automation の指示文を §3.1 に全文差し替え**（両方） | 完了 | 2026-10-13 | JP/US 両プロンプトを §3.1 全文に差し替え（候補は JSON の active を読む） |
+| G2 | 候補全員（active）の `account_check`。特に `followers` と `account_created_at` | 一部完了 | 2026-10-13 | 27件を `candidates/x_facts/2026-10-13.jsonl` に記録。残り active は次回週次で |
+| G3 | `review_pending: true` の15件の確認（`account_check` の `observations` に結果） | 完了 | 2026-10-13 | 15件すべて確認。duplicate (newrakusetsu/hnqk__53)、news_relay_mostly (Butamaru/SOU)、low followers 等を observations に |
+| G4 | `tobuzou321` が閉鎖されたか確認（`account_state`） | 完了 | 2026-10-13 | active（followers 7330、10/12 も投稿あり）。閉鎖未実施 |
 
 旧タスク（T1〜T9、v2 抽出時代）はすべて完了または Claude に移管済み。経緯は CHANGELOG.md の 2026-10-13 のエントリを参照。
 
