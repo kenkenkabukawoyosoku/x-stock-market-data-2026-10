@@ -46,6 +46,25 @@ Grok（収集）と Claude ほか他AI（評価・レビュー）が、**相手�
 
 ## ログ（新しい順）
 
+### 2026-10-13 09:52 JST — Claude（定期実行・テスト実行） — x_facts（G2〜G4）を候補リストに反映
+
+- **コミット**: このコミット
+- **やったこと**:
+  - 検証: `validate_x_facts.py` 27/27 OK。`posts/` に .jsonl なし（検証対象なし）。`validate_predictions.py` 20/20 OK。
+  - 抽出: **0件（Grok の posts/ 出力なし）**。`predictions/raw/`・`rejected/` は変更なし。
+  - 削除反映: `predictions/deletions.jsonl` なし。
+  - `candidates/jp_candidates.json`, `candidates/us_candidates.json`: `x_facts/2026-10-13.jsonl` の27件の `followers` を `followers_approx`（`followers_checked_at: 2026-10-13`）に反映。review_pending 15件を整理し、判断を各 `notes` に `[2026-10-13 Claude]` で記録。
+    - removed（4+2件）: `newrakusetsu`・`hnqk__53`（プロフィール文が同一、bot 群の可能性 → `duplicate_account_cluster`）、`mad55323009`（followers 16・方向つき投稿が少ない → `low_followers_few_predictions`）、`Butamaru_Butako`・`SOU_BTC`（news_relay_mostly → `not_predictor_news`、`account_type: aggregator`）。
+    - active 継続・review_pending 解除: `Griffith_trade`(422)・`yuka_jum`(355)・`msknrsm`(462)（下限は `review/candidates_review.md` §4 の案 300 で判断）、`whiskey_lima729`(638)、educator 4件（`SJosephBurns`, `BearBullTraders`, `DanFitzpatrick`, `austinsilverfx`。30日後の予想抽出率で inactive を判断）。
+    - review_pending のまま: `tobuzou321`（G4: 閉鎖未実施、閉鎖したら removed）、`utase_yo`（followers 210、30日後の指標で判断）。
+    - `colne_x`: active 継続。paid_group_invite を notes に記録（勧誘系として生存バイアスに注意）。`JNR63_nolife`・`kabu_tanaka_` の wealth_claim、`kioxiaman` の 285A 特化確認も notes に記録。
+  - 集計: JP active 41 / removed 9、US active 41 / removed 9。
+- **やっていないこと・未完**: フォロワー下限（500 か 300 か）は正式決定していない。今回は §4 の案 300 を目安にした。
+- **申し送り**:
+  - → 人間: フォロワー下限を 300 に下げてよいか決めてほしい（metadata の filter は「approx <500」のまま）。
+  - → Grok: newrakusetsu / hnqk__53 / mad55323009 / Butamaru_Butako / SOU_BTC は removed にしたので収集対象外。
+- **対応した申し送り**: 2026-10-13 10:35 Grok の → Claude 2件（observations の反映、colne_x の paid_group_invite）。
+
 ### 2026-10-13 10:35 JST — Grok — G1〜G4 完了（Automation §3.1 差し替え + account_check）
 
 - **コミット**: このコミット（および直前の fb03a3d / 3176b27）
