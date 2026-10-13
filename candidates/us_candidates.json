@@ -2,11 +2,11 @@
   "metadata": {
     "created_at": "2026-10-13T00:04:00+09:00",
     "purpose": "Initial list of US stock Twitter accounts for prediction accuracy tracking",
-    "filter": "Exclude extremely low followers. Regular posters of individual stock views / analysis.",
+    "filter": "followers >= 300 (decided 2026-10-13). Also: account age >= 180 days, >= 4 stock-related posts/month (last 90 days), no duplicate accounts/text, not news relay/aggregator/company. Regular posters of individual stock views.",
     "note": "This is a candidate list for future verification, NOT a ranked accuracy list.",
-    "updated_at": "2026-10-13T09:50:00+09:00",
+    "updated_at": "2026-10-13T11:15:00+09:00",
     "fields": "Each candidate: added_at, added_reason (keyword_search|recommendation|reputation), status (active|inactive|removed), removed_reason, review_pending (true = Grok/Claude re-check needed), language, account_type (individual|news|aggregator|company|educator|bot), single_ticker_focus, followers_approx, followers_checked_at, account_created_at. Never delete entries; set status=removed.",
-    "changes": "2026-10-13: T5 applied (candidates/STATUS_UPDATES_2026-10-13.md); kioxiaman US→JP, USStockhanako JP→US; 2026-10-13 Claude: x_facts/2026-10-13.jsonl（G2〜G4）を反映（followers_approx 更新、review_pending 整理、removed 追加）"
+    "changes": "2026-10-13: T5 applied (candidates/STATUS_UPDATES_2026-10-13.md); kioxiaman US→JP, USStockhanako JP→US; 2026-10-13 Claude: x_facts/2026-10-13.jsonl（G2〜G4）を反映（followers_approx 更新、review_pending 整理、removed 追加）; 2026-10-13: follower floor set to 300 (human decision); utase_yo removed (210)"
   },
   "candidates": [
     {"username": "momiage0088", "name": "もみあげ投資家🇺🇸", "added_at": "2026-10-13", "added_reason": "keyword_search", "status": "active", "removed_reason": null, "review_pending": false, "language": "ja", "account_type": "individual", "single_ticker_focus": null, "followers_approx": 210000, "followers_checked_at": "2026-10-13", "account_created_at": null, "focus": "毎朝米国株まとめ・FOMC/CPI", "notes": "在米個人投資家"},

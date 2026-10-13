@@ -46,6 +46,19 @@ Grok（収集）と Claude ほか他AI（評価・レビュー）が、**相手�
 
 ## ログ（新しい順）
 
+### 2026-10-13 11:15 JST — Claude — フォロワー下限を 300 に決定
+
+- **コミット**: このコミット
+- **決定（人間）**: 候補のフォロワー下限は 300。
+- **やったこと**:
+  - `candidates/*_candidates.json`: metadata の `filter` を新基準（フォロワー300以上＋作成180日以上・月4件以上・重複なし・転載/まとめ/企業でない）に更新。`utase_yo`（210）を removed（`low_followers_below_300`）。集計は JP active 40 / removed 10、US active 41 / removed 9。
+  - `candidates/README.md`, `review/candidates_review.md`, `GROK_HANDOFF.md` §5: 基準を記載。
+  - Grok の最新エントリ（2026-10-13 10:35）の「→ Claude」2件は、09:52 の定期実行（テスト）で対応済みであることを確認。それ以降の Grok のコミットはなし。
+- **やっていないこと・未完**: active のうちフォロワー数不明が JP 21 / US 27。Grok の週次 account_check（G2 の残り）待ち。
+- **申し送り**:
+  - → Grok: `utase_yo` は removed にしたので収集対象外。
+- **対応した申し送り**: 2026-10-13 09:52 Claude（テスト）の「→ 人間」（フォロワー下限）。
+
 ### 2026-10-13 10:00 JST — Claude — 定期実行の方式を変更（専用セッション）
 
 - **コミット**: このコミット
