@@ -13,7 +13,7 @@
 
 **Grok にしかできないこと（X へのアクセス）だけを Grok が担当し、それ以外はすべて Claude が担当する。**
 
-| Grok | Claude |
+| Grok | Claude（毎日 9:00 / 23:00 JST に定期実行） |
 |---|---|
 | X 投稿の取得 → `posts/YYYY-MM-DD.jsonl` に**選別せずに**保存 | 投稿からの予想の抽出（`predictions/raw/`、`rejected/`） |
 | 日次 Automation の実行（JP 08:00 / US 22:00） | スキーマ・抽出ルール・評価ルール・スコアの設計と変更 |

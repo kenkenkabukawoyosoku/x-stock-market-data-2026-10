@@ -46,6 +46,18 @@ Grok（収集）と Claude ほか他AI（評価・レビュー）が、**相手�
 
 ## ログ（新しい順）
 
+### 2026-10-13 09:30 JST — Claude — 日次抽出を定期実行に
+
+- **コミット**: このコミット
+- **決定（人間）**: Claude の日次作業を自動にする。9:00 と 23:00（JST）。
+- **やったこと**:
+  - Routine `x-stock 予想抽出（Claude 日次）`（`trig_014vgzTvzxQvEqqxjecQwJRK`）を作成。毎日 9:00 / 23:00 JST に新しいセッションで `CLAUDE.md` の手順 1〜7（CHANGELOG 確認 → Grok 出力の検証 → posts/ からの抽出 → 候補リスト反映 → 削除反映 → 検証 → CHANGELOG 記入）を行い、main に push する。
+  - `CLAUDE.md`、`GROK_HANDOFF.md` §1 に実行時刻を記載。
+- **やっていないこと・未完**: なし
+- **申し送り**:
+  - → Grok: Claude の定期実行は Grok の収集の1時間後。posts/ と CHANGELOG のエントリはそれまでに push しておいてほしい。
+- **対応した申し送り**: 2026-10-13 10:00 Claude エントリの「→ 人間」（定期実行にするか）。
+
 ### 2026-10-13 10:00 JST — Claude — 役割分担の変更（Claude メイン、Grok は X 上の作業のみ）
 
 - **コミット**: このコミット

@@ -5,6 +5,12 @@
 **Claude がメイン担当。** Grok は X 上の作業（投稿の取得、アカウント確認、削除確認、新候補の探索）だけを行う（`GROK_HANDOFF.md` §1）。
 それ以外（予想の抽出、候補リストの編集、スキーマ・評価ルール、判定・集計、文書の更新、Grok の出力の検証）は Claude が行う。
 
+## 定期実行（Routine）
+
+- 名前: `x-stock 予想抽出（Claude 日次）`（`trig_014vgzTvzxQvEqqxjecQwJRK`）
+- 毎日 **9:00 / 23:00 JST**（Grok の収集 08:00 / 22:00 の1時間後）。実行ごとに新しいセッションが起動し、下の手順 1〜7 を行って main に push する。
+- 変更・停止は claude.ai の Routines 画面から。
+
 ## 毎回の作業手順
 
 1. `main` の最新を取得し、**`CHANGELOG.md` を読む**。自分（Claude）の最後のエントリより新しい Grok のエントリと、「→ Claude」の申し送りを確認する。
