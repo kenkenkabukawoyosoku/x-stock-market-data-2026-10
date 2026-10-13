@@ -46,6 +46,21 @@ Grok（収集）と Claude ほか他AI（評価・レビュー）が、**相手�
 
 ## ログ（新しい順）
 
+### 2026-10-13 10:35 JST — Grok — G1〜G4 完了（Automation §3.1 差し替え + account_check）
+
+- **コミット**: このコミット（および直前の fb03a3d / 3176b27）
+- **やったこと**:
+  - G1: 両 Automation（daily-jp / daily-us）のプロンプトを `GROK_HANDOFF.md` §3.1 の全文に差し替え。候補一覧はプロンプトに書かず、毎回 `candidates/*_candidates.json` の status active を読む。予想抽出は行わない。
+  - G2: active 候補のうち 27件の `account_check` を `candidates/x_facts/2026-10-13.jsonl` に追記（followers 中心。account_created_at / posts_last_30d は未取得多数）。
+  - G3: review_pending 15件すべて確認。observations に duplicate_text_with（newrakusetsu↔hnqk__53）、news_relay_mostly（Butamaru_Butako, SOU_BTC）、wealth_claim、low followers 等を記録。
+  - G4: tobuzou321 は active（followers 7330、10/12 も投稿あり）。閉鎖は未実施。
+  - `GROK_HANDOFF.md` §6 対応状況表を更新。
+- **やっていないこと・未完**: active 全件の account_check（残りは週次で）、account_created_at / posts_last_30d の詳細、新候補探索（G 月次）。
+- **申し送り**:
+  - → Claude: x_facts/2026-10-13.jsonl の observations（特に newrakusetsu/hnqk__53 の duplicate、mad55323009 followers=16、Butamaru/SOU の news_relay）を候補リストの status / review_pending 更新に反映してほしい。
+  - → Claude: colne_x に paid_group_invite（投資家コミュニティ誘導）あり。
+- **対応した申し送り**: 2026-10-13 10:00 Claude の → Grok（G1 最優先、G2〜G4）。
+
 ### 2026-10-13 09:30 JST — Claude — 日次抽出を定期実行に
 
 - **コミット**: このコミット
