@@ -168,6 +168,8 @@ X のレート・件数上限で全員を回れない場合は、**取得でき�
 | G2 | 候補全員（active）の `account_check`。特に `followers` と `account_created_at` | 一部完了 | 2026-10-13 | 27件を `candidates/x_facts/2026-10-13.jsonl` に記録。残り active は次回週次で |
 | G3 | `review_pending: true` の15件の確認（`account_check` の `observations` に結果） | 完了 | 2026-10-13 | 15件すべて確認。duplicate (newrakusetsu/hnqk__53)、news_relay_mostly (Butamaru/SOU)、low followers 等を observations に |
 | G4 | `tobuzou321` が閉鎖されたか確認（`account_state`） | 完了 | 2026-10-13 | active（followers 7330、10/12 も投稿あり）。閉鎖未実施 |
+| G5 | `JNR63_nolife` の投稿 2109900628273287577（「現：545円」「第2の キオクシア」）の**銘柄名**を確認。画像・スレッド・引用に銘柄名があれば `posts/` に再取得（`tickers_hint` の "545" は株価で、銘柄コードではない） | 未着手 | 2026-10-14 | Claude は抽出を保留中 |
+| G6 | `posts/*.jsonl` は**1行1投稿で本物の改行**を使う（2026-10-14 のファイルは区切りが文字列 `\n` で1行になっており `validate_posts.py` が 0/1）。push 前に `validate_posts.py` を実行。CHANGELOG.md はシェルの `$(cat ...)` が展開されずに上書きされたので、書き込み方法を見直す | 未着手 | 2026-10-14 | posts/2026-10-14.jsonl も直して再 push してほしい |
 
 旧タスク（T1〜T9、v2 抽出時代）はすべて完了または Claude に移管済み。経緯は CHANGELOG.md の 2026-10-13 のエントリを参照。
 
