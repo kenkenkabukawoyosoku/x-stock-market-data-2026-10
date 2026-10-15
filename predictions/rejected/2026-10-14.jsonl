@@ -6,3 +6,4 @@
 {"post_url": "https://x.com/taiaraharu0214/status/2109954140281704872", "ticker": "3315", "reason": "watch_only", "detail": "「今、チェックしておきたい低位株」「注目」だけで方向・期間・目標がない。「上昇を保証するものではありません」と明記"}
 {"post_url": "https://x.com/taiaraharu0214/status/2109954140281704872", "ticker": "288A", "reason": "watch_only", "detail": "「今、チェックしておきたい低位株」「注目」だけで方向・期間・目標がない。「上昇を保証するものではありません」と明記"}
 {"post_url": "https://x.com/kabu_tanaka_/status/2109994668658393148", "ticker": "3350", "reason": "no_horizon_no_target", "detail": "メタプラネットへの批判（引用投稿）。否定的だが、売り・回避の期間・目標がない。引用元の本文（quoted_text）は未取得"}
+{"post_url": "https://x.com/JNR63_nolife/status/2109900628273287577", "ticker": "UNKNOWN", "reason": "no_instrument", "detail": "「現：545円」「第2のキオクシア」「小泉防衛大臣」とあるが銘柄名がない。G5 で Grok が確認したが、本文・画像・動画からも銘柄は不明（2026-10-15 Grok）。tickers_hint の 545 は株価"}
