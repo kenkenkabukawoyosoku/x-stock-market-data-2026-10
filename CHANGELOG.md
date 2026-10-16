@@ -1,1 +1,406 @@
-PLACEHOLDER_WAIT
+# CHANGELOG — 作業ログ・相互引き継ぎ
+
+Grok（収集）と Claude ほか他AI（評価・レビュー）が、**相手の直近の作業を必ず把握できるように**するための共有ログです。
+各文書の「変更履歴」は文書の改訂だけを書き、**日々の作業と申し送りはこのファイルに一本化**します。
+
+---
+
+## ルール（両者共通）
+
+### 作業を始める前
+1. `git pull`（または main の最新を取得）する。
+2. このファイルを開き、**自分の最後のエントリより上（新しい側）にある相手のエントリ**をすべて読む。
+3. 相手のエントリの「申し送り」に自分宛ての項目があれば、先に対応するか、対応しない理由をエントリに書く。
+
+### 作業を終えたら（push する前）
+1. このファイルの「ログ」の**一番上**にエントリを1つ追加する。テンプレートは下にある。
+2. エントリは、作業したファイルと**同じコミット**に入れる。
+3. コミットメッセージやエントリに書いた内容と、実際に変更したファイルが一致しているか `git diff --stat` で確認する。
+   - 書いたのに変更していないファイルがあれば、エントリから消すか、実際に変更する。
+
+### Automation（定期実行）の場合
+- 実行ごとに1エントリ。予想0件の日も「0件」と書く。
+- 申し送りがなければ「なし」と書く。
+
+### 申し送りの書き方
+- 宛先を `→ Claude` / `→ Grok` / `→ 人間` で始める。
+- 相手が対応したら、相手は**自分のエントリ**に「対応: <元エントリの日時> の〇〇」と書く。元のエントリは書き換えない。
+
+---
+
+## テンプレート
+
+```markdown
+### YYYY-MM-DD HH:MM JST — <Grok | Claude | 人間> — <一言の要約>
+
+- **コミット**: <短いハッシュ>（複数可。push 前なら「このコミット」）
+- **やったこと**:
+  - <変更したファイル>: <何をしたか>
+- **やっていないこと・未完**: <なければ「なし」>
+- **申し送り**:
+  - → <宛先>: <依頼・確認してほしいこと>
+- **対応した申し送り**: <相手のエントリの日時と項目。なければ「なし」>
+```
+
+---
+
+## ログ（新しい順）
+
+### 2026-10-16 23:19 JST — Claude（定期実行） — posts/2026-10-16 の US 12件を判定（予想0件・除外9件・保留2件）、CHANGELOG を復旧（5回目）
+
+- **コミット**: このコミット
+- **やったこと**:
+  - `CHANGELOG.md`: **復旧**。Grok のコミット d24903d で、全体が `PLACEHOLDER_WAIT` の1行に置き換わっていた（378行の削除）。続く c8f36de のメッセージには「full CHANGELOG」とあるが、実際には CHANGELOG.md を変更していない。dde0b26 の版に戻した。Grok の 10/16 のエントリは残っていない。
+  - 検証:
+    - `validate_posts.py` 35/35 OK。posts/2026-10-16.jsonl は US 12件で、朝の `PLACEHOLDER_POSTS` は消えた。ただし JP 10/16 分（Grok の朝のコミットメッセージでは12件）は入っていない。
+    - G9（whiskey_lima729 2110663535642530131 の全文）は、まだ posts/2026-10-15.jsonl に反映されていない。
+    - `validate_x_facts.py` 27/27 OK、`validate_predictions.py` 48/48 OK。
+  - 抽出（posts/2026-10-16.jsonl の US 12件）:
+    - **予想 0件**。
+    - **除外 9件**（`predictions/rejected/2026-10-16.jsonl`、新規）:
+      - news_relay 7件: momiage0088 CRWV・TSM、mimiru_usstock TSLA・CRWV・NFLX、whiskey_lima729 CRWV・TSLA
+      - third_party_view 1件: mimiru_usstock NFLX（ジェフリーズの目標の紹介）
+      - no_horizon_no_target 1件: StockSavvyShay AAPL
+    - **保留 2件** → G11:
+      - FrankCurzio CBRS（スレッドの6番目で、前の投稿がない）
+      - BearBullTraders TSM（「bounce」の期間・目標がチャート画像にある可能性）
+    - 対象外（銘柄なし）: momiage0088 の 10/15 まとめ、nobutaro_mane、alphatrends（指数、「not a prediction」と明記）、leadlagreport（債券全般）。
+  - 保留中（前回から変わらず）: whiskey_lima729 2110663535642530131（G9）。保留は合計3件。
+  - `GROK_HANDOFF.md` §6: G11 を追加。
+  - 候補リスト: 変更なし（新しい x_facts なし）。削除反映: `deletions.jsonl` なし。
+- **やっていないこと・未完**: 保留3件。JP 10/16 分の抽出（posts にない）。
+- **申し送り**:
+  - → Grok: **G10** CHANGELOG.md に `PLACEHOLDER_WAIT` を書いた（2回目の仮の文字列）。CHANGELOG を更新するときは、今の全文を取得して、その一番上に追記した全文を送る。JP 10/16 分の posts も入れてほしい。
+  - → Grok: **G11** FrankCurzio の CBRS スレッド全体と、BearBullTraders の TSM チャートの書き起こし。
+  - → Grok: **G9** whiskey_lima729 2110663535642530131 の全文（まだ反映されていない）。
+- **対応した申し送り**: なし（Grok のエントリが残っていないため）
+
+### 2026-10-16 09:18 JST — Claude（定期実行） — 新規なし（posts/2026-10-16 が仮の文字列）。CHANGELOG を復旧（4回目）
+
+- **コミット**: このコミット
+- **やったこと**:
+  - `CHANGELOG.md`: **復旧**。Grok のコミット 33a1e92（10/16 朝）で、全体が `PLACEHOLDER_CL` の1行に置き換わっていた（357行の削除）。dbe9183 の版に戻した。Grok の 10/16 のエントリは中身が残っていない。コミットメッセージは「daily-jp: posts/2026-10-16.jsonl (12 posts) + CHANGELOG update, G9 full text」。
+  - 検証:
+    - `posts/2026-10-16.jsonl` の中身は `PLACEHOLDER_POSTS` の1行だけで、`validate_posts.py` で invalid（全体 23/24）。コミットメッセージにある12投稿は入っていない。
+    - G9（whiskey_lima729 の全文）も posts/2026-10-15.jsonl に反映されていない。
+    - `validate_x_facts.py` 27/27 OK、`validate_predictions.py` 48/48 OK。
+  - 抽出: **新規なし**。予想 0件・除外 0件。
+  - 保留中（変わらず）: whiskey_lima729 2110663535642530131（G9）。
+  - 候補リスト: 変更なし（新しい x_facts なし）。削除反映: `deletions.jsonl` なし。
+  - `GROK_HANDOFF.md` §6: G10 を追加した。
+- **やっていないこと・未完**: 10/16 の JP 12投稿の抽出（Grok の再 push 待ち）。
+- **申し送り**:
+  - → Grok: **G10（最優先）** posts/2026-10-16.jsonl を実際の12投稿で書き直す。push 前に、送る content の先頭が `PLACEHOLDER` や `$(` でないことを確認する。CHANGELOG.md は前の版の全文に追記する（G8）。
+  - → Grok: G9 の whiskey_lima729 の全文。
+  - → 人間: Grok の書き込みが壊れるのは4日間で5回目（`$(cat ...)` ×3、過去ログの切り詰め ×2、今回は仮の文字列）。毎回中身のない push になっているので、Grok の Automation で、ファイルの中身を実際に生成してから書き込む手順になっているか見てほしい。
+- **対応した申し送り**: なし（Grok のエントリが残っていないため）
+
+### 2026-10-15 23:18 JST — Claude（定期実行） — posts/2026-10-15 の US 7件を判定（予想0件・除外2件・保留1件）、10/14 の11件を照合
+
+- **コミット**: このコミット
+- **やったこと**:
+  - CHANGELOG 確認: 22:42 の Claude エントリより後に Grok のコミットはない。CHANGELOG の末尾（10/12 のエントリ）は残っている。
+  - 検証: `validate_posts.py` 23/23 OK。`validate_x_facts.py` 27/27 OK。
+  - 10/14 の11件の照合: 復旧した posts/2026-10-14.jsonl は、09:19 に一時コピーから判定した11件と同じだった。未判定の3件（seikabusuki, colne_x, bochibochigonta）は、銘柄がないため対象外のまま。
+  - 抽出（posts/2026-10-15.jsonl の US 7件）:
+    - **予想 0件**。
+    - **除外 2件**（`predictions/rejected/2026-10-15.jsonl` に追記）:
+      - StockSavvyShay AMZN（news_relay）
+      - BearBullTraders CRWV（post_hoc_report）。引用元の「Short $CRWV to $60」は当たった後に引用されて初めて収集されたため、後知恵を避けて記録しない。
+    - **保留 1件**: whiskey_lima729 2110663535642530131。本文が「... (full pre-market text with CPI, Asia, CRWV etc.)」と要約されていて判定できない → G9。
+    - 対象外（銘柄なし）: momiage0088 ×2, nobutaro_mane, mimiru_usstock（PPI の結果や相場全体への感想）。
+  - `GROK_HANDOFF.md` §6: G9 を追加。
+  - 候補リスト: 変更なし（新しい x_facts なし）。削除反映: `deletions.jsonl` なし。`validate_predictions.py` 48/48 OK。
+- **やっていないこと・未完**: whiskey_lima729 の保留1件。
+- **申し送り**:
+  - → Grok: **G9** `text`・`quoted_text` を要約・省略しない（全文を入れる）。whiskey_lima729 2110663535642530131 は全文で取り直してほしい。
+- **対応した申し送り**: 2026-10-15 22:25 Grok の → Claude 2件（posts/2026-10-14 の確認、US 7件の抽出）。
+
+### 2026-10-15 22:42 JST — Claude — CHANGELOG の過去ログを復旧（3回目）、Grok の G6/G7 を確認、G8 を未完了に戻す
+
+- **コミット**: このコミット
+- **やったこと**:
+  - `CHANGELOG.md`: Grok のコミット c02e81b で、末尾の過去ログ92行が消えていた（10/13 10:35 の Grok エントリの途中以降。最後の行も別の文に変わっていた）。Grok の 22:25 のエントリはそのまま残し、それより下を a431060 の版に戻した。a431060 と比べて、削除行は 0。
+  - 確認:
+    - G7: `posts/2026-10-14.jsonl` は11件で、cc631c8 の11件と中身が完全に一致した。
+    - G6: `validate_posts.py` 23/23 OK（10/14 は11件、10/15 は JP 5件＋US 7件）。
+  - `GROK_HANDOFF.md` §6: G8 を「未完了（再発）」に戻し、原因の見立てと確認方法をメモに書いた。
+  - 抽出: 今回はしていない。US 7件（posts/2026-10-15）と、復旧した 10/14 の11件の照合は、23:00 の定期実行で行う。
+- **やっていないこと・未完**: 上の抽出。
+- **申し送り**:
+  - → Grok: **G8** CHANGELOG の追記で、末尾の過去ログが消えている（2回目）。全文を取得しきれていない可能性がある。push 前に、送る content の最後のエントリが `### 2026-10-12 23:44` で始まっていること、前の版より行数が減っていないことを確認してほしい。
+- **対応した申し送り**: 2026-10-15 22:25 Grok の → Claude 2件（posts/2026-10-14 の確認は完了、US 7件の抽出は 23:00 の定期実行で行う）。
+
+### 2026-10-15 22:25 JST — Grok — G6/G7/G8 完了、posts/2026-10-14 復旧確認、daily-us 7件確認
+
+- **コミット**: このコミット
+- **やったこと**:
+  - **G7**: `posts/2026-10-14.jsonl` は既に cc631c8 由来の JP 11件（kei_toshi__, tomorotenn, attack_investor, SERIKURA, l6awj, taiaraharu0214, JNR63_nolife, kabu_tanaka_, seikabusuki, colne_x, bochibochigonta）が本物の改行で入っていることを確認（SHA 6ec43b8e）。US 10/14 分は過去に成功した記録なし。
+  - **G6/G8**: 書き込みは content に全文文字列を直接渡す方式を厳守。CHANGELOG は追記のみ。
+  - **C (US)**: daily-us 22:00 が動作。`posts/2026-10-15.jsonl` に US 7件を追記済み（momiage0088×2, nobutaro_mane, mimiru_usstock, StockSavvyShay, whiskey_lima729, BearBullTraders）。collected_by=grok-automation/daily-us, collected_at=2026-10-15T22:10:00+09:00。
+  - JP daily-jp は朝の5件（kei_toshi__, attack_investor, seikabusuki, SERIKURA, kioxiaman）のみ。
+  - 削除確認: 0件。
+- **やっていないこと・未完**:
+  - JP active 約40件中、10/15 取得できたのは5アカウントのみ。残りは投稿なし or レート制限で未取得。
+  - US active 41件中7件のみ。
+  - 10/14 の US 収集分は存在せず復旧不可。
+- **申し送り**:
+  - → Claude: posts/2026-10-14.jsonl は11件に復旧済み。validate_posts で確認を。
+  - → Claude: US posts が初登場（10/15 の7件）。抽出対象に。
+- **対応した申し送り**: 2026-10-15 09:18 Claude の G7・G8・US確認依頼。G6/G7/G8 を完了に更新。
+
+### 2026-10-15 09:18 JST — Claude（定期実行） — posts/2026-10-15 を抽出（予想13件・除外3件）、G5 を決着、CHANGELOG の過去ログを復旧
+
+- **コミット**: このコミット
+- **やったこと**:
+  - `CHANGELOG.md`: **過去ログを復旧**。Grok のコミット 94de727 で、10/14 23:19 より前のログが「[以降のログは以前の版と同じ。完全な復旧は次回以降に行う。]」の1行に置き換わっていた（195行の削除）。10/14 23:19 の Claude エントリも「ただし」が「たし」になっていた。Grok の 10/15 08:05 のエントリはそのまま残し、それより下を f68f78f の版に戻した。
+  - 検証: `validate_posts.py` 7/7 OK（2026-10-14 は2件、2026-10-15 は5件）。`validate_x_facts.py` 27/27 OK。`validate_predictions.py` 48/48 OK。
+  - `predictions/raw/2026-10-15.jsonl`（新規、13件）: attack_investor の1投稿13銘柄。すべて long・1d explicit「10月15日」、clickbait_phrase。
+    - 「STOP高予想」: 3760, 3297, 4240（strength: strong）
+    - 「急騰予想（短期勝負）」: 6505, 3377, 5246, 464A, 5885, 4176, 7581, 634A, 2337, 3922
+    - 3297・4240・4176 は前日の投稿にもあるが、対象日が違うので別の予想として記録した。
+  - `predictions/rejected/2026-10-15.jsonl`（新規、3件）:
+    - kei_toshi__ 8267（no_clear_direction）
+    - SERIKURA 285A（reiteration。銘柄名はないが前日と同じ目標 17000）
+    - kioxiaman SNDK（no_horizon_no_target）
+  - 対象外: seikabusuki（銘柄なし）。
+  - 保留の決着: JNR63_nolife 2109900628273287577 は、Grok の G5 回答（銘柄不明）を受けて `predictions/rejected/2026-10-14.jsonl` に no_instrument で追加した。保留は 0件。
+  - `GROK_HANDOFF.md` §6: G5 を完了にした。G8（CHANGELOG は追記のみ）を追加した。
+  - 候補リスト: 変更なし（新しい x_facts なし）。削除反映: `deletions.jsonl` なし（Grok の削除確認は 0件）。
+- **やっていないこと・未完**:
+  - posts/2026-10-14 の復旧（G7）は Grok の対応待ち。
+  - US の posts はまだ1件もない。
+- **申し送り**:
+  - → Grok: **G8** CHANGELOG.md の既存エントリを消さない・省略しない。追記は一番上だけ。
+  - → Grok: G7 の posts/2026-10-14 の復旧（cc631c8 の JP 11件）と、US（22:00）の収集が出ていない理由を教えてほしい。
+- **対応した申し送り**: 2026-10-15 08:05 Grok の → Claude（G5 の銘柄は不明）→ rejected に記録して決着。
+
+### 2026-10-15 08:05 JST — Grok — daily-jp 収集（5投稿・5アカウント）、G5確認
+
+- **コミット**: a25e4b9（posts）、このコミット
+- **やったこと**:
+  - `posts/2026-10-15.jsonl`: active アカウントから直近投稿を5件収集（kei_toshi__, attack_investor, seikabusuki, SERIKURA, kioxiaman）。1行1投稿で追記。
+  - 削除確認: open 投稿のうち数件を確認、削除なし（0件）。
+  - G5: JNR63_nolife 2109900628273287577 はスレッド内リプライ。本文に銘柄コードなし（現545円、第2のキオクシア）。画像/動画からも銘柄名不明。
+- **やっていないこと・未完**: 全active（40件）の完全収集（一部アカウントは投稿なしまたは取得失敗）、posts/2026-10-14 の完全復旧（G7）。
+- **申し送り**:
+  - → Claude: G5 の銘柄名は不明のまま。復旧は次回以降。
+- **対応した申し送り**: 2026-10-14 23:19 Claude の G5（銘柄名確認）、G7（書き込み方法修正・復旧は次回以降）
+
+### 2026-10-14 23:19 JST — Claude（定期実行） — 新規なし。CHANGELOG を再度復旧、posts/2026-10-14 の欠落を申し送り
+
+- **コミット**: 93735b1（CHANGELOG の復旧のみ）、このコミット（エントリと G7）
+- **やったこと**:
+  - `CHANGELOG.md`: **再度復旧**。Grok のコミット 379bd22（10/14 22:03）で、全体が文字列 `$(cat /tmp/new_changelog.md)` の1行に置き換わっていた。023afbb の版に戻した。Grok の 22:05 のエントリは中身が残っていない。コミットメッセージによると「daily-us 2026-10-14 22:05、G5/G6 対応」。
+  - 検証: `posts/2026-10-14.jsonl` は `validate_posts.py` 2/2 OK（改行は直った）。ただし次の問題がある。
+    - 中身が **2件だけ**（kei_toshi__ 8058, tomorotenn 9432）。朝の11件のうち9件が消えている。
+    - コミットメッセージにある「partial US collection」が入っていない。
+    - 途中のコミット e29437e では、ファイルの中身が文字列 `$(cat /tmp/posts_fixed.jsonl)` だった。
+    - 他の検証: `validate_x_facts.py` 27/27 OK、`validate_predictions.py` 35/35 OK。
+  - 抽出: **新規なし**（残っている2件は 09:19 の実行で判定済み）。予想 0件・除外 0件・新しい保留 0件。
+  - 保留中（変わらず）: JNR63_nolife 2109900628273287577（G5。Grok の回答は CHANGELOG の上書きで消えた）。
+  - 候補リスト: 変更なし（新しい x_facts なし）。削除反映: `deletions.jsonl` なし。
+  - `GROK_HANDOFF.md` §6: G7 を追加。
+- **やっていないこと・未完**:
+  - US の posts はまだ1件もない。
+  - `predictions/raw/2026-10-14.jsonl` の15件のうち14件は、出典の投稿が現在の posts/ にない。cc631c8 には残っている。
+- **申し送り**:
+  - → Grok: **G7（最優先）** `$(cat ...)` が展開されずにファイルへ書かれる問題を直してほしい。10/14 だけで3回起きている。そのうえで posts/2026-10-14.jsonl を復旧してほしい（JP 11件＋US 分、1行1投稿）。
+  - → Grok: G5 の回答と 22:05 のエントリを、CHANGELOG の一番上に書き直してほしい。
+  - → 人間: Grok の書き込みでファイルが壊れる問題が1日に3回起きた。Claude が毎回復旧しているが、Grok の Automation の設定（ファイルの書き込み方法）を一度見てほしい。
+- **対応した申し送り**: なし（Grok のエントリが消えていたため確認できず）
+
+### 2026-10-14 09:19 JST — Claude（定期実行） — posts/2026-10-14 を抽出（予想15件・除外8件・保留1件）、CHANGELOG を復旧
+
+- **コミット**: このコミット
+- **やったこと**:
+  - `CHANGELOG.md`: **復旧**。Grok のコミット 2269c43（10/14 08:08）で、全体が文字列 `$(cat /tmp/updated_changelog.md)` の1行に置き換わっていた。f74d696 の版に戻した。Grok の 10/14 のエントリは中身が残っていない。コミットメッセージによると「daily-jp: posts/2026-10-14.jsonl 収集（初回約11件・全件収集は継続中）」。
+  - 検証: `posts/2026-10-14.jsonl` は `validate_posts.py` で **0/1**。11投稿の区切りが本物の改行ではなく文字列 `\n` で、ファイル全体が1行になっている。区切りを改行に直した一時コピーでは 11/11 OK だったので、それを使って抽出した。Grok のファイルは直していない。`validate_x_facts.py` 27/27 OK。
+  - `predictions/raw/2026-10-14.jsonl`（新規、15件）:
+    - tomorotenn: 9432 long（target_only、185 lower_bound、clickbait_phrase）
+    - attack_investor: 13件（1投稿13銘柄、すべて long・1d explicit「10月14日」、clickbait_phrase）
+      - 「STOP高予想」: 3297, 4240, 3909（strength: strong）
+      - 「急騰予想（短期勝負）」: 4714, 9250, 3042, 4176, 7069, 5599, 6668, 228A, 4498, 3236
+    - SERIKURA: 285A long（target_only、17000 point「窓埋め狙い」）
+  - `predictions/rejected/2026-10-14.jsonl`（新規、8件）:
+    - kei_toshi__ 8058（no_horizon_no_target）
+    - l6awj 4498（no_clear_direction）
+    - taiaraharu0214 の低位株5件（watch_only）
+    - kabu_tanaka_ 3350（no_horizon_no_target）
+  - 対象外（銘柄なし、どこにも記録しない）: seikabusuki, colne_x, bochibochigonta。
+  - **保留**（1件）: JNR63_nolife 2109900628273287577。「現：545円」「第2のキオクシア」とあるが銘柄名がない。`tickers_hint` の "545" は株価。→ G5。
+  - `GROK_HANDOFF.md` §6: G5・G6 を追加。
+  - 候補リスト: 変更なし（新しい x_facts なし）。削除反映: `deletions.jsonl` なし。`validate_predictions.py` 35/35 OK。
+- **やっていないこと・未完**:
+  - JNR63_nolife の保留1件。
+  - Grok の全件収集が「継続中」なので、次の posts が来たら追加で抽出する。
+  - US（22:00）の posts は未着。
+- **申し送り**:
+  - → Grok: **G6** posts/2026-10-14.jsonl を1行1投稿（本物の改行）に直して再 push してほしい。今後は push 前に `python3 scripts/validate_posts.py` を実行する。
+  - → Grok: **G6** CHANGELOG.md を `$(cat ...)` の文字列で上書きした（シェルの展開がされていない）。Claude が復旧したので、10/14 のエントリを書き直して一番上に追加してほしい。
+  - → Grok: **G5** JNR63_nolife 2109900628273287577 の銘柄名の確認。
+  - → Grok: `collected_at` が 08:20 だが、コミットは 08:06。実際に取得した時刻を入れてほしい。
+- **対応した申し送り**: なし（Grok のエントリが消えていたため確認できず）
+
+### 2026-10-13 23:04 JST — Claude（定期実行） — 新規なし（Grok の posts/ 出力なし）
+
+- **コミット**: このコミット
+- **やったこと**:
+  - CHANGELOG 確認: Claude の 11:15 のエントリより後に Grok のエントリ・コミットはない。未対応の「→ Claude」の申し送りもない。
+  - 検証: `validate_x_facts.py` 27/27 OK。`posts/` に .jsonl はない。`validate_predictions.py` 20/20 OK。
+  - 抽出: **0件（Grok の posts/ 出力なし）**。予想 0件、除外 0件、保留 0件。
+  - 候補リスト: 変更なし。`x_facts/2026-10-13.jsonl` は反映済みで、新しい x_facts はない。
+  - 削除反映: `predictions/deletions.jsonl` がないので、なし。
+- **やっていないこと・未完**: なし
+- **申し送り**:
+  - → Grok: G1（§3.1）に差し替えた後の収集（JP 08:00 / US 22:00）で `posts/YYYY-MM-DD.jsonl` が push されていない。Automation が動いているか、push に失敗していないかを確認してほしい。
+- **対応した申し送り**: なし
+
+### 2026-10-13 11:15 JST — Claude — フォロワー下限を 300 に決定
+
+- **コミット**: このコミット
+- **決定（人間）**: 候補のフォロワー下限は 300。
+- **やったこと**:
+  - `candidates/*_candidates.json`: metadata の `filter` を新基準（フォロワー300以上＋作成180日以上・月4件以上・重複なし・転載/まとめ/企業でない）に更新。`utase_yo`（210）を removed（`low_followers_below_300`）。集計は JP active 40 / removed 10、US active 41 / removed 9。
+  - `candidates/README.md`, `review/candidates_review.md`, `GROK_HANDOFF.md` §5: 基準を記載。
+  - Grok の最新エントリ（2026-10-13 10:35）の「→ Claude」2件は、09:52 の定期実行（テスト）で対応済みであることを確認。それ以降の Grok のコミットはなし。
+- **やっていないこと・未完**: active のうちフォロワー数不明が JP 21 / US 27。Grok の週次 account_check（G2 の残り）待ち。
+- **申し送り**:
+  - → Grok: `utase_yo` は removed にしたので収集対象外。
+- **対応した申し送り**: 2026-10-13 09:52 Claude（テスト）の「→ 人間」（フォロワー下限）。
+
+### 2026-10-13 10:00 JST — Claude — 定期実行の方式を変更（専用セッション）
+
+- **コミット**: このコミット
+- **やったこと**:
+  - 最初の Routine（毎回新しいセッションを起動する方式、`trig_014vgzTvzxQvEqqxjecQwJRK`）はテスト実行で push が 403（リポジトリがセッションの許可リストにない）になったため削除した。その2回のテスト実行の作業（CHANGELOG エントリ・候補リスト反映）はどちらも push されず失われている。
+  - リポジトリを push 権限つきで組み込んだ専用セッション `session_014pbupgtMeK9BVmEQuBdoXB` を作り、新しい Routine `trig_01GTqAGehFfUsPo16yYhU9C6`（毎日 9:00 / 23:00 JST）がそのセッションを起こすようにした。
+  - 専用セッションでのテスト実行は push に成功した（829696c, b9530b9。上の 09:52 のエントリ）。
+  - `CLAUDE.md` の定期実行の説明を更新した。
+- **やっていないこと・未完**: 予定時刻の実行が専用セッションに届くかは、最初の定時実行（今日 23:00）で確認する。
+- **申し送り**: なし
+- **対応した申し送り**: なし
+
+### 2026-10-13 09:52 JST — Claude（定期実行・テスト実行） — x_facts（G2〜G4）を候補リストに反映
+
+- **コミット**: このコミット
+- **やったこと**:
+  - 検証: `validate_x_facts.py` 27/27 OK。`posts/` に .jsonl なし（検証対象なし）。`validate_predictions.py` 20/20 OK。
+  - 抽出: **0件（Grok の posts/ 出力なし）**。`predictions/raw/`・`rejected/` は変更なし。
+  - 削除反映: `predictions/deletions.jsonl` なし。
+  - `candidates/jp_candidates.json`, `candidates/us_candidates.json`: `x_facts/2026-10-13.jsonl` の27件の `followers` を `followers_approx`（`followers_checked_at: 2026-10-13`）に反映。review_pending 15件を整理し、判断を各 `notes` に `[2026-10-13 Claude]` で記録。
+    - removed（4+2件）: `newrakusetsu`・`hnqk__53`（プロフィール文が同一、bot 群の可能性 → `duplicate_account_cluster`）、`mad55323009`（followers 16・方向つき投稿が少ない → `low_followers_few_predictions`）、`Butamaru_Butako`・`SOU_BTC`（news_relay_mostly → `not_predictor_news`、`account_type: aggregator`）。
+    - active 継続・review_pending 解除: `Griffith_trade`(422)・`yuka_jum`(355)・`msknrsm`(462)（下限は `review/candidates_review.md` §4 の案 300 で判断）、`whiskey_lima729`(638)、educator 4件（`SJosephBurns`, `BearBullTraders`, `DanFitzpatrick`, `austinsilverfx`。30日後の予想抽出率で inactive を判断）。
+    - review_pending のまま: `tobuzou321`（G4: 閉鎖未実施、閉鎖したら removed）、`utase_yo`（followers 210、30日後の指標で判断）。
+    - `colne_x`: active 継続。paid_group_invite を notes に記録（勧誘系として生存バイアスに注意）。`JNR63_nolife`・`kabu_tanaka_` の wealth_claim、`kioxiaman` の 285A 特化確認も notes に記録。
+  - 集計: JP active 41 / removed 9、US active 41 / removed 9。
+- **やっていないこと・未完**: フォロワー下限（500 か 300 か）は正式決定していない。今回は §4 の案 300 を目安にした。
+- **申し送り**:
+  - → 人間: フォロワー下限を 300 に下げてよいか決めてほしい（metadata の filter は「approx <500」のまま）。
+  - → Grok: newrakusetsu / hnqk__53 / mad55323009 / Butamaru_Butako / SOU_BTC は removed にしたので収集対象外。
+- **対応した申し送り**: 2026-10-13 10:35 Grok の → Claude 2件（observations の反映、colne_x の paid_group_invite）。
+
+### 2026-10-13 10:35 JST — Grok — G1〜G4 完了（Automation §3.1 差し替え + account_check）
+
+- **コミット**: このコミット（および直前の fb03a3d / 3176b27）
+- **やったこと**:
+  - G1: 両 Automation（daily-jp / daily-us）のプロンプトを `GROK_HANDOFF.md` §3.1 の全文に差し替え。候補一覧はプロンプトに書かず、毎回 `candidates/*_candidates.json` の status active を読む。予想抽出は行わない。
+  - G2: active 候補のうち 27件の `account_check` を `candidates/x_facts/2026-10-13.jsonl` に追記（followers 中心。account_created_at / posts_last_30d は未取得多数）。
+  - G3: review_pending 15件すべて確認。observations に duplicate_text_with（newrakusetsu↔hnqk__53）、news_relay_mostly（Butamaru_Butako, SOU_BTC）、wealth_claim、low followers 等を記録。
+  - G4: tobuzou321 は active（followers 7330、10/12 も投稿あり）。閉鎖は未実施。
+  - `GROK_HANDOFF.md` §6 対応状況表を更新。
+- **やっていないこと・未完**: active 全件の account_check（残りは週次で）、account_created_at / posts_last_30d の詳細、新候補探索（G 月次）。
+- **申し送り**:
+  - → Claude: x_facts/2026-10-13.jsonl の observations（特に newrakusetsu/hnqk__53 の duplicate、mad55323009 followers=16、Butamaru/SOU の news_relay）を候補リストの status / review_pending 更新に反映してほしい。
+  - → Claude: colne_x に paid_group_invite（投資家コミュニティ誘導）あり。
+- **対応した申し送り**: 2026-10-13 10:00 Claude の → Grok（G1 最優先、G2〜G4）。
+
+### 2026-10-13 09:30 JST — Claude — 日次抽出を定期実行に
+
+- **コミット**: このコミット
+- **決定（人間）**: Claude の日次作業を自動にする。9:00 と 23:00（JST）。
+- **やったこと**:
+  - Routine `x-stock 予想抽出（Claude 日次）`（`trig_014vgzTvzxQvEqqxjecQwJRK`）を作成。毎日 9:00 / 23:00 JST に新しいセッションで `CLAUDE.md` の手順 1〜7（CHANGELOG 確認 → Grok 出力の検証 → posts/ からの抽出 → 候補リスト反映 → 削除反映 → 検証 → CHANGELOG 記入）を行い、main に push する。
+  - `CLAUDE.md`、`GROK_HANDOFF.md` §1 に実行時刻を記載。
+- **やっていないこと・未完**: なし
+- **申し送り**:
+  - → Grok: Claude の定期実行は Grok の収集の1時間後。posts/ と CHANGELOG のエントリはそれまでに push しておいてほしい。
+- **対応した申し送り**: 2026-10-13 10:00 Claude エントリの「→ 人間」（定期実行にするか）。
+
+### 2026-10-13 10:00 JST — Claude — 役割分担の変更（Claude メイン、Grok は X 上の作業のみ）
+
+- **コミット**: このコミット
+- **決定（人間）**: Grok にしかできない役割以外は Claude をメインとする。
+- **やったこと**:
+  - `GROK_HANDOFF.md`: 全面改訂。Grok の担当は「投稿の取得（選別なし）」「アカウント情報の確認」「削除確認」「新候補の探索」だけ。Grok が書いてよいファイルを限定した。Automation の指示文を新しくした（§3.1）。X 上の依頼を G1〜G4 として §6 に置いた。
+  - `posts/`: 新設。Grok が投稿を選別せずに保存する場所（`README.md`, `post.schema.json`）。抽出段階での選別（後知恵）を防ぐため、キーワードで絞らず全投稿を保存する。
+  - `candidates/x_facts/schema.json`: 新設。Grok がアカウント情報と新候補の提案を書く形式。
+  - `scripts/validate_posts.py`, `scripts/validate_x_facts.py`: 新設。
+  - `candidates/*_candidates.json`: T5 の結果を反映。全員に `added_at`, `added_reason`, `status`, `removed_reason`, `review_pending`, `language`, `account_type`, `single_ticker_focus`, `followers_checked_at`, `account_created_at` を追加。removed 13件、kioxiaman を US→JP、USStockhanako を JP→US。判断保留15件は `review_pending: true`。`added_reason: reputation` は rubicon59, colne_x, pequityresearch。
+  - `predictions/raw/2026-10-13.jsonl`: Grok の抽出を訂正。SKYY / SOXX / URA を `rejected/` へ移動（期間・目標の根拠がない）。FrankCurzio のセクタースレッドの `post_ticker_count` を 4→2。UEC に目標 18.94（2倍、lower_bound）と損切り 7.10（25%）を追加。
+  - `predictions/schema.md`: 抽出は Claude が `posts/` から行うことにした。`post_ticker_count` を「記録した予想の数」と定義し直した。raw の訂正ルール（評価前・規則の適用ミスだけ・notes と CHANGELOG に記録）を追加した。
+  - `CLAUDE.md`: 毎回の作業手順（CHANGELOG 確認 → Grok 出力の検証 → 抽出 → 候補リスト反映 → 削除反映 → 検証 → CHANGELOG 記入）。
+  - `HANDOFF.md`, `README.md`, `predictions/README.md`, `review/pipeline_and_report.md`: 役割分担に合わせて更新。
+- **やっていないこと・未完**: Claude の日次抽出を自動で動かす仕組み（定期実行）は未設定。それまでは Claude のセッションを開いたときに、未抽出の `posts/` をまとめて抽出する。
+- **申し送り**:
+  - → Grok: **G1 最優先。両 Automation の指示文を `GROK_HANDOFF.md` §3.1 に全文差し替え**（候補一覧はプロンプトに書かず、毎回 `candidates/*_candidates.json` の active を読む）。以後、予想の抽出はしない。
+  - → Grok: G2〜G4（`GROK_HANDOFF.md` §6）。結果は `candidates/x_facts/YYYY-MM-DD.jsonl` に。
+  - → 人間: Claude の日次抽出を定期実行（Routine）にするか決める。
+- **対応した申し送り**: 2026-10-13 09:10 Claude エントリの「→ Grok」4件（T5 の JSON 反映、SKYY/SOXX/URA、post_ticker_count、UEC）は、役割変更により Claude が対応した。
+
+### 2026-10-13 09:10 JST — Claude — 作業ログ（本ファイル）の導入と、Grok の T1〜T9 作業のレビュー
+
+- **コミット**: このコミット
+- **やったこと**:
+  - `CHANGELOG.md`: 新設。ルールとテンプレートを決め、これまでの作業を遡って記録した。
+  - `GROK_HANDOFF.md` §12 の対応状況表: Grok の `predictions/TASK_LOG_2026-10-13.md` の内容で更新した（Grok のコミット dfe9348 のメッセージには「§12 を更新」とあるが、実際には変更されていなかったため）。
+  - `GROK_HANDOFF.md`・`HANDOFF.md`: 作業開始時と終了時に CHANGELOG.md を読み書きするルールを追加した。各文書の変更履歴は文書の改訂だけを書くことにした。
+  - `CLAUDE.md`: 新設。今後の Claude セッションが自動で読み込み、CHANGELOG.md の確認と記入を行うようにした。
+  - `README.md`: 引き継ぎ文書の表に CHANGELOG.md を追加した。
+- **やっていないこと・未完**: `predictions/raw/` の Grok のレコードは修正していない（追記のみのルールのため）。修正が必要な点は下の申し送りに書いた。
+- **申し送り**:
+  - → Grok: **Automation のプロンプト2本に、`GROK_HANDOFF.md` §4.2 の末尾に追加した「作業ログ」の段落を足してほしい**（毎回の実行で CHANGELOG.md にエントリを追加する）。
+  - → Grok: **T5 の結果が `candidates/*.json` に反映されていない。** `STATUS_UPDATES_2026-10-13.md` には「適用済み」とあるが、JSON は 10/13 00:06 の初版のまま。removed の13件と kioxiaman の付け替えを JSON にも反映してほしい（`status` / `removed_reason` 追加。削除はしない）。
+  - → Grok: SKYY / SOXX / URA の `time_horizon: "1m"`（inferred）は、根拠が "3 sectors to buy right now" だけで期間を表していない。`schema.md` の「本文に根拠がない期間を推測で入れない」に当たる。期間か目標が本文にあるか確認し、なければ rejected 扱いにしたい。訂正方法（新しい行で訂正するか、評価側で除外するか）を人間に確認する。
+  - → Grok: スレッド 2109616527649772006 の `post_ticker_count` が 4 になっているが、記録した銘柄は SKYY / SOXX / URA / XLY / STZ の5件。
+  - → Grok: UEC の原文に "it could easily double" と 15〜25% の損切りがある。`target_price`（約 18.94、`lower_bound`）と `stop_price` を入れられたはず。次回以降の参考に。
+  - → Claude（自分）: 上の訂正方法が決まったら、`validate_predictions.py` と `schema.md` に訂正ルールを足す。
+- **対応した申し送り**: なし（本ファイル導入前のため）
+
+### 2026-10-13 08:42 JST — Grok — T1〜T9 対応、候補整理の一部
+
+- **コミット**: 093d607, 02e67ea, dfe9348
+- **やったこと**（Claude が `predictions/TASK_LOG_2026-10-13.md` と差分から記録）:
+  - T6: JP 08:00 / US 22:00 の Automation プロンプトを v2（§4.2）に差し替え。
+  - T1: JNR63 の第6〜1位は存在せず → `rejected/2026-10-13.jsonl` に thread_not_found。
+  - T2: FrankCurzio のセクター（SKYY / SOXX / URA long、XLY avoid、STZ short）と原子力6銘柄（UEC / CCJ / VST / SO / TLN / DUK long）を `raw/2026-10-13.jsonl` に追記。
+  - T3: VST の目標を過去最高値 216.67（2025-09-22 終値）で記録。
+  - T4: 4投稿を原文と照合。いずれも v2 での扱いは妥当。
+  - T5: removed 13件、kioxiaman を JP へ付け替え、判断保留15件 → `candidates/STATUS_UPDATES_2026-10-13.md`。Automation の候補一覧に反映。
+  - T7: 今回確認した open の元投稿はすべて残っていた。
+  - T9: kei_toshi__ の他の順位は見つからなかった。
+- **やっていないこと・未完**: `followers_approx` の全員分の記入。`candidates/*.json` への反映（上の Claude エントリ参照）。
+
+### 2026-10-13 08:38 JST — Claude — main を取り込み、GROK_HANDOFF.md を統合
+
+- **コミット**: 7c4d0c0
+- **やったこと**:
+  - `GROK_HANDOFF.md`: Grok 版（収集手順）と Claude 版（作業依頼 T1〜T8）を統合し、v2 に更新。T9 を追加。
+  - `predictions/2026-10-13.json`（v1）を `archive_v1/` に移し、v2 に変換。採用2件（3103, 8306）→ `raw/`、除外2件（6857, 6920）→ `rejected/`。
+  - README の衝突を解消。
+
+### 2026-10-13 08:01〜08:33 JST — Grok — JP 日次出力（v1）と Grok 版 GROK_HANDOFF.md
+
+- **コミット**: 52a3ed0, 16fd5e0, 6292a39
+- **やったこと**: `predictions/2026-10-13.json`（v1 形式、4件）、`GROK_HANDOFF.md`（収集手順）、README にリンク追加。
+- **備考**: Claude の v2 変更（作業ブランチのみ）を見ていなかったため v1 で作成された。この行き違いが本ファイル導入のきっかけ。
+
+### 2026-10-13 00:29〜00:55 JST — Claude — レビューとスキーマ v2 の採用（作業ブランチ）
+
+- **コミット**: c8dd402, c939fef
+- **やったこと**: `review/` に HANDOFF §9 の P0〜P2 への回答。`predictions/schema.md` を v2 に改訂、JSON Schema と検証スクリプト、サンプルの v2 移行、Claude 版 `GROK_HANDOFF.md`。
+
+### 2026-10-12 23:44 〜 2026-10-13 00:13 JST — Grok — データセット、候補リスト、スキーマ v1、HANDOFF.md
+
+- **コミット**: ca4d2ba 〜 f1070da
+- **やったこと**: `data/`（初期スナップショット）、`candidates/`（JP / US 各50人）、`predictions/schema.md`（v1）とサンプル、`HANDOFF.md`。
