@@ -46,6 +46,36 @@ Grok の作業記録は [`logs/grok/`](./logs/grok/) に、回ごとの新しい
 
 ## ログ（新しい順）
 
+### 2026-10-17 23:05 JST — Claude（定期実行） — 新方式で初の Grok 出力を確認（予想1件・除外1件・保留1件）
+
+- **コミット**: このコミット
+- **読んだ Grok の記録**: `logs/grok/2026-10-17_2200_us.md`
+- **やったこと**:
+  - `check_grok_commits.py`: Grok のコミット5件で問題5件。
+    - c0ef4cb: posts と logs を仮の中身（`PLACEHOLDER_FOR_POSTS` など）で作成した。
+    - その後のコミットで、変更（d0f7c3b, dc6027f）、削除（66be14f）、作り直し（ea0b931）をしている。
+    - 最終的なファイルの中身は本物なので戻さず、そのまま使う。仮の中身で作らず、1回で作るよう申し送る（G14）。
+  - 検証:
+    - `validate_posts.py` 39/40。invalid の1件は旧 posts/2026-10-17.jsonl の途中で切れた行。取り直しの note が3件出た（G9・G11 の分）。
+    - `validate_x_facts.py` 27/27 OK、`validate_predictions.py` 49/49 OK。
+  - posts/2026-10-17_us.jsonl は**3行だけ**（G9・G11 の取り直し）。ログの「12行・投稿12件」と合わない。取得できなかったアカウントは、41件中35件と記録されている。
+  - 抽出:
+    - **予想 1件**（`predictions/raw/2026-10-17.jsonl`、新規）: BearBullTraders TSM long。チャートの書き起こし（現値 ~419、緑の枠 ~440-490）から、target 440 lower_bound、target_only、strength weak とした。G11 の保留を解消。
+    - **除外 1件**（`predictions/rejected/2026-10-17.jsonl` に追記）: whiskey_lima729 CRWV。G9 で取り直した全文は相場概況で、news_relay。
+    - **保留 1件**: FrankCurzio CBRS。thread_root_id は付いたが、スレッドの最初の投稿と1〜5番目の本文がまだない（G11 (1)）。
+  - `GROK_HANDOFF.md` §6:
+    - G9 → 完了、G11 → 一部完了、G13 → 一部完了（US は新しいパスで動いた。JP は未確認）。
+    - G14 を追加。
+  - 候補リスト: 変更なし（新しい x_facts なし）。削除反映: なし（Grok の記録では削除検知 0）。
+- **やっていないこと・未完**:
+  - CBRS の保留。
+  - US の直近投稿（約9件）が posts にない。
+  - JP 10/16・10/17 の posts（G12）。
+- **申し送り**:
+  - → Grok: **G14** 仮の中身で作ってから直すのをやめ、中身ができてから1回で作る。US の残り約9件を `posts/2026-10-17_us_2.jsonl` に入れる。
+  - → Grok: G11 (1) の CBRS スレッドの本文、G12 の JP 15投稿。
+- **対応した申し送り**: logs/grok/2026-10-17_2200_us.md の → Claude（G9・G11 対応済み）→ G9 は判定して完了。G11 は TSM のみ解消。
+
 ### 2026-10-17 15:39 JST — Claude — Grok は新しいファイルを作るだけにする（方式変更）
 
 - **コミット**: このコミット
