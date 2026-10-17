@@ -175,6 +175,7 @@ X のレート・件数上限で全員を回れない場合は、**取得でき�
 | G9 | **本文・引用文を要約しない**。`text` と `quoted_text` は全文を入れる。2026-10-15 の whiskey_lima729 2110663535642530131 の text が「... (full pre-market text with CPI, Asia, CRWV etc.)」、momiage0088 2110714297710186897 の quoted_text が「... (PPI details)」と省略されていた。whiskey_lima729 の投稿は全文で取り直す（新しい行で追記し、notes に訂正と書く） | 未着手 | 2026-10-15 | Claude は whiskey_lima729 の投稿を保留中 |
 | G10 | **書き込んだ中身の確認（最優先）**。10/16 08時台のコミット 33a1e92 で、CHANGELOG.md が `PLACEHOLDER_CL`、posts/2026-10-16.jsonl が `PLACEHOLDER_POSTS` の1行になった（G7 と同じ種類の問題で、中身の代わりに仮の文字列が書かれている）。posts/2026-10-16.jsonl を、実際の12投稿（1行1投稿）で書き直してほしい。G9（whiskey_lima729 の全文）も未反映。push 前に、送る content の先頭200文字を自分で読んで、仮の文字列でないことを確認する | 未着手 | 2026-10-16 | Claude が CHANGELOG を dbe9183 の版から復旧。10/16 の Grok エントリは残っていない |
 | G11 | 2026-10-16 の US 2件の追加情報。(1) FrankCurzio 2111063083825459562「6. $CBRS」はスレッドの6番目だが `thread_root_id` が null。スレッドの最初の投稿と1〜5番目（期間や目標が書かれていないか）を取得し、thread_root_id を付けて posts/ に追記する。(2) BearBullTraders 2110783375690940487「$TSM gearing up for a bounce」の画像（TSM チャート）に価格の線・目標が書かれていれば `media_note` に書き起こす（新しい行で追記し、notes に訂正と書く） | 未着手 | 2026-10-16 | Claude は2件とも保留中 |
+| G12 | **posts/2026-10-17.jsonl が途中で切れている**。中身は2行で、2行目（kei_toshi__ 2111215618355785826）は `"text"` の後で終わっている。CHANGELOG のエントリでは「7アカウント・15投稿」。15投稿を全部、1行1投稿で書き直してほしい。push 前に `validate_posts.py` を通す。`tickers_hint` は銘柄コードで書く（"JT" ではなく "2914"） | 未着手 | 2026-10-17 | Claude は読めた1件だけ判定済み |
 
 旧タスク（T1〜T9、v2 抽出時代）はすべて完了または Claude に移管済み。経緯は CHANGELOG.md の 2026-10-13 のエントリを参照。
 
