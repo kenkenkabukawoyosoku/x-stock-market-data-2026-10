@@ -5,9 +5,12 @@ Grok が X から取得した投稿を、**判断を加えずにそのまま**�
 
 ## ファイル
 
-- `posts/YYYY-MM-DD.jsonl` … 1行1投稿。日付は**収集を実行した日（JST）**。追記のみ。
+- `posts/YYYY-MM-DD_{jp|us}.jsonl` … 1行1投稿。日付は**収集を実行した日（JST）**。`jp` は 08:00、`us` は 22:00 の Automation（2026-10-17〜）。
+  - **毎回新しいファイルを作る。既存のファイルは変更しない。** 同じ名前があれば `_2`, `_3` を付ける。
+  - 取り直し・訂正（全文、スレッドの続き、画像の書き起こし）も、その回の新しいファイルに入れる。同じ `post_id` が複数のファイルにあれば、ファイル名の順で後のものを使う。
+  - 2026-10-17 より前の `posts/YYYY-MM-DD.jsonl` は旧方式のファイル。
 - 定義: [`post.schema.json`](./post.schema.json)
-- 検証: `python3 scripts/validate_posts.py posts/YYYY-MM-DD.jsonl`
+- 検証: `python3 scripts/validate_posts.py posts/*.jsonl`（同じファイル内の重複 post_id はエラー、別ファイルの重複は note）
 
 ## 何を保存するか（Grok の判断を入れない）
 

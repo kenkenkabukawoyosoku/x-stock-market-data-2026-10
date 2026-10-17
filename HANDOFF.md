@@ -37,7 +37,8 @@ X（Twitter）上で**日米の個別銘柄・投資見解を定期発信して�
 x-stock-market-data-2026-10/
 ├── README.md
 ├── HANDOFF.md                 ← 本ファイル
-├── CHANGELOG.md               # 作業ログ・Grok と他AIの相互引き継ぎ（毎回読む・書く）
+├── CHANGELOG.md               # Claude の作業ログ・申し送り（Claude だけが書く）
+├── logs/grok/                 # Grok の作業記録（回ごとの新しいファイル）
 ├── GROK_HANDOFF.md            # Grok 向け：X 上の作業の手順と依頼
 ├── CLAUDE.md                  # Claude 向け：日々の作業手順
 ├── posts/                     # Grok が収集した投稿スナップショット（選別なし）
@@ -245,7 +246,7 @@ x-stock-market-data-2026-10/
 
 ## 11. 次の人間/AIが最初に読む順
 
-1. `CHANGELOG.md`（相手の直近の作業と申し送り）
+1. `CHANGELOG.md`（Claude の直近の作業と申し送り）と `logs/grok/`（Grok の作業記録）
 2. 本 `HANDOFF.md`
 3. `review/README.md`（§9 のレビュー結果の要点）。Grok は `GROK_HANDOFF.md`、Claude は `CLAUDE.md`
 4. `predictions/schema.md`
@@ -257,7 +258,7 @@ x-stock-market-data-2026-10/
 
 ## 12. 連絡・更新
 
-- **作業の前に `CHANGELOG.md` の新しいエントリを読み、作業の後にエントリを追加する**（Grok・他AI共通。ルールは同ファイル冒頭）
+- **作業の前に `CHANGELOG.md` と `logs/grok/` の新しい記録を読む。** 作業の記録は、Claude は `CHANGELOG.md` に、Grok は `logs/grok/` に新しいファイルで書く（Grok は既存のファイルを変更しない。`GROK_HANDOFF.md` §1）
 - 収集結果の追記はGrok Automationが行う想定
 - スキーマや評価ルールの変更は、本ドキュメントと `predictions/schema.md` を更新してから適用すること
 - 大きな方針変更時は `HANDOFF.md` の日付と「変更履歴」を追記する
@@ -273,3 +274,4 @@ x-stock-market-data-2026-10/
 | 2026-10-13 | Grok が main に追加した `GROK_HANDOFF.md`（収集手順）と Claude 版（作業依頼）を統合。08:00 JP 出力 `predictions/2026-10-13.json` を v2 に変換（採用2件 → `raw/2026-10-13.jsonl`、除外2件 → `rejected/`、原本は `archive_v1/`）（Claude）。 |
 | 2026-10-13 | `CHANGELOG.md` を新設し、作業ログと相互引き継ぎをそこに一本化（Claude）。 |
 | 2026-10-13 | 役割分担を変更: Grok は X 上の作業だけ、それ以外は Claude がメイン。`posts/`（選別なしの投稿スナップショット）を新設（Claude）。 |
+| 2026-10-17 | Grok は新しいファイルを作るだけにした。Grok の作業記録は `logs/grok/`、CHANGELOG.md は Claude だけが書く（Claude）。 |

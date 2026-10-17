@@ -11,7 +11,7 @@
 | `samples_2026-10-12.json` | 初期サンプル予想（v2 移行済み・未評価） | — |
 | `raw/YYYY-MM-DD.jsonl` | 日次の抽出結果（`posts/` から抽出） | Claude |
 | `rejected/YYYY-MM-DD.jsonl` | 記録しなかった候補と理由 | Claude |
-| `deletions.jsonl` | 削除を検知した投稿（`{"id", "post_deleted_at"}`） | Grok |
+| `deletions/YYYY-MM-DD_{jp\|us}.jsonl` | 削除を検知した投稿（`{"id", "post_url", "post_deleted_at"}`）。回ごとの新しいファイル | Grok |
 | `evaluations/YYYY-MM-DD.jsonl` | 評価結果 | 評価側 |
 | `archive_v1/` | v1 形式の旧出力（参照のみ） | — |
 

@@ -68,7 +68,7 @@ v1 からの主な変更: `direction` に `avoid` を追加、`time_horizon` か
 
 ### 担当の分け方
 
-- **抽出（Claude）が書く**: `status` / `evaluation` 以外のすべて。`status` は常に `"open"`、`evaluation` は `null`。抽出元は `posts/YYYY-MM-DD.jsonl`（Grok が選別せずに保存した投稿）。
+- **抽出（Claude）が書く**: `status` / `evaluation` 以外のすべて。`status` は常に `"open"`、`evaluation` は `null`。抽出元は `posts/*.jsonl`（Grok が選別せずに保存した投稿）。
 - **抽出するときに価格を見ない。** `posts/` の投稿を上から順にすべて判定し、採用は `raw/`、銘柄に触れているが不採用のものは `rejected/` に入れる。
 - **raw の訂正**: 評価前（`evaluation` が null）に限り、規則の適用ミスや事実誤りを直してよい。値動きを見て方向・目標・期間を変えることはしない。訂正したら `notes` に `[日付 Claude] 何を何に変えたか` を書き、CHANGELOG.md に記録する。
 - **評価側が書く**: `status`, `evaluation`。
@@ -91,10 +91,10 @@ v1 からの主な変更: `direction` に `avoid` を追加、`time_horizon` か
 
 | パス | 内容 | 書く人 |
 |---|---|---|
-| `posts/YYYY-MM-DD.jsonl` | 抽出元の投稿スナップショット（`posts/README.md`） | Grok |
-| `predictions/raw/YYYY-MM-DD.jsonl` | 抽出結果。1行1レコード。日付は抽出元の `posts/` のファイルと同じ | Claude |
+| `posts/YYYY-MM-DD_{jp\|us}.jsonl` | 抽出元の投稿スナップショット（`posts/README.md`）。2026-10-17 より前は `posts/YYYY-MM-DD.jsonl` | Grok |
+| `predictions/raw/YYYY-MM-DD.jsonl` | 抽出結果。1行1レコード。日付は抽出元の `posts/` のファイル名の日付 | Claude |
 | `predictions/rejected/YYYY-MM-DD.jsonl` | 記録しなかった候補と理由（`{"post_url", "ticker", "reason"}`） | Claude |
-| `predictions/deletions.jsonl` | 削除を検知した投稿 `{"id", "post_deleted_at"}` | Grok |
+| `predictions/deletions/YYYY-MM-DD_{jp\|us}.jsonl` | 削除を検知した投稿 `{"id", "post_url", "post_deleted_at"}`（回ごとの新しいファイル） | Grok |
 | `predictions/evaluations/YYYY-MM-DD.jsonl` | 評価結果（`id` で紐付け） | 評価側 |
 | `predictions/samples_2026-10-12.json` | 初期サンプル（v2 に移行済み） | — |
 

@@ -5,7 +5,7 @@
 ## 1. パイプライン全体
 
 ```
-[Grok 収集] ──► posts/YYYY-MM-DD.jsonl（選別なし）
+[Grok 収集] ──► posts/YYYY-MM-DD_{jp|us}.jsonl（選別なし・回ごとの新しいファイル）
                        │
                        ▼
 [Claude 抽出] ──► predictions/raw/YYYY-MM-DD.jsonl

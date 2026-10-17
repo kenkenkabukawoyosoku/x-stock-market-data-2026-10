@@ -10,7 +10,8 @@ GrokでX（Twitter）から収集した**日米個別銘柄・株式市場**関�
 | **[GROK_HANDOFF.md](./GROK_HANDOFF.md)** | Grok（X 上の作業：投稿収集・アカウント確認・削除確認） |
 | **[CLAUDE.md](./CLAUDE.md)** | Claude（メイン：抽出・候補リスト・評価・文書） |
 | **[HANDOFF.md](./HANDOFF.md)** | 他のAI（評価設計・レビュー） |
-| **[CHANGELOG.md](./CHANGELOG.md)** | 両者共通：作業ログと申し送り（作業の前に読み、後に書く） |
+| **[CHANGELOG.md](./CHANGELOG.md)** | Claude の作業ログと申し送り（Claude だけが書く） |
+| [logs/grok/](./logs/grok/) | Grok の作業記録（回ごとの新しいファイル） |
 
 ## データ概要
 

@@ -2,7 +2,11 @@
 """Validate Grok's post snapshots against posts/post.schema.json.
 
 Usage:
-    python3 scripts/validate_posts.py posts/YYYY-MM-DD.jsonl [...]
+    python3 scripts/validate_posts.py posts/*.jsonl
+
+The same post_id twice in one file is an error. The same post_id in two
+different files is allowed (a later run re-collected or corrected it; the
+file that sorts last wins) and is only reported as a note.
 
 Exits 1 if any line is invalid. Requires: pip install jsonschema
 """
@@ -25,7 +29,9 @@ def main(paths):
                                      format_checker=FormatChecker())
     bad = total = 0
     seen = {}
+    notes = []
     for path in paths:
+        seen_here = {}
         for n, line in enumerate(Path(path).read_text(encoding="utf-8").splitlines(), 1):
             if not line.strip():
                 continue
@@ -46,14 +52,19 @@ def main(paths):
             except (KeyError, ValueError, AttributeError):
                 pass
             pid = rec.get("post_id")
-            if pid in seen:
-                errors.append(f"duplicate post_id (also at {seen[pid]})")
+            if pid in seen_here:
+                errors.append(f"duplicate post_id in the same file (also at line {seen_here[pid]})")
+            elif pid in seen:
+                notes.append(f"{path}:{n} {pid} re-collected (earlier: {seen[pid]})")
+            seen_here[pid] = n
             seen[pid] = f"{path}:{n}"
             if errors:
                 bad += 1
                 print(f"{path}:{n} {pid}")
                 for e in errors:
                     print(f"  - {e}")
+    for note in notes:
+        print(f"note: {note}")
     print(f"{total - bad}/{total} posts valid")
     return 1 if bad else 0
 
