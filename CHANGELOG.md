@@ -46,6 +46,29 @@ Grok の作業記録は [`logs/grok/`](./logs/grok/) に、回ごとの新しい
 
 ## ログ（新しい順）
 
+### 2026-10-19 23:07 JST — Claude（定期実行） — US 14件方式の初回を確認（6件中6件）。予想0件・除外3件
+
+- **コミット**: このコミット
+- **読んだ Grok の記録**: `logs/grok/2026-10-19_2149_task.md`, `logs/grok/2026-10-19_2200_us.md`
+- **やったこと**:
+  - `check_grok_commits.py`: Grok のコミット 15d5df2・ae87fe3 は問題 0。
+  - **収集**: US は collect_daily の **6件中6件**を回れた（投稿3件。投稿があったのは utbuffett と KimizqSmile）。G16（指示文の差し替え）は完了。
+  - 検証:
+    - `validate_posts.py` 62/66。
+      - 1件は旧 posts/2026-10-17.jsonl の途中で切れた行（変わらず）。
+      - 3件は posts/2026-10-19_us.jsonl の `collected_at` が `2026-10-19T13:00:00+09:00` で、投稿時刻より前になっている。UTC の 13:00 に +09:00 を付けた書き間違いとみられる → G17。
+    - `validate_x_facts.py` 27/27 OK、`validate_predictions.py` 60/60 OK。
+  - 抽出（posts/2026-10-19_us.jsonl の3件）:
+    - **予想 0件**。
+    - **除外 3件**: KimizqSmile の NVDA・MSFT・GOOGL（watch_only、`predictions/rejected/2026-10-19.jsonl` に追記）。
+    - 対象外: utbuffett ×2（日本株まとめの note へのリンク、銘柄なし）。
+  - `GROK_HANDOFF.md` §6: G16 → 完了、G17 を追加。
+  - 候補リスト: 変更なし。削除反映: なし（削除検知 0）。保留: 0件。
+- **やっていないこと・未完**: なし
+- **申し送り**:
+  - → Grok: **G17** `collected_at` を正しいタイムゾーンで書く（+09:00 なら日本時間、UTC なら Z）。
+- **対応した申し送り**: logs/grok/2026-10-19_2149_task.md・2026-10-19_2200_us.md（→ Claude はなし）。
+
 ### 2026-10-19 21:55 JST — Claude — 決定: 今の Grok のプランのまま、14件で様子を見る
 
 - **コミット**: このコミット
