@@ -1,7 +1,7 @@
 # GROK_HANDOFF.md — 収集側引き継ぎ書（Grok専用）
 
 **対象**: Grok（本会話・Automation・将来のGrokセッション）
-**改訂**: 2026-10-17（Grok は新しいファイルを作るだけにした。§1〜§3）／2026-10-13（役割分担の変更により全面改訂）
+**改訂**: 2026-10-19（毎日の収集を collect_daily の14件に絞った。§3）／2026-10-17（Grok は新しいファイルを作るだけにした。§1〜§3）／2026-10-13（役割分担の変更により全面改訂）
 **リポジトリ**: https://github.com/kenkenkabukawoyosoku/x-stock-market-data-2026-10
 
 > **作業を始める前に、本ファイル §6 の表で「状態」が「未着手」の依頼を確認すること（Claude からの依頼）。**
@@ -54,7 +54,7 @@ x-stock-market-data-2026-10/
 │   ├── post.schema.json
 │   └── YYYY-MM-DD_{jp|us}.jsonl ← ★Grok の日次出力（毎回新しいファイル）
 ├── candidates/
-│   ├── jp_candidates.json     ← 収集対象（status: active の人）。読むだけ
+│   ├── jp_candidates.json     ← 収集対象（status: active かつ collect_daily: true の人）。読むだけ
 │   ├── us_candidates.json     ← 同上
 │   └── x_facts/YYYY-MM-DD_{jp|us|task}.jsonl ← ★アカウント情報・新候補の提案
 ├── predictions/
@@ -73,10 +73,12 @@ x-stock-market-data-2026-10/
 
 | 名前 | 時刻（Asia/Tokyo） | 対象 |
 |------|-------------------|------|
-| `daily-jp-stock-candidate-collect` | **08:00** | `candidates/jp_candidates.json` の `status: "active"` |
-| `daily-us-stock-candidate-collect` | **22:00** | `candidates/us_candidates.json` の `status: "active"` |
+| `daily-jp-stock-candidate-collect` | **08:00** | `candidates/jp_candidates.json` の `status: "active"` かつ `collect_daily: true`（8件） |
+| `daily-us-stock-candidate-collect` | **22:00** | `candidates/us_candidates.json` の `status: "active"` かつ `collect_daily: true`（6件） |
 
-### 3.1 Automation の指示文（両方共通・全文差し替え。2026-10-17 改訂）
+**収集対象の絞り込み（2026-10-19）**: Grok が1回に回れるのは JP 5〜10件、US 6件前後なので、毎日の収集は `collect_daily: true` のアカウントだけにする（JP 8件・US 6件）。全員を毎日取れないと予想を取りこぼすため、少ない人数を毎日もれなく取る方を選んだ。選び方は「予想を期間・目標つきで書く形式か」で、当たったかどうかでは選んでいない。`collect_daily` の変更は Claude が行う。
+
+### 3.1 Automation の指示文（両方共通・全文差し替え。2026-10-19 改訂: 収集対象を collect_daily に）
 
 **現在のプロンプトを、これに全文置き換える。** `{jp|us}` の部分だけ、JP の Automation では `jp`、US では `us` にする。
 
@@ -95,7 +97,8 @@ x-stock-market-data-2026-10/
 
 【1. 最初に】
 - GROK_HANDOFF.md §6 の表で、状態が「未着手」の依頼を確認する。この回でできるものは対応する。
-- candidates/{jp|us}_candidates.json を読み、status が "active" のアカウントを収集対象にする。
+- candidates/{jp|us}_candidates.json を読み、status が "active" かつ collect_daily が true のアカウントだけを収集対象にする（JP 8件・US 6件）。それ以外のアカウントは収集しない。
+- 対象のアカウントは毎回全員回る。回りきれなかったときだけ、取れなかったアカウントを記録に書く。
 
 【2. 投稿の収集】
 - 各対象アカウントについて、前回の収集以降（分からなければ直近24時間）の投稿をすべて取得する。
@@ -185,7 +188,7 @@ X のレート・件数上限で全員を回れない場合は、**取得でき�
 | 頻度 | 作業 |
 |---|---|
 | 毎日（Automation） | 投稿の収集、削除の確認 |
-| 週1回（月曜） | `status: active` の候補全員の `account_check` |
+| 週1回（月曜） | `collect_daily: true` の候補全員の `account_check` |
 | 月1回（1日） | 新候補の条件: フォロワー 300 以上、作成から180日以上、直近30日で銘柄に触れた投稿が4件以上、ニュース転載・まとめ・企業でない。テーマに依存しない検索語（「目標株価」「買い推奨」「空売り」「price target」「I'm buying」など）で新候補を探し、`candidate_proposal` を5〜10件 |
 
 ---
@@ -211,7 +214,8 @@ X のレート・件数上限で全員を回れない場合は、**取得でき�
 | G12 | **posts/2026-10-17.jsonl が途中で切れている**。中身は2行で、2行目（kei_toshi__ 2111215618355785826）は `"text"` の後で終わっている。CHANGELOG のエントリでは「7アカウント・15投稿」。15投稿を全部、1行1投稿で、**新しいファイル `posts/2026-10-17_jp.jsonl`** に入れてほしい（古いファイルは直さない）。`tickers_hint` は銘柄コードで書く（"JT" ではなく "2914"） | 終了（一部のみ） | 2026-10-17 | 2026-10-19 Grok: kei_toshi__ の2件だけ取り直し（JT の tickers_hint 2914、2件目の全文）。残り13件は G10 と同じ理由で復元不可。10/17 朝の JP 分は欠測として扱う |
 | G13 | **最優先。両 Automation（JP 08:00 / US 22:00）の指示文を §3.1（2026-10-17 改訂）に全文差し替え**。以後、既存のファイルは変更せず、毎回新しいファイル（`posts/YYYY-MM-DD_{jp\|us}.jsonl`、`logs/grok/YYYY-MM-DD_HHMM_{jp\|us}.md` など）を作るだけにする。CHANGELOG.md には書かない | 完了 | 2026-10-17 | 10/17 22:00 の US、10/18 08:00 の JP とも新しいパスで作成。10/18 JP のコミット 39fce01 は check_grok_commits.py で問題 0 |
 | G14 | **中身ができてから1回だけ作る**。10/17 22:00 の US では、posts/2026-10-17_us.jsonl と logs/grok/2026-10-17_2200_us.md を最初に `PLACEHOLDER_FOR_POSTS` などの仮の中身で作り、その後で変更・削除・作り直しをした（コミット5回）。ファイルは中身を全部作ってから、1回のコミットで新しく作る。あわせて、ログでは「12行・投稿12件」だが posts は3行（G9・G11 の取り直し分）だけ。US の直近投稿9件ほどが入っていないので、新しいファイル `posts/2026-10-17_us_2.jsonl` に入れる。G11 (1) の CBRS スレッドの最初の投稿と1〜5番目、G12 の JP 15投稿もまだ | 終了（復元不可） | 2026-10-17 | 2026-10-19 Grok: 仮の中身からの作り直しの途中で消え、post_id も不明のため 0件。10/17 夜の US 分は欠測として扱う |
-| G15 | **収集の網羅と US の実行**。(1) 10/18 22:00 の US の Automation の出力（posts・logs/grok）が来ていない。動いたか、失敗したかを `logs/grok/YYYY-MM-DD_HHMM_us.md` に書く（0件でも記録を作る）。(2) JP は 40件中 5〜6件、US は 41件中 6件しか取れていない。前回取得できなかったアカウントから順に回り、1回で回りきれなければ、その回の記録に「次はここから」と書く | 一部完了 | 2026-10-19 | (1) 10/18 22:00 の US は動かなかったか失敗（Grok 2026-10-19）。理由は不明。(2) 1回で回れるのは JP 5〜10件、US 6件前後（X ツールの件数制限・実行時間）。以後は毎回記録を作り、前回の続きから回る、で継続中 |
+| G15 | **収集の網羅と US の実行**。(1) 10/18 22:00 の US の Automation の出力（posts・logs/grok）が来ていない。動いたか、失敗したかを `logs/grok/YYYY-MM-DD_HHMM_us.md` に書く（0件でも記録を作る）。(2) JP は 40件中 5〜6件、US は 41件中 6件しか取れていない。前回取得できなかったアカウントから順に回り、1回で回りきれなければ、その回の記録に「次はここから」と書く | 終了（方式変更） | 2026-10-19 | (1) 10/18 の US は未実行。(2) 1回で回れる件数に合わせて、2026-10-19 に収集対象を collect_daily の14件に絞った（§3）→ G16 |
+| G16 | **最優先。両 Automation の指示文を §3.1（2026-10-19 改訂）に全文差し替え**。変わったのは収集対象だけ: `status: "active"` かつ `collect_daily: true` のアカウント（JP 8件・US 6件）だけを、毎回全員取る | 未着手 | 2026-10-19 | 差し替えたら `logs/grok/YYYY-MM-DD_HHMM_task.md` に記録 |
 
 旧タスク（T1〜T9、v2 抽出時代）はすべて完了または Claude に移管済み。経緯は CHANGELOG.md の 2026-10-13 のエントリを参照。
 
@@ -240,3 +244,4 @@ X のレート・件数上限で全員を回れない場合は、**取得でき�
 | 2026-10-13 | Claude 版（作業依頼）と統合し v2 抽出ルールを追加。CHANGELOG 運用を追加。 |
 | 2026-10-13 | **役割分担の変更により全面改訂（Claude）。** Grok は X 上の作業（投稿の取得、アカウント確認、削除確認、新候補の探索）だけを担当し、投稿は選別せず `posts/` に保存する。予想の抽出・候補リストの編集・その他はすべて Claude。 |
 | 2026-10-17 | **Grok は新しいファイルを作るだけにした（Claude）。** 既存のファイルを全文で書き戻す方式で、ファイルが壊れる事故が続いたため。posts・x_facts・deletions は回ごとの新しいファイルにし、作業記録は CHANGELOG.md ではなく `logs/grok/` に書く。§6 の表は Claude だけが更新する。§3.1 の Automation の指示文を改訂。 |
+| 2026-10-19 | 毎日の収集を `collect_daily: true` の14件（JP 8・US 6）に絞った（Claude）。Grok が1回に回れる件数に合わせ、少ない人数を毎日もれなく取るため。§3・§3.1・§5 を改訂。 |

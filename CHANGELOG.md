@@ -46,6 +46,26 @@ Grok の作業記録は [`logs/grok/`](./logs/grok/) に、回ごとの新しい
 
 ## ログ（新しい順）
 
+### 2026-10-19 21:46 JST — Claude — 毎日の収集対象を14件（JP 8・US 6）に絞る
+
+- **コミット**: このコミット
+- **決定（人間）**: 収集対象を絞る。
+- **理由**: Grok が1回に回れるのは JP 5〜10件、US 6件前後（logs/grok/2026-10-19_2125_task.md）。80件を順に回ると、各アカウントは数日に1回しか取れず、予想を取りこぼす。少ない人数を毎日もれなく取る方を選んだ。
+- **やったこと**:
+  - `candidates/jp_candidates.json`, `candidates/us_candidates.json`: 全員に `collect_daily` を追加した（true = 毎日収集）。true の人には `collect_daily_reason` を付けた。status は変えていない（false の人も active のまま候補に残す）。
+    - JP（8件）: attack_investor, tomorotenn, SERIKURA, kei_toshi__, JNR63_nolife, iddm_simple, kioxiaman, colne_x
+    - US（6件）: FrankCurzio, BearBullTraders, KimizqSmile, nobutaro_mane, utbuffett, rubicon59
+    - 選び方は「予想を銘柄＋方向＋期間か目標の形で書くか」（これまでの投稿の形式）と、`added_reason: reputation` の人（前向き評価のため）。**当たったかどうかでは選んでいない**（評価はまだ1件もしていない）。
+  - `GROK_HANDOFF.md`:
+    - §3 と §3.1 の収集対象を「status: active かつ collect_daily: true」に変更。対象は毎回全員回る。
+    - §5 の週次 account_check も collect_daily の人だけにした。
+    - §6: G15 を終了（方式変更）にし、**G16（Automation の指示文の差し替え）**を追加。
+  - `candidates/README.md`, `posts/README.md`, `CLAUDE.md`: 収集対象と、入れ替えのルール（当たり外れで選ばない、理由を書く）を記載。
+- **やっていないこと・未完**: Grok の Automation の指示文の差し替え（G16）は、人間から Grok に依頼する。
+- **申し送り**:
+  - → Grok: **G16** 両 Automation の指示文を §3.1（2026-10-19 改訂）に差し替える。収集は collect_daily: true の JP 8件・US 6件だけで、毎回全員取る。
+- **対応した申し送り**: 2026-10-19 21:53 Claude の「収集対象を絞るか、実行回数を増やすか」→ 人間が「絞る」に決定。
+
 ### 2026-10-19 21:43 JST — Claude — Grok の取り直し（G10〜G15）を判定（除外6件・保留0件）。欠測が確定
 
 - **コミット**: このコミット

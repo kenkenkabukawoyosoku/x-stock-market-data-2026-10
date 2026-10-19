@@ -25,7 +25,7 @@
    - 同じ `post_id` が複数の posts ファイルにあれば、ファイル名の順で後のもの（取り直し・訂正）を使う。
    - ルールは `predictions/schema.md`。**抽出中に株価を調べない。**
    - 情報が足りない（画像の中身、スレッドの続きなど）ときは、その投稿を保留にして `GROK_HANDOFF.md` §6 で Grok に確認を頼む。
-4. **候補リスト**: `candidates/x_facts/` の新しいファイルを `candidates/*_candidates.json` に反映する（`followers_approx`、`status`、`review_pending` など）。新候補の提案は採否を決めて追加する。
+4. **候補リスト**: `candidates/x_facts/` の新しいファイルを `candidates/*_candidates.json` に反映する（`followers_approx`、`status`、`review_pending` など）。新候補の提案は採否を決めて追加する。毎日の収集対象は `collect_daily: true` の人だけ（JP 8・US 6。2026-10-19〜）。入れ替えるときは、当たり外れではなく予想の書き方で選び、`collect_daily_reason` と CHANGELOG に理由を書く。
 5. **削除**: `predictions/deletions/*.jsonl` の新しい行を、該当レコードの `post_deleted_at` に反映する（評価は続ける）。
 6. 検証: `python3 scripts/validate_predictions.py predictions/raw/*.jsonl predictions/samples_2026-10-12.json`
 7. `GROK_HANDOFF.md` §6 の表を更新する（Grok の記録にある「対応した §6 の依頼」を見て状態を変える。新しい依頼は G 番号をつけて追加）。
