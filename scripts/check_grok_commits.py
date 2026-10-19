@@ -20,7 +20,7 @@ ALLOWED_NEW = [
     r"predictions/deletions/\d{4}-\d{2}-\d{2}_(jp|us|task)(_\d+)?\.jsonl",
     r"logs/grok/\d{4}-\d{2}-\d{2}_\d{4}_(jp|us|task)\.md",
 ]
-BAD_CONTENT = ("PLACEHOLDER", "$(cat", "$(")
+PLACEHOLDER_LINE = re.compile(r"^\s*(PLACEHOLDER\w*|\$\(.*\))\s*$")
 
 
 def git(*args):
@@ -49,7 +49,9 @@ def main(argv):
                 problems.append(f"{short} A {path}: not a path Grok may create ({subject})")
                 continue
             text = git("show", f"{sha}:{path}")
-            if not text.strip() or text.lstrip().startswith(BAD_CONTENT) or "PLACEHOLDER" in text:
+            # A line that is only a placeholder token or an unexpanded $(...) means the
+            # real content was never written. Mentioning the word in prose is fine.
+            if not text.strip() or any(PLACEHOLDER_LINE.match(l) for l in text.splitlines()):
                 problems.append(f"{short} A {path}: empty or placeholder content")
     for p in problems:
         print(p)
