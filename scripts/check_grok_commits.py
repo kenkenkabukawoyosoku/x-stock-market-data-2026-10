@@ -18,7 +18,7 @@ ALLOWED_NEW = [
     r"posts/\d{4}-\d{2}-\d{2}_(jp|us|task)(_\d+)?\.jsonl",
     r"candidates/x_facts/\d{4}-\d{2}-\d{2}_(jp|us|task)(_\d+)?\.jsonl",
     r"predictions/deletions/\d{4}-\d{2}-\d{2}_(jp|us|task)(_\d+)?\.jsonl",
-    r"logs/grok/\d{4}-\d{2}-\d{2}_\d{4}_(jp|us|task)\.md",
+    r"logs/grok/\d{4}-\d{2}-\d{2}_\d{4}_(jp|us|task)(_\d+)?\.md",
 ]
 PLACEHOLDER_LINE = re.compile(r"^\s*(PLACEHOLDER\w*|\$\(.*\))\s*$")
 
