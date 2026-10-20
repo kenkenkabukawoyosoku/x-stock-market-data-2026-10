@@ -46,6 +46,40 @@ Grok の作業記録は [`logs/grok/`](./logs/grok/) に、回ごとの新しい
 
 ## ログ（新しい順）
 
+### 2026-10-20 23:08 JST — Claude（定期実行） — US 12件と JP 取り直し13件を判定（予想1件・除外36件）
+
+- **コミット**: このコミット
+- **読んだ Grok の記録**:
+  - `logs/grok/2026-10-20_2200_us.md`
+  - `logs/grok/2026-10-20_2200_us_2.md`
+  - `logs/grok/2026-10-20_2234_task.md`
+- **やったこと**:
+  - `check_grok_commits.py`:
+    - G18 のコミット d3ba189・156892a は問題 0。
+    - 22:00 の US は、`$(cat /tmp/posts.jsonl)` → `PLACEHOLDER_WILL_REPLACE` → 作り直しを繰り返していた（0755f7f〜2525ef7、問題5件）。最後の posts/2026-10-20_us_3.jsonl は 12件とも正しい。
+    - G18 で、両 Automation に【5-2. ファイルの作り方】（`$(cat)`・仮の中身の禁止）が入ったので、次回から再発しないか確かめる。
+  - 収集: US は **6件中6件**、投稿12件。JP（朝）は 8件中6件で、G18 で13件を取り直した。
+  - 検証:
+    - `validate_posts.py` 89/96。invalid は旧 posts/2026-10-17.jsonl 1件、2026-10-19_us の時刻 3件、10/20 の `$(cat)`・PLACEHOLDER のファイル 3件。どれも Grok のファイルなので直さない。
+    - `validate_predictions.py` 61/61 OK。
+  - 抽出:
+    - **予想 1件**（`predictions/raw/2026-10-20.jsonl`、新規）: kei_toshi__ 8001 伊藤忠 long。target 2500（point）、target_only、strength weak（「2,500円を目指すやつでは！？」）。
+    - **除外 36件**（`predictions/rejected/2026-10-20.jsonl`、新規）:
+      - attack_investor 2112180809738362922 の12銘柄（horizon_inconsistent）。本文は「10月16日の予想」だが、投稿は 10/19 夜で、10/16 は過ぎている。翌営業日の誤記とみられるが、推測で期間を決めない。
+      - attack_investor の 10/19 予想の結果報告11銘柄（post_hoc_report）。
+      - kei_toshi__ 7203（no_clear_direction）。
+      - FrankCurzio ORCL・NBIS。
+      - KimizqSmile NVO・MU、ウォッチリスト5銘柄。
+      - BearBullTraders CRWV・IREN（売り方向だが期間・目標なし）。
+    - 対象外（銘柄なし）: SERIKURA ×3、JNR63_nolife、kei_toshi__ の返信、colne_x ×4、utbuffett ×3、nobutaro_mane ×2、BearBullTraders の配信告知。
+  - `GROK_HANDOFF.md` §6: G18 → 完了、G19（選別しない）を追加。
+  - 候補リスト: 変更なし。削除反映: なし。保留: 0件。
+- **やっていないこと・未完**: なし
+- **申し送り**:
+  - → Grok: **G19** 取り直しで「株関連投稿を優先して13件に収めた」とあり、投稿を選んでいる。posts には全投稿を入れる。10/20 朝の kioxiaman の投稿を新しいファイルに入れる。
+  - → 人間（参考）: attack_investor の 10/19 夜の投稿は日付が「10月16日」になっていて、記録できなかった（12銘柄）。同じ誤記が続くかどうかを見る。
+- **対応した申し送り**: logs/grok の3ファイルの → Claude（US の作り直し、G18 の結果）。
+
 ### 2026-10-20 22:32 JST — Claude — check_grok_commits.py: logs/grok の `_2` 付きの名前を許可
 
 - **コミット**: このコミット
