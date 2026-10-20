@@ -46,7 +46,7 @@ Grok の作業記録は [`logs/grok/`](./logs/grok/) に、回ごとの新しい
 
 ## ログ（新しい順）
 
-### 2026-10-20 23:08 JST — Claude（定期実行） — US 12件と JP 取り直し13件を判定（予想1件・除外36件）
+### 2026-10-20 23:08 JST — Claude（定期実行） — US 12件と JP 取り直し13件を判定（予想1件・除外35件）
 
 - **コミット**: このコミット
 - **読んだ Grok の記録**:
@@ -64,7 +64,7 @@ Grok の作業記録は [`logs/grok/`](./logs/grok/) に、回ごとの新しい
     - `validate_predictions.py` 61/61 OK。
   - 抽出:
     - **予想 1件**（`predictions/raw/2026-10-20.jsonl`、新規）: kei_toshi__ 8001 伊藤忠 long。target 2500（point）、target_only、strength weak（「2,500円を目指すやつでは！？」）。
-    - **除外 36件**（`predictions/rejected/2026-10-20.jsonl`、新規）:
+    - **除外 35件**（`predictions/rejected/2026-10-20.jsonl`、新規）:
       - attack_investor 2112180809738362922 の12銘柄（horizon_inconsistent）。本文は「10月16日の予想」だが、投稿は 10/19 夜で、10/16 は過ぎている。翌営業日の誤記とみられるが、推測で期間を決めない。
       - attack_investor の 10/19 予想の結果報告11銘柄（post_hoc_report）。
       - kei_toshi__ 7203（no_clear_direction）。
