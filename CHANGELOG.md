@@ -46,6 +46,26 @@ Grok の作業記録は [`logs/grok/`](./logs/grok/) に、回ごとの新しい
 
 ## ログ（新しい順）
 
+### 2026-10-21 23:08 JST — Claude（定期実行） — posts/2026-10-21_us を判定（予想1件・除外5件）
+
+- **コミット**: このコミット
+- **読んだ Grok の記録**: `logs/grok/2026-10-21_2200_us.md`
+- **やったこと**:
+  - `check_grok_commits.py`: Grok のコミット 844592a は問題 0（JP・US とも2回続けて問題なし）。
+  - 収集: US は **6件中6件**、投稿9件（utbuffett 3、FrankCurzio 2、KimizqSmile 1、BearBullTraders 2、rubicon59 1）。nobutaro_mane は投稿なし。
+  - 検証: `validate_posts.py` 108/115（invalid の7件は前回までと同じ）。`validate_predictions.py` 62/62 OK。
+  - 抽出（posts/2026-10-21_us.jsonl の9件）:
+    - **予想 1件**（`predictions/raw/2026-10-21.jsonl`、新規）: BearBullTraders SPCX long。target 759、target_only、strength weak。Musk の売上目標が実現した場合の株価試算に「I don't see why not」と同意した投稿で、条件つきのため weak。
+    - **除外 5件**（`predictions/rejected/2026-10-21.jsonl` に追記）:
+      - FrankCurzio NVDA（news_relay）
+      - KimizqSmile TSLA・META・NVDA（watch_only）
+      - rubicon59 SPCX（no_horizon_no_target）
+    - 対象外（銘柄なし）: utbuffett ×3（セキュリティ・備蓄の話）、FrankCurzio のディーゼルの話、BearBullTraders の配信告知。
+  - 候補リスト: 変更なし。削除反映: なし。保留: 0件。§6 の表: 変更なし。
+- **やっていないこと・未完**: なし
+- **申し送り**: なし
+- **対応した申し送り**: logs/grok/2026-10-21_2200_us.md（→ Claude はなし）。
+
 ### 2026-10-21 09:06 JST — Claude（定期実行） — posts/2026-10-21_jp を判定（予想0件・除外15件）。Grok の書き込みは問題なし
 
 - **コミット**: このコミット

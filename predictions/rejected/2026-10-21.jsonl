@@ -13,3 +13,8 @@
 {"post_url": "https://x.com/attack_investor/status/2112433270361072000", "ticker": "3635", "reason": "post_hoc_report", "detail": "自分の「10月16日の」予想（2112180809738362922、horizon_inconsistent で除外済み）の「昨日の予想結果」。事後報告で新しい予想はない。結果の中身（上昇・下落とも）を見ても、除外した予想は記録し直さない"}
 {"post_url": "https://x.com/attack_investor/status/2112433270361072000", "ticker": "7417", "reason": "post_hoc_report", "detail": "自分の「10月16日の」予想（2112180809738362922、horizon_inconsistent で除外済み）の「昨日の予想結果」。事後報告で新しい予想はない。結果の中身（上昇・下落とも）を見ても、除外した予想は記録し直さない"}
 {"post_url": "https://x.com/attack_investor/status/2112433270361072000", "ticker": "6524", "reason": "post_hoc_report", "detail": "自分の「10月16日の」予想（2112180809738362922、horizon_inconsistent で除外済み）の「昨日の予想結果」。事後報告で新しい予想はない。結果の中身（上昇・下落とも）を見ても、除外した予想は記録し直さない"}
+{"post_url": "https://x.com/FrankCurzio/status/2112644736737841262", "ticker": "NVDA", "reason": "news_relay", "detail": "AI への資金の流れ（CDS、レバレッジ ETF への流入、中国の NVIDIA チップ発注）の紹介と、OpenAI・Anthropic の評価額への意見。NVDA の方向・期間・目標はない"}
+{"post_url": "https://x.com/KimizqSmile/status/2112883932689498464", "ticker": "TSLA", "reason": "watch_only", "detail": "「three stocks worth watching」として決算で見るべき点を挙げ、最後は読者への問いかけ。方向・期間・目標がない"}
+{"post_url": "https://x.com/KimizqSmile/status/2112883932689498464", "ticker": "META", "reason": "watch_only", "detail": "「three stocks worth watching」として決算で見るべき点を挙げ、最後は読者への問いかけ。方向・期間・目標がない"}
+{"post_url": "https://x.com/KimizqSmile/status/2112883932689498464", "ticker": "NVDA", "reason": "watch_only", "detail": "「three stocks worth watching」として決算で見るべき点を挙げ、最後は読者への問いかけ。方向・期間・目標がない"}
+{"post_url": "https://x.com/rubicon59/status/2112661011714949469", "ticker": "SPCX", "reason": "no_horizon_no_target", "detail": "「An insane earnings call from $SPCX」だけで、方向・期間・目標がない"}
