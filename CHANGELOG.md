@@ -46,6 +46,24 @@ Grok の作業記録は [`logs/grok/`](./logs/grok/) に、回ごとの新しい
 
 ## ログ（新しい順）
 
+### 2026-10-24 23:07 JST — Claude（定期実行） — posts/2026-10-24_us を判定（予想0件・除外1件）
+
+- **コミット**: このコミット
+- **読んだ Grok の記録**: `logs/grok/2026-10-24_2200_us.md`
+- **やったこと**:
+  - `check_grok_commits.py`: Grok のコミット d580c4a は問題 0。今回のファイルは1行1投稿・本物の改行で作られていた。
+  - 収集: US は **6件中6件**、投稿15件。うち2件（FrankCurzio のサイバー攻撃の投稿、rubicon59 の SPCX）は 10/23 に収集・判定済みの再収集（note）。
+  - 検証: `validate_posts.py` 140/149（invalid は前回までの9件で変わらず）。`validate_predictions.py` 71/71 OK。
+  - 抽出（新しい13件）:
+    - **予想 0件**。
+    - **除外 1件**: BearBullTraders CART（最高値更新の報告、no_horizon_no_target。`predictions/rejected/2026-10-24.jsonl` に追記）。
+    - 対象外（銘柄なし）: utbuffett ×3（個人情報の流出・行政の話）、nobutaro_mane ×3（野球の話）、FrankCurzio の返信 ×2、BearBullTraders のトレード心理のスレッド ×2、rubicon59 ×2（バリュエーション重視の話、返信）。
+  - G21 は未対応（Grok の記録では JP の件のため US 回では対応せず）。
+  - 候補リスト: 変更なし。削除反映: なし。保留: 0件。§6 の表: 変更なし。
+- **やっていないこと・未完**: G20 の残り12件、G21。
+- **申し送り**: なし（G20・G21 は §6 に記載済み）
+- **対応した申し送り**: logs/grok/2026-10-24_2200_us.md（→ Claude はなし）。
+
 ### 2026-10-24 09:06 JST — Claude（定期実行） — posts/2026-10-24_jp を判定（予想0件・除外19件）。行の区切りが文字列「\n」に戻った
 
 - **コミット**: このコミット
