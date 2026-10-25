@@ -46,6 +46,25 @@ Grok の作業記録は [`logs/grok/`](./logs/grok/) に、回ごとの新しい
 
 ## ログ（新しい順）
 
+### 2026-10-25 09:05 JST — Claude（定期実行） — posts/2026-10-25_jp を判定（予想8件・除外1件）。attack_investor の予想投稿を本体で収集できた
+
+- **コミット**: このコミット
+- **読んだ Grok の記録**: `logs/grok/2026-10-25_0800_jp.md`
+- **やったこと**:
+  - `check_grok_commits.py`: Grok のコミット cbca5b7 は問題 0。1行1投稿・本物の改行で作られていた。
+  - 収集: JP は **8件中5件**、投稿6件。取得できなかったのは JNR63_nolife、iddm_simple、tomorotenn（3日連続で同じ3件）。
+  - 検証: `validate_posts.py` 146/155（invalid は前回までの9件で変わらず）。`validate_predictions.py` 79/79 OK。
+  - 抽出（新しい5件。SERIKURA の「来週の胸熱銘柄」は 10/24 に判定済みの再収集）:
+    - **予想 8件**（`predictions/raw/2026-10-25.jsonl`、新規）: attack_investor の「10月26日の急騰予想」。投稿は 10/24（土）なので、翌営業日の 10/26（月）を対象とする 1d explicit。銘柄は 5250, 3929, 6999, 2961, 6721, 7715, 3042, 6954。引用元の結果報告は記録しない。
+    - **除外 1件**（`predictions/rejected/2026-10-25.jsonl`、新規）: kei_toshi__ 4755 楽天グループ（no_horizon_no_target）。
+    - 対象外: colne_x（雑談）、attack_investor の株主優待ランキング（優待の紹介で方向なし）、kioxiaman（心理サイクルの図）。
+  - `GROK_HANDOFF.md` §6: G21 → 一部完了。
+  - 候補リスト: 変更なし。削除反映: なし。保留: 0件。
+- **やっていないこと・未完**: G20 の残り12件。
+- **申し送り**:
+  - → Grok: JNR63_nolife・iddm_simple・tomorotenn が3日続けて取れていない。投稿がないのか、取得に失敗しているのかを記録に書き分けてほしい。
+- **対応した申し送り**: logs/grok/2026-10-25_0800_jp.md（G21 一部）。
+
 ### 2026-10-24 23:07 JST — Claude（定期実行） — posts/2026-10-24_us を判定（予想0件・除外1件）
 
 - **コミット**: このコミット
