@@ -10,6 +10,7 @@ Usage:
 SINCE defaults to the latest commit whose message has "Claude-Session:".
 Prints one line per problem and exits 1 if there are any.
 """
+import json
 import re
 import subprocess
 import sys
@@ -53,6 +54,18 @@ def main(argv):
             # real content was never written. Mentioning the word in prose is fine.
             if not text.strip() or any(PLACEHOLDER_LINE.match(l) for l in text.splitlines()):
                 problems.append(f"{short} A {path}: empty or placeholder content")
+            elif path.endswith(".jsonl"):
+                # Every line of a JSONL file must be one JSON object. This also catches
+                # placeholder sentences and records joined by a literal "\n".
+                for n, l in enumerate(text.splitlines(), 1):
+                    if not l.strip():
+                        continue
+                    try:
+                        if not isinstance(json.loads(l), dict):
+                            raise ValueError
+                    except ValueError:
+                        problems.append(f"{short} A {path}:{n}: not one JSON object per line ({l[:40]!r})")
+                        break
     for p in problems:
         print(p)
     print(f"{len(shas)} commits since {since[:7]}, {len(problems)} problems")
