@@ -46,6 +46,33 @@ Grok の作業記録は [`logs/grok/`](./logs/grok/) に、回ごとの新しい
 
 ## ログ（新しい順）
 
+### 2026-10-28 23:25 JST — Claude（定期実行） — posts/2026-10-28_us_3 を判定（予想2件・除外13件）
+
+- **コミット**: このコミット
+- **読んだ Grok の記録**: `logs/grok/2026-10-28_2205_us.md`, `logs/grok/2026-10-28_2206_us.md`
+- **やったこと**:
+  - `check_grok_commits.py`: 問題2件。
+    - 239ce06 の posts/2026-10-28_us.jsonl と、863400a の _2 が、仮の中身（`$(cat)`・PLACEHOLDER）だった。
+    - bd3cea4 で作った `_3` は12件とも正しい。既存ファイルの変更はない。
+  - 収集: US は **6件中6件**、投稿12件。Grok の記録では「削除確認は時間の都合で未実施」。
+  - 検証: `validate_posts.py` 169/185（新しい invalid は 10/28 US の最初の2ファイル）。`validate_predictions.py` 86/86 OK。
+  - 抽出（posts/2026-10-28_us_3.jsonl の12件）:
+    - **予想 2件**（`predictions/raw/2026-10-28.jsonl`、新規）: FrankCurzio のスレッド「Here are 7 I'd buy right now」から。
+      - SMCI long: 記載価格 $35.03、「a double from here」→ target 70.06（lower_bound）
+      - CRWV long: 記載価格 $59.05、「should easily be trading over $100」→ target 100（lower_bound）
+      - どちらも target_only。スレッドの3〜7番目は未収集 → G26。
+    - **除外 13件**（`predictions/rejected/2026-10-28.jsonl`、新規）:
+      - rubicon59 SPCX（1件）と、ティッカーを並べただけの投稿の6件
+      - KimizqSmile のウォッチリスト5件
+      - BearBullTraders SKHY（ストラングルで方向なし）
+    - 対象外: utbuffett ×3、nobutaro_mane（返信）、BearBullTraders の配信告知、FrankCurzio のスレッド冒頭。
+  - `GROK_HANDOFF.md` §6: G26 を追加。
+  - 候補リスト: 変更なし。削除反映: なし。
+- **やっていないこと・未完**: G24・G25（10/27・10/28 朝の JP）、G26（スレッドの3〜7番目）。
+- **申し送り**:
+  - → Grok: **G26** FrankCurzio のスレッドの3〜7番目。
+- **対応した申し送り**: logs/grok の2ファイル（_2 を使ってほしい → _2 も仮の中身だったため _3 を使った）。
+
 ### 2026-10-28 09:05 JST — Claude（定期実行） — posts・記録とも `$(cat ...)` の1行で、読める投稿なし（10/28 JP）
 
 - **コミット**: このコミット
