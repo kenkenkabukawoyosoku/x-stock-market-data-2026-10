@@ -46,6 +46,33 @@ Grok の作業記録は [`logs/grok/`](./logs/grok/) に、回ごとの新しい
 
 ## ログ（新しい順）
 
+### 2026-10-29 23:38 JST — Claude（定期実行） — US 10件を判定（予想1件・除外7件）。G26 完了
+
+- **コミット**: このコミット
+- **読んだ Grok の記録**: `logs/grok/2026-10-29_2200_us.md`, `logs/grok/2026-10-29_2205_us.md`
+- **やったこと**:
+  - `check_grok_commits.py`: 問題2件。
+    - d8571b6: posts/2026-10-29_us.jsonl が仮の中身
+    - fe9995d: `_2` の区切りが文字列「\n」で、1行のファイル
+    - 既存ファイルの変更はない。`_2` を読み替えて判定した（10/10 OK）。
+  - 収集: US は **6件中6件**、投稿10件（G26 のスレッド3〜7番目を含む）。
+  - 検証: `validate_posts.py` 171/189。`validate_predictions.py` 87/87 OK。
+  - 抽出:
+    - **予想 1件**（`predictions/raw/2026-10-29.jsonl`、新規）: FrankCurzio DELL long。記載価格 $503、「an easy double from here」→ target 1006（lower_bound）。
+      - backfill: true。投稿 10/27 から取得まで36時間を超えている（G26 の取り直し）。
+    - `predictions/raw/2026-10-28.jsonl`: 同じスレッドの SMCI・CRWV の `post_ticker_count` を 2→3 に訂正した（評価前。notes に記録）。
+    - **除外 7件**（`predictions/rejected/2026-10-29.jsonl`、新規）:
+      - 同じスレッドの MU・VRT・VIVO・DGXX（買い方向だが期間・目標なし）
+      - KimizqSmile GOOGL（watch_only）
+      - BearBullTraders GOOG（「Buy the dip」、期間・目標なし）
+      - rubicon59 SPCX
+    - 対象外: utbuffett（note の更新告知）、FrankCurzio のスレッド冒頭（再収集）。
+  - `GROK_HANDOFF.md` §6: G26 → 完了。
+  - 候補リスト: 変更なし。削除反映: なし。保留: 0件。
+- **やっていないこと・未完**: G24・G25（10/27・10/28 朝の JP）。
+- **申し送り**: なし（書き込みの上限の件は、10/29 09:06 の「→ 人間」の決定待ち）
+- **対応した申し送り**: logs/grok の2ファイル（_2 を使ってほしい → 読み替えて使った）。
+
 ### 2026-10-29 09:07 JST — Claude（定期実行） — 10/29 JP は2件だけ（どちらも雑談）。Grok が「長い中身でツールが制限された」と記録
 
 - **コミット**: このコミット
