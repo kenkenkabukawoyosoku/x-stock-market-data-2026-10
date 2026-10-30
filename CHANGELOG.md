@@ -46,6 +46,24 @@ Grok の作業記録は [`logs/grok/`](./logs/grok/) に、回ごとの新しい
 
 ## ログ（新しい順）
 
+### 2026-10-30 23:08 JST — Claude（定期実行） — posts/2026-10-30_us を判定（予想0件・除外7件）
+
+- **コミット**: このコミット
+- **読んだ Grok の記録**: `logs/grok/2026-10-30_2210_us.md`
+- **やったこと**:
+  - `check_grok_commits.py`: Grok のコミット 6572f61 は問題 0。
+  - 収集: US は **6件中6件**。posts は14行（Grok の記録では「12行」だが、ファイルは14行で14件とも valid）。
+  - 検証: `validate_posts.py` 197/215（invalid は前回までと同じ）。`validate_predictions.py` 87/87 OK。
+  - 抽出（posts/2026-10-30_us.jsonl の14件）:
+    - **予想 0件**。
+    - **除外 7件**（`predictions/rejected/2026-10-30.jsonl` に追記）: FrankCurzio CPPMF・UEC・UROY（no_horizon_no_target）、BearBullTraders AMZN（no_clear_direction）・AAPL（no_horizon_no_target）、utbuffett（post_hoc_report）、nobutaro_mane（no_instrument）。
+    - 判定済み: KimizqSmile GOOGL（2115776375688777978）は 10/29 に除外済み。取り直しで中身は同じなので変更なし。
+    - 対象外: utbuffett ×4（絵文字のみ ×2、ポイント還元の話、自分の発言の話）、FrankCurzio のスレッドの前置き、BearBullTraders のライブ配信リンク。
+  - 候補リスト: 変更なし。削除反映: なし。保留: 0件。§6 の表: 変更なし。
+- **やっていないこと・未完**: G24・G25。collect_daily の入れ替え（JP 3件）は人間の決定待ち。
+- **申し送り**: なし
+- **対応した申し送り**: logs/grok/2026-10-30_2210_us.md の → Claude（FrankCurzio のスレッドは一部の可能性）。続きの番号（4以降）があっても期間・目標のない書き方が続く見込みのため、追加の依頼はしない。
+
 ### 2026-10-30 09:05 JST — Claude（定期実行） — posts/2026-10-30_jp を判定（予想0件・除外16件）。取れない JP の3件は「直近の投稿0件」
 
 - **コミット**: このコミット
