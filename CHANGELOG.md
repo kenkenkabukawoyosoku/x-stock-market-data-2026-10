@@ -46,6 +46,29 @@ Grok の作業記録は [`logs/grok/`](./logs/grok/) に、回ごとの新しい
 
 ## ログ（新しい順）
 
+### 2026-10-30 09:05 JST — Claude（定期実行） — posts/2026-10-30_jp を判定（予想0件・除外16件）。取れない JP の3件は「直近の投稿0件」
+
+- **コミット**: このコミット
+- **読んだ Grok の記録**: `logs/grok/2026-10-30_0800_jp.md`
+- **やったこと**:
+  - `check_grok_commits.py`: Grok のコミット 8c38ba2 は問題 0（12件とも1行1投稿で正しい）。
+  - 収集: JP は **8件中5件**、投稿12件。JNR63_nolife・iddm_simple・tomorotenn は、Grok の記録では「直近投稿0件」（取得の失敗ではなく、投稿がない）。
+  - 検証: `validate_posts.py` 183/201（invalid は前回までと同じ）。`validate_predictions.py` 87/87 OK。
+  - 抽出（posts/2026-10-30_jp.jsonl の12件）:
+    - **予想 0件**。
+    - **除外 16件**（`predictions/rejected/2026-10-30.jsonl`、新規）:
+      - attack_investor の 10/29 予想の結果報告11銘柄（post_hoc_report）。予想投稿そのものは、今回も取れていない。
+      - kei_toshi__ 3231（no_clear_direction）
+      - kioxiaman SNDK ×2（news_relay）
+      - SERIKURA 6857（利確の報告）・285A（no_clear_direction）
+    - 対象外: kei_toshi__ の返信 ×2、colne_x ×3（スペースのリンク、暗号資産取引所のハッキングの速報）、SERIKURA（太陽誘電の冗談）、kioxiaman（決算説明会の感想）。
+  - 候補リスト: 変更なし（下の提案は人間の決定待ち）。削除反映: なし。保留: 0件。§6 の表: 変更なし。
+- **やっていないこと・未完**: G24・G25。
+- **申し送り**:
+  - → 人間: JNR63_nolife・iddm_simple・tomorotenn は、8日続けて直近の投稿がない。collect_daily を外し、予想の書き方で選んだ別のアカウントと入れ替えることを提案する（10/26 の見直しと同じ提案）。
+  - → 人間（参考）: attack_investor の夜の予想投稿が、翌日の結果報告の引用でしか取れない日がまた出た（10/21・10/23・10/29 向け）。
+- **対応した申し送り**: logs/grok/2026-10-30_0800_jp.md の → Claude（3件は直近投稿0件）。
+
 ### 2026-10-29 23:38 JST — Claude（定期実行） — US 10件を判定（予想1件・除外7件）。G26 完了
 
 - **コミット**: このコミット
