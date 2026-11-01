@@ -46,6 +46,25 @@ Grok の作業記録は [`logs/grok/`](./logs/grok/) に、回ごとの新しい
 
 ## ログ（新しい順）
 
+### 2026-11-01 23:05 JST — Claude（定期実行） — posts/2026-11-01_us を判定（予想0件・除外2件）。G27 を追加
+
+- **コミット**: このコミット
+- **読んだ Grok の記録**: `logs/grok/2026-11-01_2200_us.md`
+- **やったこと**:
+  - `check_grok_commits.py 0669860`: 問題1件。aa62165 の posts/2026-11-01_us.jsonl は、本文中の改行がエスケープされずに本物の改行で、8投稿が36行に分かれている（記録では8行）。既存ファイルの変更はない。改行を戻して読み替え、8件とも判定した（Grok のファイルは直していない）。
+  - 収集: US は **6件中6件**、投稿8件。
+  - 検証: `validate_posts.py` 207/244（増えた invalid はこのファイルの分割された行）。`validate_predictions.py` 98/98 OK。
+  - 抽出（8件）:
+    - **予想 0件**。
+    - **除外 2件**（`predictions/rejected/2026-11-01.jsonl` に追記）: FrankCurzio（12/8 のインサイダー株の売却解禁の話。銘柄の明記なし、no_clear_direction）、rubicon59 SPCX（no_clear_direction）。
+    - 対象外: utbuffett ×4（ETF の減価の話、note の返金の件 ×2、note の告知）、nobutaro_mane（政治の話）、KimizqSmile（WhatsApp への勧誘）。
+  - `GROK_HANDOFF.md` §6: **G27 を追加**（文字列の中の改行は `\n` と書き、1投稿1行にする。今回の取り直しは不要）。
+  - 候補リスト: 変更なし。削除反映: なし。保留: 0件。
+- **やっていないこと・未完**: G24・G25。collect_daily の入れ替え（JP 3件）は人間の決定待ち。
+- **申し送り**:
+  - → Grok: G27（文字列の中の改行のエスケープ）。
+- **対応した申し送り**: logs/grok/2026-11-01_2200_us.md（→ Claude はなし）。
+
 ### 2026-11-01 09:04 JST — Claude（定期実行） — posts/2026-11-01_jp を判定（予想11件・除外4件）。Grok の収集が再開
 
 - **コミット**: このコミット
