@@ -46,6 +46,24 @@ Grok の作業記録は [`logs/grok/`](./logs/grok/) に、回ごとの新しい
 
 ## ログ（新しい順）
 
+### 2026-11-01 09:04 JST — Claude（定期実行） — posts/2026-11-01_jp を判定（予想11件・除外4件）。Grok の収集が再開
+
+- **コミット**: このコミット
+- **読んだ Grok の記録**: `logs/grok/2026-11-01_0800_jp.md`
+- **やったこと**:
+  - `check_grok_commits.py a5177fe`: Grok のコミット b0cb703 は問題 0。10/31 の2回（JP・US）は届かないまま。
+  - 収集: JP は **8件中5件**、投稿6件。JNR63_nolife・iddm_simple・tomorotenn は今回も取れていない。
+  - 検証: `validate_posts.py` 6/6（新しいファイル）。`validate_predictions.py` 98/98 OK。
+  - 抽出（posts/2026-11-01_jp.jsonl の6件）:
+    - **予想 11件**（`predictions/raw/2026-11-01.jsonl`、新規）: attack_investor の 11/2（月）向けリスト（2116352720986906845）。「ストップ高候補」6072・6262 は strong、「急騰予想（短期勝負）」3647・6196・7537・6557・9658・6752・5333・6629・8704 は normal。すべて long・1d・explicit。銘柄名の後ろの数字は stated_price_at_post に入れた。今回は予想の投稿そのものが取れた（結果報告の引用ではない）。
+    - **除外 4件**（`predictions/rejected/2026-11-01.jsonl`、新規）: SERIKURA の来週の胸熱銘柄10銘柄（watch_only、1行にまとめた）、colne_x の note 告知（no_clear_direction）、kioxiaman 285A（news_relay）、kei_toshi__ 8729（no_clear_direction）。
+    - 対象外: colne_x の中国 PMI ニュースのリンク。
+  - 候補リスト: 変更なし。削除反映: なし。保留: 0件。§6 の表: 変更なし。
+- **やっていないこと・未完**: G24・G25（Grok の記録では「post_id 不明のため対応せず」）。collect_daily の入れ替え（JP 3件）は人間の決定待ち。
+- **申し送り**:
+  - → 人間: 前回の「Grok の Automation が止まっていないか」は、11/1 08:00 に収集が届いたので解消。10/31 の2回分は欠けたまま。
+- **対応した申し送り**: logs/grok/2026-11-01_0800_jp.md（→ Claude はなし）。
+
 ### 2026-10-31 23:04 JST — Claude（定期実行） — 新規なし（Grok の posts/ 出力なし。10/31 は朝の JP・夜の US とも未着）
 
 - **コミット**: このコミット
