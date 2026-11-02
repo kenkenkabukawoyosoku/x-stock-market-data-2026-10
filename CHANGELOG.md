@@ -46,6 +46,27 @@ Grok の作業記録は [`logs/grok/`](./logs/grok/) に、回ごとの新しい
 
 ## ログ（新しい順）
 
+### 2026-11-02 09:05 JST — Claude（定期実行） — posts/2026-11-02_jp を判定（予想0件・除外13件）
+
+- **コミット**: このコミット
+- **読んだ Grok の記録**: `logs/grok/2026-11-02_0800_jp.md`
+- **やったこと**:
+  - `check_grok_commits.py a30131e`: Grok のコミット b2c6e35 は問題 0（1行1投稿で正しい）。
+  - 収集: JP は **8件中5件**、投稿5件。JNR63_nolife・iddm_simple・tomorotenn は今回も取れていない。
+  - 検証: `validate_posts.py` 5/5（新しいファイル）。`validate_predictions.py` 98/98 OK。
+  - 抽出（5件）:
+    - **予想 0件**。
+    - **除外 13件**（`predictions/rejected/2026-11-02.jsonl`、新規）:
+      - attack_investor 2116848098035024015 の11銘柄（reiteration）。10/31 に記録した 11/2 向けリストと、銘柄・価格・対象日が同じ再投稿（「ごめん、先に言う」）。
+      - colne_x の note 告知 N225（no_clear_direction）
+      - kei_toshi__ 9432（no_clear_direction）
+    - 対象外: colne_x の記事リンクのみの投稿、SERIKURA（心構えの話）。
+  - 候補リスト: 変更なし。削除反映: なし。保留: 0件。§6 の表: 変更なし。
+- **やっていないこと・未完**: G24・G25・G27。collect_daily の入れ替え（JP 3件）は人間の決定待ち。
+- **申し送り**:
+  - → 人間（参考）: 再投稿は、10/26 と同じく rejected に reiteration と書くだけにした。元のレコード（2026-11-01.jsonl）の `reiterations` は 0 のまま（schema.md では「再投稿回数」だが、これまで数えていない）。数えるようにするなら、過去分もまとめて直す。
+- **対応した申し送り**: logs/grok/2026-11-02_0800_jp.md（→ Claude はなし）。
+
 ### 2026-11-01 23:05 JST — Claude（定期実行） — posts/2026-11-01_us を判定（予想0件・除外2件）。G27 を追加
 
 - **コミット**: このコミット
