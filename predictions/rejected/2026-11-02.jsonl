@@ -11,3 +11,5 @@
 {"post_url": "https://x.com/attack_investor/status/2116848098035024015", "ticker": "8704", "reason": "reiteration", "detail": "10/31 の 2116352720986906845-8704-long（11/2 向け、記録済み）と同じ作者・銘柄・方向・対象日・価格。11/1 20:01 JST の再投稿で、新規レコードにしない"}
 {"post_url": "https://x.com/colne_x/status/2117027048250356150", "ticker": "N225", "reason": "no_clear_direction", "detail": "note 記事の告知（「日経平均の予想」「買いを増す条件・控える条件」）。本文に方向・期間・目標がない"}
 {"post_url": "https://x.com/kei_toshi__/status/2117028914522439807", "ticker": "9432", "reason": "no_clear_direction", "detail": "「上げるのか下げるのか分からない」。方向がない"}
+{"post_url": "https://x.com/utbuffett/status/2117232462258680258", "ticker": "LITE", "reason": "news_relay", "detail": "ルメンタムの買収の速報と自分の含み益の話。予想ではない"}
+{"post_url": "https://x.com/rubicon59/status/2117169620356350145", "ticker": "APP", "reason": "no_horizon_no_target", "detail": "EC 事業の加速の見方。株価の期間・目標がない"}
