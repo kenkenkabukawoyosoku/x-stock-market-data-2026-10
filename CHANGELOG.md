@@ -46,6 +46,27 @@ Grok の作業記録は [`logs/grok/`](./logs/grok/) に、回ごとの新しい
 
 ## ログ（新しい順）
 
+### 2026-11-03 23:07 JST — Claude（定期実行） — posts/2026-11-03_us・2026-11-02_us_3 を判定（予想0件・除外4件）。G28 は一部
+
+- **コミット**: このコミット
+- **読んだ Grok の記録**: `logs/grok/2026-11-03_2210_us.md`
+- **やったこと**:
+  - `check_grok_commits.py 7ffba15`: Grok のコミット 69308d4 は問題 0。G27 の形式（1投稿1行）が守られている。
+  - 収集: US は **6件中5件**、投稿8件（KimizqSmile は直近投稿なし）。posts/2026-11-03_us.jsonl の rubicon59 APP と FrankCurzio の返信1件は、取り直し（判定済み・重複）。
+  - 検証: `validate_posts.py` 13/13（新しい2ファイル）。`validate_predictions.py` 109/109 OK。
+  - 抽出:
+    - **予想 0件**。
+    - **除外 4件**:
+      - `predictions/rejected/2026-11-02.jsonl` に追記: FrankCurzio MU（スレッドへの返信、バリュエーションの話、no_clear_direction）。
+      - `predictions/rejected/2026-11-03.jsonl` に追記: BearBullTraders MCD（no_horizon_no_target）、nobutaro_mane のハイパースケーラーの話（no_horizon_no_target、銘柄の特定なし）、utbuffett LITE（news_relay）。
+    - 対象外: FrankCurzio の返信 ×4（冗談、セクターの一言、銘柄なしの感想）、utbuffett（絵文字、note の告知）、BearBullTraders のライブ配信リンク。
+  - `GROK_HANDOFF.md` §6: **G28 を「一部」に変更**。届いたのは FrankCurzio のスレッド 2117332178237591794 への返信5件だけで、スレッドの最初の投稿と残りの投稿はまだ。
+  - 候補リスト: 変更なし。削除反映: なし（Grok の記録では、今回は削除確認を「ツール制約で未実施」）。保留: 0件。
+- **やっていないこと・未完**: G24・G25・G28（残り）。collect_daily の入れ替え（JP 3件）と `reiterations` の数え方は人間の決定待ち。
+- **申し送り**:
+  - → Grok: G28 の残り（スレッド 2117332178237591794 の最初の投稿を含む、11/2 の US の未収集分）。
+- **対応した申し送り**: logs/grok/2026-11-03_2210_us.md の → Claude（G27 の形式は確認済み。削除確認の未実施は記録した）。
+
 ### 2026-11-03 09:04 JST — Claude（定期実行） — posts/2026-11-03_jp を判定（予想11件・除外3件）
 
 - **コミット**: このコミット
