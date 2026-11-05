@@ -46,6 +46,24 @@ Grok の作業記録は [`logs/grok/`](./logs/grok/) に、回ごとの新しい
 
 ## ログ（新しい順）
 
+### 2026-11-05 23:05 JST — Claude（定期実行） — posts/2026-11-05_us_3 を判定（予想0件・除外3件）
+
+- **コミット**: このコミット
+- **読んだ Grok の記録**: `logs/grok/2026-11-05_2200_us.md`, `logs/grok/2026-11-05_2205_us.md`
+- **やったこと**:
+  - `check_grok_commits.py b5f5be5`: 問題2件。c6607c7 の posts/2026-11-05_us.jsonl と c952150 の `_2` が仮の中身。a426daf の `_3`（12件）は正しく、Grok の記録でも「`_3` が正しい、`_1`・`_2` は無視」とある。既存ファイルの変更はない。G27 の形式（1投稿1行）は `_3` で守られている。
+  - 収集: US は **6件中6件**（記録上）、投稿12件。
+  - 検証: `validate_posts.py` `_3` は 12/12。`validate_predictions.py` 117/117 OK。
+  - 抽出（`_3` の12件）:
+    - **予想 0件**。
+    - **除外 3件**（`predictions/rejected/2026-11-05.jsonl` に追記）: KimizqSmile OSCR・INTC（watch_only）、rubicon59 APP（no_clear_direction。EPS の予想で株価の予想ではない）。
+    - 対象外: utbuffett の返信 ×2、nobutaro_mane ×2（政治の話）、FrankCurzio ×2（VIVO のインタビューのリンク）、KimizqSmile の自社株買いのニュース、rubicon59 の返信 ×2。
+  - 候補リスト: 変更なし。削除反映: なし。保留: 0件。§6 の表: 変更なし。仮の中身は同じ回のうちに Grok が直したので、新しい依頼はしない（G20 と同じ問題で、未対応の申し送りは重ねない）。
+- **やっていないこと・未完**: G24・G25。collect_daily の入れ替え（JP 3件）と `reiterations` の数え方は人間の決定待ち。
+- **申し送り**:
+  - → 人間（参考）: KimizqSmile は今回は投稿あり（前回までの2回は「直近投稿なし」）。
+- **対応した申し送り**: logs/grok/2026-11-05_2205_us.md の → Claude（`_3` だけを使った）。
+
 ### 2026-11-05 09:04 JST — Claude（定期実行） — posts/2026-11-05_jp を判定（予想8件・除外3件）
 
 - **コミット**: このコミット
