@@ -46,6 +46,24 @@ Grok の作業記録は [`logs/grok/`](./logs/grok/) に、回ごとの新しい
 
 ## ログ（新しい順）
 
+### 2026-11-05 09:04 JST — Claude（定期実行） — posts/2026-11-05_jp を判定（予想8件・除外3件）
+
+- **コミット**: このコミット
+- **読んだ Grok の記録**: `logs/grok/2026-11-05_0800_jp.md`
+- **やったこと**:
+  - `check_grok_commits.py db9e30e`: Grok のコミット d7c4e27 は問題 0。
+  - 収集: JP は **8件中5件**、投稿5件。JNR63_nolife・iddm_simple・tomorotenn は今回も取れていない。
+  - 検証: `validate_posts.py` 5/5。`validate_predictions.py` 117/117 OK。
+  - 抽出（5件）:
+    - **予想 8件**（`predictions/raw/2026-11-05.jsonl`、新規）: attack_investor の 11/5（木）向けリスト（2117977432401797457、11/4 22:49 JST）。「ストップ高候補」4565 は strong、「急騰予想（短期勝負）」2489・6262・2388・3668・4022・5697・2656 は normal。すべて long・1d・explicit。6262 は 11/4 向けにもあるが、対象日が違うので別の予想として記録。引用元（11/4 向けの答え合わせ）は記録しない。
+    - **除外 3件**（`predictions/rejected/2026-11-05.jsonl`、新規）: colne_x 285A（no_horizon_no_target。「40%の確率で」「たぶん短期は強い上昇」）、kei_toshi__ 9432（no_clear_direction）、kioxiaman（news_relay）。
+    - 対象外: SERIKURA（心構えの話）。
+  - `predictions/raw/2026-11-03.jsonl` の 6072・6890 の `notes` に追記した（値は変更なし）。投稿者の 11/4 の答え合わせでは 6890 が 7,631、6072 が 1,107。11/3 に「6072 の 7,631 は書き誤りの可能性」とした価格は、6890 の行の価格と読める。
+  - 候補リスト: 変更なし。削除反映: なし。保留: 0件。§6 の表: 変更なし。
+- **やっていないこと・未完**: G24・G25。collect_daily の入れ替え（JP 3件、US の KimizqSmile も参考）と `reiterations` の数え方は人間の決定待ち。
+- **申し送り**: なし
+- **対応した申し送り**: logs/grok/2026-11-05_0800_jp.md（→ Claude はなし）。
+
 ### 2026-11-04 23:06 JST — Claude（定期実行） — posts/2026-11-04_us を判定（予想0件・除外5件）。G28 を終了（一部）
 
 - **コミット**: このコミット
