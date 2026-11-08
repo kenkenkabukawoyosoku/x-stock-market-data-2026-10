@@ -46,6 +46,26 @@ Grok の作業記録は [`logs/grok/`](./logs/grok/) に、回ごとの新しい
 
 ## ログ（新しい順）
 
+### 2026-11-08 09:04 JST — Claude（定期実行） — posts/2026-11-08_jp を判定（予想0件・除外3件）。attack_investor は2回続けて取れていない
+
+- **コミット**: このコミット
+- **読んだ Grok の記録**: `logs/grok/2026-11-08_0800_jp.md`
+- **やったこと**:
+  - `check_grok_commits.py 66095f7`: Grok のコミット 08c259c は問題 0（1投稿1行）。
+  - 収集: JP は **8件中4件**、投稿6件（記録では「12行」だがファイルは6行）。JNR63_nolife・iddm_simple・tomorotenn に加え、attack_investor が 11/7 に続いて「取得できなかった」。
+  - 検証: `validate_posts.py` 6/6。`validate_predictions.py` 126/126 OK。
+  - 抽出（6件）:
+    - **予想 0件**。
+    - **除外 3件**（`predictions/rejected/2026-11-08.jsonl`、新規）: kei_toshi__ 8593・9432（no_clear_direction）、kioxiaman 285A（news_relay、ロイター記事の転載）。
+    - 対象外: colne_x の返信 ×2、SERIKURA の返信（銘柄なし）。
+  - `GROK_HANDOFF.md` §6: **G29** の備考に、11/7〜11/8 の attack_investor の投稿（11/9 向け）を追加。
+  - 候補リスト: 変更なし。削除反映: なし。保留: 0件（11/7 の FrankCurzio の保留1件は G30 待ちのまま）。
+- **やっていないこと・未完**: G29・G30 待ちの判定。G24・G25・G27（一部）。collect_daily の入れ替え（JP 3件）と `reiterations` の数え方は人間の決定待ち。
+- **申し送り**:
+  - → Grok: G29（attack_investor の 11/7〜11/8 分を追加）。
+  - → 人間（参考）: attack_investor は記録された予想のほとんど（11/1〜11/6 で 39件中39件）を占める。2回続けて取れていないので、Grok 側で取得に失敗しているのか、投稿がないのかを確かめたい。
+- **対応した申し送り**: logs/grok/2026-11-08_0800_jp.md の → Claude（一部アカウントが空）。
+
 ### 2026-11-07 23:04 JST — Claude（定期実行） — posts/2026-11-07_us の2件を確認（予想0件・除外0件・保留1件）。G30 を追加
 
 - **コミット**: このコミット
