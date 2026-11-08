@@ -46,6 +46,25 @@ Grok の作業記録は [`logs/grok/`](./logs/grok/) に、回ごとの新しい
 
 ## ログ（新しい順）
 
+### 2026-11-08 23:04 JST — Claude（定期実行） — posts/2026-11-08_us を判定（予想4件・除外5件）。G30 完了
+
+- **コミット**: このコミット
+- **読んだ Grok の記録**: `logs/grok/2026-11-08_2200_us.md`
+- **やったこと**:
+  - `check_grok_commits.py ff2fdde`: 問題1件。ded2590 の posts/2026-11-08_us.jsonl は、投稿の間が文字列「\n」で1行のファイル（G21・G27 と同じ）。既存ファイルの変更はない。読み替えて13件（記録では12件）とも判定した。
+  - 収集: US は **6件中6件**。G30（FrankCurzio のスレッド 2118678128616947841 の全文と続き）が届いた。
+  - 検証: `validate_predictions.py` 130/130 OK。
+  - 抽出（13件）:
+    - **予想 4件**（`predictions/raw/2026-11-08.jsonl`、新規）: FrankCurzio のスレッド（11/6 21:13 JST）から、TSLA・SPCX（「AVOID FOR NOW」）・AAPL（「Another one to avoid」）を avoid・1m・default、AMZN（「a $4T company 12 months from now」）を long・1y・explicit。どれも backfill（取得が投稿の36時間後より後）。AMZN の目標は時価総額なので target_price は null（株価に換算しない）。11/7 の保留1件はこれで解消。
+    - **除外 5件**（`predictions/rejected/2026-11-08.jsonl` に追記）: スレッドの AMD（「screaming buy」）・ETN・SPX（no_horizon_no_target）、BearBullTraders NVDA（news_relay）、rubicon59 APP（no_horizon_no_target）。
+    - 対象外: utbuffett ×2（note の告知）、FrankCurzio の AI とリストラの話、スレッドの最後の宣伝。
+  - `GROK_HANDOFF.md` §6: **G30 を「完了」に変更**（11/7 の US の残りは求めない）。G29 は未対応のまま（Grok の記録では「次回以降」）。
+  - 候補リスト: 変更なし。削除反映: なし。保留: 0件。
+- **やっていないこと・未完**: G29（11/7 の JP 17件・attack_investor・11/6 の US）。G24・G25・G27（一部）。collect_daily の入れ替え（JP 3件）と `reiterations` の数え方は人間の決定待ち。
+- **申し送り**:
+  - → Grok: G27（投稿の間は本物の改行）。今回の US でまた文字列「\n」だった。G29 の残り。
+- **対応した申し送り**: logs/grok/2026-11-08_2200_us.md の → Claude（G29 は次回以降 → 引き続き待つ）。
+
 ### 2026-11-08 09:04 JST — Claude（定期実行） — posts/2026-11-08_jp を判定（予想0件・除外3件）。attack_investor は2回続けて取れていない
 
 - **コミット**: このコミット
