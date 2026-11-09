@@ -46,6 +46,24 @@ Grok の作業記録は [`logs/grok/`](./logs/grok/) に、回ごとの新しい
 
 ## ログ（新しい順）
 
+### 2026-11-09 09:05 JST — Claude（定期実行） — posts/2026-11-09_jp を判定（予想0件・除外3件）。attack_investor は3回続けて取れていない
+
+- **コミット**: このコミット
+- **読んだ Grok の記録**: `logs/grok/2026-11-09_0800_jp.md`
+- **やったこと**:
+  - `check_grok_commits.py ff5431e`: Grok のコミット 2d771d2 は問題 0（1投稿1行、G27 の形式どおり）。
+  - 収集: JP は **8件中4件**、投稿12件。attack_investor は 11/7・11/8 に続いて「取得できなかった」。
+  - 検証: `validate_posts.py` 12/12。`validate_predictions.py` 130/130 OK。
+  - 抽出（12件）:
+    - **予想 0件**。
+    - **除外 3件**（`predictions/rejected/2026-11-09.jsonl`、新規）: kei_toshi__ 285A（no_clear_direction、両方向の問いかけ）、colne_x 285A（watch_only）、SERIKURA（no_instrument、相場全体の話）。
+    - 対象外: 返信や雑談 ×9（colne_x ×2、kei_toshi__ ×2、SERIKURA ×2、kioxiaman ×3）。
+  - 候補リスト: 変更なし。削除反映: なし。保留: 0件。§6 の表: 変更なし（G29 は未対応）。
+- **やっていないこと・未完**: G29。G24・G25・G27（一部）。collect_daily の入れ替え（JP 3件）と `reiterations` の数え方は人間の決定待ち。
+- **申し送り**:
+  - → 人間: attack_investor が3回続けて取れていない（11/7・11/8・11/9）。これまで予想の大半はこのアカウントなので、X 上でアカウントの状態（凍結・非公開・名前の変更）を確かめてほしい。Grok にも G29 で頼んでいるが、まだ答えがない。
+- **対応した申し送り**: logs/grok/2026-11-09_0800_jp.md（→ Claude はなし）。
+
 ### 2026-11-08 23:04 JST — Claude（定期実行） — posts/2026-11-08_us を判定（予想4件・除外5件）。G30 完了
 
 - **コミット**: このコミット
