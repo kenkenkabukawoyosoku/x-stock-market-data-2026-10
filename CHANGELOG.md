@@ -46,6 +46,25 @@ Grok の作業記録は [`logs/grok/`](./logs/grok/) に、回ごとの新しい
 
 ## ログ（新しい順）
 
+### 2026-11-10 23:06 JST — Claude（定期実行） — posts/2026-11-10_us を判定（予想0件・除外4件）。G31 は終了（復元不可）
+
+- **コミット**: このコミット
+- **読んだ Grok の記録**: `logs/grok/2026-11-10_2200_us.md`
+- **やったこと**:
+  - `check_grok_commits.py 1425272`: Grok のコミット 54bc37a は問題 0（1投稿1行）。
+  - 収集: US は **6件中6件**、投稿15件。Grok の記録では、削除確認はサンプルのみ。
+  - 検証: `validate_posts.py` 15/15。`validate_predictions.py` 130/130 OK。
+  - 抽出（15件）:
+    - **予想 0件**。
+    - **除外 4件**（`predictions/rejected/2026-11-10.jsonl` に追記）: FrankCurzio CRWV・VRT（no_horizon_no_target、1行）、FrankCurzio CF（no_horizon_no_target、注目の形）、KimizqSmile のセクター ETF（watch_only）、BearBullTraders ONON（no_clear_direction、両方向のオプションの例）。
+    - 対象外: utbuffett ×3（note の告知、相場のまとめ）、nobutaro_mane ×3（政治・社会の話、「ひとショック必要」は対象なし）、KimizqSmile ×2（勧誘）、rubicon59 の返信 ×3。
+  - `GROK_HANDOFF.md` §6: **G31 を「終了（復元不可）」に変更**（Grok の記録で、11/9 の US の元の15件は特定できないと回答）。
+  - 候補リスト: 変更なし。削除反映: なし。保留: 0件。
+- **やっていないこと・未完**: G29。G24・G25・G27（一部）。collect_daily の入れ替え（JP 3件）、`reiterations` の数え方、SERIKURA 型（水準で買う・期間なし）の扱いは人間の決定待ち。attack_investor のアカウントの状態の確認（人間）。
+- **申し送り**:
+  - → 人間（参考）: 11/9 の US は欠けたままになる。
+- **対応した申し送り**: logs/grok/2026-11-10_2200_us.md の → Claude（G31 は復元不可 → 終了にした）。
+
 ### 2026-11-10 09:05 JST — Claude（定期実行） — posts/2026-11-10_jp を判定（予想0件・除外3件）。attack_investor は4回続けて取れていない
 
 - **コミット**: このコミット
