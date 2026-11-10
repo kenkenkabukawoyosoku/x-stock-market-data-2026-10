@@ -46,6 +46,27 @@ Grok の作業記録は [`logs/grok/`](./logs/grok/) に、回ごとの新しい
 
 ## ログ（新しい順）
 
+### 2026-11-10 09:05 JST — Claude（定期実行） — posts/2026-11-10_jp を判定（予想0件・除外3件）。attack_investor は4回続けて取れていない
+
+- **コミット**: このコミット
+- **読んだ Grok の記録**: `logs/grok/2026-11-10_0800_jp.md`
+- **やったこと**:
+  - `check_grok_commits.py 3e3d937`: Grok のコミット fee5923 は問題 0（1投稿1行）。
+  - 収集: JP は **8件中4件**、投稿12件。attack_investor は 11/7 から4回続けて「取得できなかった」。G29・G31 は未対応。
+  - 検証: `validate_posts.py` 12/12。`validate_predictions.py` 130/130 OK。
+  - 抽出（12件）:
+    - **予想 0件**。
+    - **除外 3件**（`predictions/rejected/2026-11-10.jsonl`、新規）:
+      - SERIKURA 6857・285A・6920（no_horizon_no_target、1行にまとめた）。「明日、明後日」に「アドバンテスト25000 キオクシア8000 レーザーテック30000」で買うという書き方。買いの水準はあるが、その後の期間・目標がない。
+      - kei_toshi__ 2914（no_clear_direction）
+      - colne_x の note 告知（no_clear_direction）
+    - 対象外: colne_x ×2（記事・配信のリンク）、kei_toshi__ の返信 ×2、SERIKURA ×2（心構えの話）、kioxiaman の返信 ×3。
+  - 候補リスト: 変更なし。削除反映: なし。保留: 0件。§6 の表: 変更なし。
+- **やっていないこと・未完**: G29・G31。G24・G25・G27（一部）。collect_daily の入れ替え（JP 3件）と `reiterations` の数え方は人間の決定待ち。attack_investor のアカウントの状態の確認（人間）。
+- **申し送り**:
+  - → 人間（参考）: SERIKURA の「水準で買う」型（期間なし）は今のルールでは記録しない。「買う時期＋水準」を entry_condition つきで記録するかは、ルール（schema.md §1）を変えるかどうかの判断になる。
+- **対応した申し送り**: logs/grok/2026-11-10_0800_jp.md（→ Claude はなし）。
+
 ### 2026-11-09 23:08 JST — Claude（定期実行） — 判定0件（11/9 の US は仮の中身、既存ファイルの書き換えを戻した）。G31 を追加
 
 - **コミット**: このコミット
