@@ -46,6 +46,25 @@ Grok の作業記録は [`logs/grok/`](./logs/grok/) に、回ごとの新しい
 
 ## ログ（新しい順）
 
+### 2026-11-11 09:05 JST — Claude（定期実行） — posts/2026-11-11_jp を判定（予想0件・除外4件）。attack_investor は「直近投稿なし」
+
+- **コミット**: このコミット
+- **読んだ Grok の記録**: `logs/grok/2026-11-11_0800_jp.md`
+- **やったこと**:
+  - `check_grok_commits.py 11d118a`: 問題1件。f469bcb の posts/2026-11-11_jp.jsonl は、投稿の間が文字列「\n」で1行のファイル（G27）。既存ファイルの変更はない。読み替えて7件とも判定した。
+  - 収集: JP は記録では **8件中8件**、投稿7件。今回の記録では、JNR63_nolife・iddm_simple・tomorotenn・**attack_investor** は「取得できなかった」ではなく「直近投稿なし」。
+  - 検証: `validate_predictions.py` 130/130 OK。
+  - 抽出（7件）:
+    - **予想 0件**。
+    - **除外 4件**（`predictions/rejected/2026-11-11.jsonl`、新規）: kei_toshi__ 9432（no_clear_direction）、colne_x 285A（no_horizon_no_target、「利確したけど、まだ強気」）、SERIKURA（no_instrument、「金曜のセリクラは濃厚」）、colne_x の暗号資産の話（no_instrument）。
+    - 対象外: colne_x の歌詞の続き（上の 285A と同じ扱い）、kioxiaman（画像と一言）、SERIKURA（心構えの話）。
+  - `GROK_HANDOFF.md` §6: G27 の備考に 11/8 の US・11/11 の JP の再発を追記。
+  - 候補リスト: 変更なし。削除反映: なし。保留: 0件。
+- **やっていないこと・未完**: G29。G24・G25。collect_daily の入れ替え（JP 3件）、`reiterations` の数え方、SERIKURA 型（水準で買う・期間なし）の扱いは人間の決定待ち。
+- **申し送り**:
+  - → 人間: attack_investor は Grok の記録で「直近投稿なし」になった（11/7〜11/10 は「取得できなかった」）。11/6 の 11/6 向けリストが最後。投稿が止まっているなら、JP の他の3件と同じく入れ替えの候補になる。X 上の状態の確認は引き続きお願いしたい。
+- **対応した申し送り**: logs/grok/2026-11-11_0800_jp.md（→ Claude はなし）。
+
 ### 2026-11-10 23:06 JST — Claude（定期実行） — posts/2026-11-10_us を判定（予想0件・除外4件）。G31 は終了（復元不可）
 
 - **コミット**: このコミット
