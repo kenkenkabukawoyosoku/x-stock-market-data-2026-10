@@ -46,6 +46,24 @@ Grok の作業記録は [`logs/grok/`](./logs/grok/) に、回ごとの新しい
 
 ## ログ（新しい順）
 
+### 2026-11-11 23:06 JST — Claude（定期実行） — posts/2026-11-11_us を判定（予想0件・除外1件）。US は2件だけ
+
+- **コミット**: このコミット
+- **読んだ Grok の記録**: `logs/grok/2026-11-11_2200_us.md`
+- **やったこと**:
+  - `check_grok_commits.py 7011366`: Grok のコミット 7fbc860・a01b460 は問題 0（1投稿1行）。
+  - 収集: US は記録では **6件中5件**（KimizqSmile は取得できず）、投稿は2件だけ（記録に「直近投稿を一部収集」）。
+  - 検証: `validate_posts.py` 2/2。`validate_predictions.py` 130/130 OK。
+  - 抽出（2件）:
+    - **予想 0件**。
+    - **除外 1件**（`predictions/rejected/2026-11-11.jsonl` に追記）: FrankCurzio CVX・HAL（no_horizon_no_target、1行）。
+    - 対象外: utbuffett（note の告知）。
+  - 候補リスト: 変更なし。削除反映: なし。保留: 0件。§6 の表: 変更なし。
+- **やっていないこと・未完**: G29。G24・G25。collect_daily の入れ替え（JP 4件になる可能性）、`reiterations` の数え方、SERIKURA 型の扱いは人間の決定待ち。
+- **申し送り**:
+  - → Grok: G23（投稿は選ばず、前回以降をすべて入れる）。今回「一部収集」で2件だけだった。
+- **対応した申し送り**: logs/grok/2026-11-11_2200_us.md の → Claude（KimizqSmile は取得できず、一部収集 → G23 を再度申し送り）。
+
 ### 2026-11-11 09:05 JST — Claude（定期実行） — posts/2026-11-11_jp を判定（予想0件・除外4件）。attack_investor は「直近投稿なし」
 
 - **コミット**: このコミット
