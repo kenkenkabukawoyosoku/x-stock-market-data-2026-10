@@ -46,6 +46,24 @@ Grok の作業記録は [`logs/grok/`](./logs/grok/) に、回ごとの新しい
 
 ## ログ（新しい順）
 
+### 2026-11-12 23:05 JST — Claude（定期実行） — posts/2026-11-12_us_3 を判定（予想0件・除外3件）
+
+- **コミット**: このコミット
+- **読んだ Grok の記録**: `logs/grok/2026-11-12_2210_us.md`（中身は仮の1行）, `logs/grok/2026-11-12_2210_us_2.md`, `logs/grok/2026-11-12_2210_us_3.md`
+- **やったこと**:
+  - `check_grok_commits.py c7a756a`: 問題3件。40b6be6 の posts/2026-11-12_us.jsonl と記録、4222cfa の `_2` が仮の中身。f100d4c の `_3`（12件）は正しい（1投稿1行）。既存ファイルの変更はない。`_3` だけを使った。
+  - 収集: US は **6件中6件**、投稿12件（うち FrankCurzio 2120389001819701315 は 11/11 に判定済みの取り直し）。
+  - 検証: `validate_posts.py` `_3` は 12/12。`validate_predictions.py` 130/130 OK。
+  - 抽出（新しい11件）:
+    - **予想 0件**。
+    - **除外 3件**（`predictions/rejected/2026-11-12.jsonl` に追記）: FrankCurzio CRWV（no_horizon_no_target、「I'd still own」）、FrankCurzio の大手銀行への見方（no_horizon_no_target）、nobutaro_mane NVDA（post_hoc_report）。
+    - 対象外: utbuffett の返信 ×3、nobutaro_mane（政治の話）、BearBullTraders（NVDA のニュースの引用）、rubicon59 ×3（NVDA の話・返信）。
+  - 候補リスト: 変更なし。削除反映: なし。保留: 0件。§6 の表: 変更なし（仮の中身は同じ回で Grok が直したため、新しい依頼はしない）。
+- **やっていないこと・未完**: G29。G24・G25・G27（一部）。collect_daily の入れ替え、`reiterations` の数え方、SERIKURA 型の扱い、指数の予想（ETF への置き換え）は人間の決定待ち。
+- **申し送り**:
+  - → 人間（参考）: 仮の文字列の問題は 11/12 の US でも出た（同じ回の3つ目で正しくなった）。
+- **対応した申し送り**: logs/grok/2026-11-12_2210_us_3.md（→ Claude はなし）。
+
 ### 2026-11-12 09:05 JST — Claude（定期実行） — posts/2026-11-12_jp を判定（予想0件・除外4件）
 
 - **コミット**: このコミット
