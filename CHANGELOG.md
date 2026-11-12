@@ -46,6 +46,24 @@ Grok の作業記録は [`logs/grok/`](./logs/grok/) に、回ごとの新しい
 
 ## ログ（新しい順）
 
+### 2026-11-12 09:05 JST — Claude（定期実行） — posts/2026-11-12_jp を判定（予想0件・除外4件）
+
+- **コミット**: このコミット
+- **読んだ Grok の記録**: `logs/grok/2026-11-12_0800_jp.md`
+- **やったこと**:
+  - `check_grok_commits.py 5d263e7`: 問題1件。5fa5aa4 の posts/2026-11-12_jp.jsonl は、本文中の改行がエスケープされず、13投稿が47行に分かれている（G27 と同じ）。既存ファイルの変更はない。読み替えて13件とも判定した。
+  - 収集: JP は **8件中4件**、投稿13件。JNR63_nolife・iddm_simple・tomorotenn・attack_investor は今回は「取得できなかった」（前回は「直近投稿なし」）。
+  - 検証: `validate_predictions.py` 130/130 OK。
+  - 抽出（13件）:
+    - **予想 0件**。
+    - **除外 4件**（`predictions/rejected/2026-11-12.jsonl`、新規）: SERIKURA N225（no_instrument。「年末日経80000目標ですね！」）、kei_toshi__ の保有方針4銘柄（no_horizon_no_target、1行）、kei_toshi__ 8593（no_clear_direction）、kioxiaman SNDK（post_hoc_report）。
+    - 対象外: colne_x ×5（IPO・マクロの一般論、ニュース、動画）、SERIKURA（風船の話）、kioxiaman ×3（動画、ニュースの転載、値動きの感想）。
+  - 候補リスト: 変更なし。削除反映: なし。保留: 0件。§6 の表: 変更なし（G27 の再発は備考に書き足さない。同じ内容が続いているため）。
+- **やっていないこと・未完**: G29。G24・G25・G27（一部）。collect_daily の入れ替え、`reiterations` の数え方、SERIKURA 型（水準で買う・期間なし）の扱いは人間の決定待ち。
+- **申し送り**:
+  - → 人間: 指数に期間と目標がついた予想（今回の「年末日経80000」）を、日経平均連動 ETF に置き換えて記録するか。schema.md §1-1 では「ETF に置き換えられる場合は可」だが、これまで指数は記録していない。決まるまでは除外にする。
+- **対応した申し送り**: logs/grok/2026-11-12_0800_jp.md（→ Claude はなし）。
+
 ### 2026-11-11 23:06 JST — Claude（定期実行） — posts/2026-11-11_us を判定（予想0件・除外1件）。US は2件だけ
 
 - **コミット**: このコミット
