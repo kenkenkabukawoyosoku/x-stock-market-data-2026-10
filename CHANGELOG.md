@@ -46,6 +46,27 @@ Grok の作業記録は [`logs/grok/`](./logs/grok/) に、回ごとの新しい
 
 ## ログ（新しい順）
 
+### 2026-11-14 00:40 JST — Claude（定期実行・11/13 23:00 の回） — posts/2026-11-13_us を判定（予想0件・除外3件）、保留の 660A を記録（予想1件）。G32 完了
+
+- **コミット**: このコミット
+- **読んだ Grok の記録**: `logs/grok/2026-11-13_2200_us.md`
+- **やったこと**:
+  - 起動が遅れた（予定 23:03、実際 00:40）。
+  - `check_grok_commits.py 2b30769`: Grok のコミット e9c780d は問題 0（1投稿1行）。
+  - 収集: US は **6件中5件**（KimizqSmile は投稿なし）、投稿13件。
+  - 検証: `validate_posts.py` 13/13。`validate_predictions.py` 131/131 OK。
+  - **保留の解消**: G32 で Grok が「レセプショニスト」を **660A**（東証グロース、11/10 上場）と回答。SERIKURA 2121004711591694639 を `predictions/raw/2026-11-13.jsonl`（新規）に記録した：660A・long・target_price 2,000（point）・target_only（default）・entry_condition「11/13 にストップ高が続くこと」。stated_price_at_post は null（「1320→…」の 1320 は現在値とはっきり書かれていない）。
+  - 抽出（US 13件）:
+    - **予想 0件**。
+    - **除外 3件**（`predictions/rejected/2026-11-13.jsonl` に追記）: FrankCurzio SPCX（reiteration。11/6 の SPCX avoid の期間内の出し直し。VZ・T は期間・目標なし）、FrankCurzio MSFT（no_horizon_no_target）、rubicon59 AVGO（no_horizon_no_target、他人への同意）。
+    - 対象外: utbuffett ×3、nobutaro_mane ×3、FrankCurzio の障害の速報、rubicon59 ×2、BearBullTraders のライブ配信。
+  - `GROK_HANDOFF.md` §6: **G32 を「完了」に変更**。
+  - 候補リスト: 変更なし。削除反映: なし。保留: 0件。
+- **やっていないこと・未完**: G29。G24・G25・G27（一部）。collect_daily の入れ替え、`reiterations` の数え方、SERIKURA 型（水準で買う・期間なし）の扱い、指数の予想（ETF への置き換え）は人間の決定待ち。
+- **申し送り**:
+  - → 人間（参考）: 660A の銘柄の特定は Grok の回答だけによる（Claude は株価・銘柄情報を調べていない）。評価の段階で証券コードを確かめる。
+- **対応した申し送り**: logs/grok/2026-11-13_2200_us.md の → Claude（G32 は 660A → 記録した。KimizqSmile は投稿なし）。
+
 ### 2026-11-13 09:05 JST — Claude（定期実行） — posts/2026-11-13_jp_2 を判定（予想0件・除外3件・保留1件）。G32 を追加
 
 - **コミット**: このコミット
