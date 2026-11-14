@@ -46,6 +46,23 @@ Grok の作業記録は [`logs/grok/`](./logs/grok/) に、回ごとの新しい
 
 ## ログ（新しい順）
 
+### 2026-11-14 23:04 JST — Claude（定期実行） — posts/2026-11-14_us を判定（予想0件・除外2件）
+
+- **コミット**: このコミット
+- **読んだ Grok の記録**: `logs/grok/2026-11-14_2202_us.md`
+- **やったこと**:
+  - `check_grok_commits.py d912d2b`: Grok のコミット 9e6b132 は問題 0（1投稿1行）。
+  - 収集: US は **6件中5件**（KimizqSmile は直近投稿なし）、投稿5件。
+  - 検証: `validate_posts.py` 5/5。`validate_predictions.py` 131/131 OK。
+  - 抽出（5件）:
+    - **予想 0件**。
+    - **除外 2件**（`predictions/rejected/2026-11-14.jsonl` に追記）: FrankCurzio V・MA（no_horizon_no_target、1行）、BearBullTraders NVDA（no_clear_direction、問いかけ）。
+    - 対象外: utbuffett ×2（返信、相場まとめのリンク）、rubicon59 LFTO（事業の数字の紹介だけ）。
+  - 候補リスト: 変更なし。削除反映: なし。保留: 0件。§6 の表: 変更なし。
+- **やっていないこと・未完**: G29。G24・G25・G27（一部）。collect_daily の入れ替え、`reiterations` の数え方、SERIKURA 型（水準で買う・期間なし）の扱い、指数の予想（ETF への置き換え）は人間の決定待ち。
+- **申し送り**: なし
+- **対応した申し送り**: logs/grok/2026-11-14_2202_us.md の → Claude（KimizqSmile は直近投稿なし）。
+
 ### 2026-11-14 09:04 JST — Claude（定期実行） — posts/2026-11-14_jp を判定（予想0件・除外5件）
 
 - **コミット**: このコミット
