@@ -46,6 +46,23 @@ Grok の作業記録は [`logs/grok/`](./logs/grok/) に、回ごとの新しい
 
 ## ログ（新しい順）
 
+### 2026-11-14 09:04 JST — Claude（定期実行） — posts/2026-11-14_jp を判定（予想0件・除外5件）
+
+- **コミット**: このコミット
+- **読んだ Grok の記録**: `logs/grok/2026-11-14_0800_jp.md`
+- **やったこと**:
+  - `check_grok_commits.py 62720c5`: 問題1件。3ae8a19 の posts/2026-11-14_jp.jsonl は投稿の間が文字列「\n」で1行のファイル（G27）。既存ファイルの変更はない。読み替えて8件とも判定した。
+  - 収集: JP は **8件中4件**、投稿8件。JNR63_nolife・iddm_simple・tomorotenn・attack_investor は今回も取れていない。
+  - 検証: `validate_predictions.py` 131/131 OK。
+  - 抽出（8件）:
+    - **予想 0件**。
+    - **除外 5件**（`predictions/rejected/2026-11-14.jsonl`、新規）: SERIKURA の来週の胸熱銘柄10銘柄（watch_only、1行）、kei_toshi__ 8766（no_horizon_no_target）、kei_toshi__ の買い増しの報告（post_hoc_report、1行）、colne_x の BTC（no_instrument）、kioxiaman SNDK（no_horizon_no_target）。
+    - 対象外: colne_x ×2（ニュース、一言）、kioxiaman の返信。
+  - 候補リスト: 変更なし。削除反映: なし。保留: 0件。§6 の表: 変更なし。
+- **やっていないこと・未完**: G29。G24・G25・G27（一部）。collect_daily の入れ替え、`reiterations` の数え方、SERIKURA 型（水準で買う・期間なし）の扱い、指数の予想（ETF への置き換え）は人間の決定待ち。
+- **申し送り**: なし
+- **対応した申し送り**: logs/grok/2026-11-14_0800_jp.md（→ Claude はなし）。
+
 ### 2026-11-14 00:40 JST — Claude（定期実行・11/13 23:00 の回） — posts/2026-11-13_us を判定（予想0件・除外3件）、保留の 660A を記録（予想1件）。G32 完了
 
 - **コミット**: このコミット
