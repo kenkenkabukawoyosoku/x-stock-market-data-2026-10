@@ -46,6 +46,24 @@ Grok の作業記録は [`logs/grok/`](./logs/grok/) に、回ごとの新しい
 
 ## ログ（新しい順）
 
+### 2026-11-15 23:04 JST — Claude（定期実行） — posts/2026-11-15_us を判定（予想1件・除外2件）
+
+- **コミット**: このコミット
+- **読んだ Grok の記録**: `logs/grok/2026-11-15_2200_us.md`
+- **やったこと**:
+  - `check_grok_commits.py 6391c4e`: Grok のコミット 1434e4b は問題 0（1投稿1行）。
+  - 収集: US は **6件中5件**（KimizqSmile は直近投稿なし）、投稿5件。Grok の記録では「主要な投稿を収集」「削除確認は open を確認して残存」。
+  - 検証: `validate_posts.py` 5/5。`validate_predictions.py` 132/132 OK。
+  - 抽出（5件）:
+    - **予想 1件**（`predictions/raw/2026-11-15.jsonl`、新規）: BearBullTraders NVDA（2121708239427649875）。「This could have a big squeeze potential on NVDA next week」を long・1w・explicit・strength weak。「I am long LEAPs for 2028」は持ち高の説明なので予想にしない。
+    - **除外 2件**（`predictions/rejected/2026-11-15.jsonl` に追記）: FrankCurzio SPCX（reiteration、11/6 の avoid の期間内）、rubicon59 NVDA（no_clear_direction）。
+    - 対象外: utbuffett ×2（パズルの話、note の告知）。
+  - 候補リスト: 変更なし。削除反映: なし。保留: 0件。§6 の表: 変更なし。
+- **やっていないこと・未完**: G29。G24・G25・G27（一部）。collect_daily の入れ替え、`reiterations` の数え方、SERIKURA 型（水準で買う・期間なし）の扱い、指数の予想（ETF への置き換え）は人間の決定待ち。
+- **申し送り**:
+  - → Grok: G23（「主要な投稿」ではなく、前回以降の投稿をすべて入れる）。
+- **対応した申し送り**: logs/grok/2026-11-15_2200_us.md の → Claude（KimizqSmile は直近投稿なし、削除確認は残存）。
+
 ### 2026-11-15 09:05 JST — Claude（定期実行） — posts/2026-11-15_jp を判定（予想0件・除外3件）
 
 - **コミット**: このコミット
