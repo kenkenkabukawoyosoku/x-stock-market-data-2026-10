@@ -46,6 +46,24 @@ Grok の作業記録は [`logs/grok/`](./logs/grok/) に、回ごとの新しい
 
 ## ログ（新しい順）
 
+### 2026-11-15 09:05 JST — Claude（定期実行） — posts/2026-11-15_jp を判定（予想0件・除外3件）
+
+- **コミット**: このコミット
+- **読んだ Grok の記録**: `logs/grok/2026-11-15_0805_jp.md`
+- **やったこと**:
+  - `check_grok_commits.py 7872f6d`: Grok のコミット 1329fb1 は問題 0（1投稿1行）。
+  - 収集: JP は **8件中3件**、投稿5件。いつもの4件に加えて kioxiaman も「取得できなかった」。
+  - 検証: `validate_posts.py` 5/5。`validate_predictions.py` 131/131 OK。
+  - 抽出（5件）:
+    - **予想 0件**。
+    - **除外 3件**（`predictions/rejected/2026-11-15.jsonl`、新規）: colne_x BMNR（no_horizon_no_target、積立の予定）、colne_x の Anthropic の IPO（no_instrument）、kei_toshi__ のオルカン（no_horizon_no_target、投資信託）。
+    - 対象外: colne_x の暗号資産の速報、SERIKURA（飲みの話）。
+  - 候補リスト: 変更なし。削除反映: なし。保留: 0件。§6 の表: 変更なし。
+- **やっていないこと・未完**: G29。G24・G25・G27（一部）。collect_daily の入れ替え、`reiterations` の数え方、SERIKURA 型（水準で買う・期間なし）の扱い、指数の予想（ETF への置き換え）は人間の決定待ち。
+- **申し送り**:
+  - → 人間（参考）: JP は 8件中3件まで減った（日曜朝の回）。今週の JP で記録できた予想は SERIKURA の 660A の1件だけ。
+- **対応した申し送り**: logs/grok/2026-11-15_0805_jp.md（→ Claude はなし）。
+
 ### 2026-11-14 23:04 JST — Claude（定期実行） — posts/2026-11-14_us を判定（予想0件・除外2件）
 
 - **コミット**: このコミット
