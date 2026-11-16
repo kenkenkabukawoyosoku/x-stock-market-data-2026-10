@@ -46,6 +46,25 @@ Grok の作業記録は [`logs/grok/`](./logs/grok/) に、回ごとの新しい
 
 ## ログ（新しい順）
 
+### 2026-11-16 09:04 JST — Claude（定期実行） — posts/2026-11-16_jp_2 を判定（予想0件・除外4件）。週次の account_check 5件を反映
+
+- **コミット**: このコミット
+- **読んだ Grok の記録**: `logs/grok/2026-11-16_0800_jp.md`（中身は仮の1行）, `logs/grok/2026-11-16_0800_jp_2.md`
+- **やったこと**:
+  - `check_grok_commits.py 91d2c82`: 問題3件。ac3c76f の posts/2026-11-16_jp.jsonl・candidates/x_facts/2026-11-16_jp.jsonl・記録が仮の中身。54a9cec・a034e88・0e1c606 の `_2` は正しい。既存ファイルの変更はない。`_2` だけを使った。
+  - 収集: JP は記録では **8件中8件**（4件は直近投稿なし）、投稿9件。
+  - 検証: `validate_posts.py` 9/9、`validate_x_facts.py` 5/5、`validate_predictions.py` 132/132 OK。
+  - 抽出（9件）:
+    - **予想 0件**。
+    - **除外 4件**（`predictions/rejected/2026-11-16.jsonl`、新規）: kei_toshi__ 8058・285A（no_clear_direction、問いかけ）、SERIKURA の半導体の話（no_instrument）、colne_x の note 告知 N225（no_clear_direction）。
+    - 対象外: colne_x ×2（記事リンク）、kei_toshi__ のあいさつ、kioxiaman ×2（NVIDIA のニュースの転載）。
+  - **候補リスト**（`candidates/jp_candidates.json`）: x_facts/2026-11-16_jp_2.jsonl の account_check 5件を反映。colne_x 21085→19863、kei_toshi__ 23805→24655、kioxiaman 13102→13333、SERIKURA 25284→25196、JNR63_nolife 1348→1391。5件とも active。observations は colne_x の paid_group_invite（前回と同じ）、JNR63_nolife の wealth_claim（新しく出た）。metadata.changes に追記。
+  - 削除反映: なし。保留: 0件。§6 の表: 変更なし。
+- **やっていないこと・未完**: G29。G24・G25・G27（一部）。collect_daily の入れ替え、`reiterations` の数え方、SERIKURA 型（水準で買う・期間なし）の扱い、指数の予想（ETF への置き換え）は人間の決定待ち。
+- **申し送り**:
+  - → 人間（参考）: JNR63_nolife は account_check では active（直近投稿なし）。プロフィールに資産の主張（wealth_claim）がある。iddm_simple・tomorotenn・attack_investor の account_check は今回なかった。
+- **対応した申し送り**: logs/grok/2026-11-16_0800_jp_2.md の → Claude（account_check を反映、`_2` を使った）。
+
 ### 2026-11-15 23:04 JST — Claude（定期実行） — posts/2026-11-15_us を判定（予想1件・除外2件）
 
 - **コミット**: このコミット
