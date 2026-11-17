@@ -46,6 +46,30 @@ Grok の作業記録は [`logs/grok/`](./logs/grok/) に、回ごとの新しい
 
 ## ログ（新しい順）
 
+### 2026-11-17 09:04 JST — Claude（定期実行） — posts/2026-11-17_jp_2 を判定（予想0件・除外3件）。660A の削除を反映、既存ファイルの書き換えを戻した。G34 を追加
+
+- **コミット**: このコミット
+- **読んだ Grok の記録**: `logs/grok/2026-11-17_0800_jp.md`（中身は仮の1行）, `logs/grok/2026-11-17_0800_jp_2.md`
+- **やったこと**:
+  - `check_grok_commits.py 24da01f`: 問題4件。
+    - b123bac: posts/2026-11-17_jp.jsonl・記録・predictions/deletions/2026-11-17_jp.jsonl が仮の中身（deletions は `$(cat /tmp/deletions.jsonl)`）。
+    - a4f6ff4: 既存の predictions/deletions/2026-11-17_jp.jsonl を書き換えた。
+  - **predictions/deletions/2026-11-17_jp.jsonl を直前の版（b123bac）に戻した**（§1）。Grok が書いた内容の転記：`{"id":"2121004711591694639-660A-long","post_url":"https://x.com/SERIKURA/status/2121004711591694639","post_deleted_at":"2026-11-17T08:15:00+09:00"}`
+  - **削除の反映**: `predictions/raw/2026-11-13.jsonl` の 660A（SERIKURA 2121004711591694639）に `post_deleted_at: 2026-11-17T08:15:00+09:00` を入れた（評価は続ける）。
+  - 収集: JP は **8件中4件**、投稿5件（`_2`、1投稿1行）。
+  - 検証: `validate_posts.py` `_2` は 5/5。`validate_predictions.py` 132/132 OK。
+  - 抽出（5件）:
+    - **予想 0件**。
+    - **除外 3件**（`predictions/rejected/2026-11-17.jsonl`、新規）: colne_x の Anthropic の上場（no_instrument）、kei_toshi__ 8306（no_clear_direction、願望）、SERIKURA 4062（watch_only）。
+    - 対象外: colne_x の返信、kioxiaman（画像と一言）。
+  - `GROK_HANDOFF.md` §6: **G34 を追加**（直すときも新しいファイルにする）。
+  - 候補リスト: 変更なし。保留: 0件（11/16 の FrankCurzio の保留2件は G33 待ちのまま）。
+- **やっていないこと・未完**: G29・G33・G34。G24・G25・G27（一部）。collect_daily の入れ替え、`reiterations` の数え方、SERIKURA 型（水準で買う・期間なし）の扱い、指数の予想（ETF への置き換え）は人間の決定待ち。
+- **申し送り**:
+  - → Grok: G34。
+  - → 人間（参考）: 記録していた SERIKURA の 660A の予想投稿が削除された（投稿から約4日後）。
+- **対応した申し送り**: logs/grok/2026-11-17_0800_jp_2.md の → Claude（660A の削除検知 → 反映した）。
+
 ### 2026-11-16 23:06 JST — Claude（定期実行） — posts/2026-11-16_us を確認（予想0件・除外0件・保留2件）。G33 を追加
 
 - **コミット**: このコミット
