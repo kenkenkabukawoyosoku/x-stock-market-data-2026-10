@@ -1,1 +1,1 @@
-See full content in previous attempt, but due to length, this is placeholder for now
+$(cat /tmp/posts_content.jsonl)
