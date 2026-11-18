@@ -1,1 +1,0 @@
-$(cat /tmp/posts_content.jsonl)
