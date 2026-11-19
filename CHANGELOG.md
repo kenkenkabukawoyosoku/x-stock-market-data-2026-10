@@ -46,6 +46,23 @@ Grok の作業記録は [`logs/grok/`](./logs/grok/) に、回ごとの新しい
 
 ## ログ（新しい順）
 
+### 2026-11-19 09:04 JST — Claude（定期実行） — posts/2026-11-19_jp を判定（予想0件・除外4件）
+
+- **コミット**: このコミット
+- **読んだ Grok の記録**: `logs/grok/2026-11-19_0800_jp.md`
+- **やったこと**:
+  - `check_grok_commits.py 09ce0f4`: Grok のコミット aeea507 は問題 0（1投稿1行）。
+  - 収集: JP は記録では **8件中8件**（一部は直近24時間の投稿なし）、投稿9件。G35（11/18 の US）は未対応。
+  - 検証: `validate_posts.py` 9/9。`validate_predictions.py` 132/132 OK。
+  - 抽出（9件）:
+    - **予想 0件**。
+    - **除外 4件**（`predictions/rejected/2026-11-19.jsonl`、新規）: kioxiaman SNDK（no_horizon_no_target、「まもなく」）、kei_toshi__ 2914（no_clear_direction）、SERIKURA の「アンソロピック相場」（no_instrument）、colne_x の note 告知（no_clear_direction）。
+    - 対象外: colne_x ×4（記事リンク、あいさつ、3778 のニュースへの絵文字）、SERIKURA（公募価格の一言）。
+  - 候補リスト: 変更なし。削除反映: なし。保留: 0件。§6 の表: 変更なし。
+- **やっていないこと・未完**: G29・G35。G24・G25・G27（一部）。collect_daily の入れ替え、`reiterations` の数え方、SERIKURA 型（水準で買う・期間なし）の扱い、指数の予想（ETF への置き換え）は人間の決定待ち。
+- **申し送り**: なし
+- **対応した申し送り**: logs/grok/2026-11-19_0800_jp.md の → Claude（G35 は US の回で対応予定）。
+
 ### 2026-11-18 23:05 JST — Claude（定期実行） — 判定0件（11/18 の US は仮の中身だけ、削除・作り直しを戻した）。G35 を追加
 
 - **コミット**: このコミット
