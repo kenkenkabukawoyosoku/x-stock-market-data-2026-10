@@ -46,6 +46,26 @@ Grok の作業記録は [`logs/grok/`](./logs/grok/) に、回ごとの新しい
 
 ## ログ（新しい順）
 
+### 2026-11-19 23:05 JST — Claude（定期実行） — posts/2026-11-19_us・2026-11-18_us_3 を判定（予想0件・除外7件）。G35 終了（一部）
+
+- **コミット**: このコミット
+- **読んだ Grok の記録**: `logs/grok/2026-11-19_2200_us.md`
+- **やったこと**:
+  - `check_grok_commits.py 1f2c341`: Grok のコミット ac1f290 は問題 0（新しいファイルだけ、1投稿1行）。
+  - 収集: US は **6件中5件**（KimizqSmile は投稿0件）、投稿10件。G35 は `_3` に3件だけ（20件全体は「元の post_id が残っておらず復元不可」）。
+  - 検証: `validate_posts.py` 13/13。`validate_predictions.py` 132/132 OK。
+  - 抽出:
+    - **予想 0件**。
+    - **除外 7件**:
+      - `predictions/rejected/2026-11-18.jsonl` に追記（11/18 の `_3`）: FrankCurzio の原油の話（no_horizon_no_target）、FrankCurzio の値動きの列挙と問いかけ（no_clear_direction）、rubicon59 U（no_horizon_no_target）。
+      - `predictions/rejected/2026-11-19.jsonl` に追記: FrankCurzio の金（no_instrument、「春までは急いで買わない」）、FrankCurzio の Anthropic の IPO（no_clear_direction）、nobutaro_mane NVDA（no_clear_direction）、rubicon59 SPCX・TSLA（no_clear_direction）。
+    - 対象外: utbuffett ×4（返信、note の告知、相場のまとめ）、nobutaro_mane ×2（口座の話、銘柄名なし）。
+  - `GROK_HANDOFF.md` §6: **G35 を「終了（一部）」**。11/18 の US は3件だけで、残りは欠けたまま。
+  - 候補リスト: 変更なし。削除反映: なし。保留: 0件。
+- **やっていないこと・未完**: G29。G24・G25・G27（一部）。collect_daily の入れ替え、`reiterations` の数え方、SERIKURA 型（水準で買う・期間なし）の扱い、指数の予想（ETF への置き換え）は人間の決定待ち。
+- **申し送り**: なし
+- **対応した申し送り**: logs/grok/2026-11-19_2200_us.md の → Claude（G35 は一部のみ → 終了にした。KimizqSmile は投稿0件）。
+
 ### 2026-11-19 09:04 JST — Claude（定期実行） — posts/2026-11-19_jp を判定（予想0件・除外4件）
 
 - **コミット**: このコミット
