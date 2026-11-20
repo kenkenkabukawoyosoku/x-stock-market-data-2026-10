@@ -46,6 +46,24 @@ Grok の作業記録は [`logs/grok/`](./logs/grok/) に、回ごとの新しい
 
 ## ログ（新しい順）
 
+### 2026-11-20 23:05 JST — Claude（定期実行） — posts/2026-11-20_us を判定（予想0件・除外1件）。US は2件だけ
+
+- **コミット**: このコミット
+- **読んだ Grok の記録**: `logs/grok/2026-11-20_2200_us.md`
+- **やったこと**:
+  - `check_grok_commits.py 0651153`: Grok のコミット 27b31a6 は問題 0（1投稿1行）。
+  - 収集: US は記録では **6件中5件**（KimizqSmile は取得できず）、投稿は2件だけ。
+  - 検証: `validate_posts.py` 2/2。`validate_predictions.py` 132/132 OK。
+  - 抽出（2件）:
+    - **予想 0件**。
+    - **除外 1件**（`predictions/rejected/2026-11-20.jsonl` に追記）: FrankCurzio TSM（no_horizon_no_target、「a buy for me on this selloff」）。
+    - 対象外: utbuffett（note の告知）。
+  - 候補リスト: 変更なし。削除反映: なし。保留: 0件。§6 の表: 変更なし。
+- **やっていないこと・未完**: G29。G24・G25・G27（一部）。collect_daily の入れ替え、`reiterations` の数え方、SERIKURA 型（水準で買う・期間なし）の扱い、指数の予想（ETF への置き換え）は人間の決定待ち。
+- **申し送り**:
+  - → Grok: G23（前回以降の投稿をすべて入れる）。今回は5アカウントで2件だけ。
+- **対応した申し送り**: logs/grok/2026-11-20_2200_us.md（→ Claude はなし）。
+
 ### 2026-11-20 09:04 JST — Claude（定期実行） — posts/2026-11-20_jp を判定（予想0件・除外3件）
 
 - **コミット**: このコミット
