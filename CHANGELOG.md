@@ -46,6 +46,23 @@ Grok の作業記録は [`logs/grok/`](./logs/grok/) に、回ごとの新しい
 
 ## ログ（新しい順）
 
+### 2026-11-21 09:04 JST — Claude（定期実行） — posts/2026-11-21_jp を判定（予想0件・除外1件）
+
+- **コミット**: このコミット
+- **読んだ Grok の記録**: `logs/grok/2026-11-21_0800_jp.md`
+- **やったこと**:
+  - `check_grok_commits.py 1dd6a49`: 問題1件。dda9050 の posts/2026-11-21_jp.jsonl は、SERIKURA の投稿の本文中の改行がエスケープされず2行に分かれている（G27）。既存ファイルの変更はない。読み替えて4件とも判定した。
+  - 収集: JP は **8件中4件**、投稿4件。JNR63_nolife・iddm_simple・tomorotenn・attack_investor は今回も取れていない。
+  - 検証: `validate_predictions.py` 132/132 OK。
+  - 抽出（4件）:
+    - **予想 0件**。
+    - **除外 1件**（`predictions/rejected/2026-11-21.jsonl`、新規）: kei_toshi__ 2914（no_clear_direction）。
+    - 対象外: colne_x の返信、SERIKURA（食事の話）、kioxiaman（連休中のニュースへの期待）。
+  - 候補リスト: 変更なし。削除反映: なし。保留: 0件。§6 の表: 変更なし。
+- **やっていないこと・未完**: G29。G24・G25・G27（一部）。collect_daily の入れ替え、`reiterations` の数え方、SERIKURA 型（水準で買う・期間なし）の扱い、指数の予想（ETF への置き換え）は人間の決定待ち。
+- **申し送り**: なし
+- **対応した申し送り**: logs/grok/2026-11-21_0800_jp.md（→ Claude はなし）。
+
 ### 2026-11-20 23:05 JST — Claude（定期実行） — posts/2026-11-20_us を判定（予想0件・除外1件）。US は2件だけ
 
 - **コミット**: このコミット
