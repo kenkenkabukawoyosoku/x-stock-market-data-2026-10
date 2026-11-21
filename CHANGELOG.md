@@ -46,6 +46,24 @@ Grok の作業記録は [`logs/grok/`](./logs/grok/) に、回ごとの新しい
 
 ## ログ（新しい順）
 
+### 2026-11-21 23:04 JST — Claude（定期実行） — posts/2026-11-21_us を判定（予想0件・除外2件）
+
+- **コミット**: このコミット
+- **読んだ Grok の記録**: `logs/grok/2026-11-21_2200_us.md`
+- **やったこと**:
+  - `check_grok_commits.py 13acc8d`: Grok のコミット f6e4557 は問題 0（1投稿1行）。
+  - 収集: US は **6件中5件**（KimizqSmile は最近投稿なし）、投稿6件。記録では「選別せず全文収集」。削除確認は今回は未実施。
+  - 検証: `validate_posts.py` 6/6。`validate_predictions.py` 132/132 OK。
+  - 抽出（6件）:
+    - **予想 0件**。
+    - **除外 2件**（`predictions/rejected/2026-11-21.jsonl` に追記）: FrankCurzio の利下げの見通し（no_instrument）、rubicon59 の「来週は節税売り」（no_instrument）。
+    - 対象外: utbuffett ×2（投資手法・現金比率の話）、nobutaro_mane（ニュースへの感想）、BearBullTraders（チャートへの問いかけ）。
+  - 候補リスト: 変更なし。削除反映: なし。保留: 0件。§6 の表: 変更なし。
+- **やっていないこと・未完**: G29。G24・G25・G27（一部）。collect_daily の入れ替え、`reiterations` の数え方、SERIKURA 型（水準で買う・期間なし）の扱い、指数の予想（ETF への置き換え）は人間の決定待ち。
+- **申し送り**:
+  - → 人間（参考）: US の KimizqSmile も直近は「投稿なし」が続いている（11/11 以降の多くの回）。
+- **対応した申し送り**: logs/grok/2026-11-21_2200_us.md の → Claude（KimizqSmile は投稿なし、削除確認は今回なし）。
+
 ### 2026-11-21 09:04 JST — Claude（定期実行） — posts/2026-11-21_jp を判定（予想0件・除外1件）
 
 - **コミット**: このコミット
