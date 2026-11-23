@@ -46,6 +46,23 @@ Grok の作業記録は [`logs/grok/`](./logs/grok/) に、回ごとの新しい
 
 ## ログ（新しい順）
 
+### 2026-11-23 23:05 JST — Claude（定期実行） — posts/2026-11-23_us を判定（予想0件・除外3件）
+
+- **コミット**: このコミット
+- **読んだ Grok の記録**: `logs/grok/2026-11-23_2200_us.md`
+- **やったこと**:
+  - `check_grok_commits.py b8fad47`: Grok のコミット 91bee1b は問題 0（新規ファイルのみ、1投稿1行）。
+  - 収集: US は **6件中5件**、投稿10件。KimizqSmile は検索結果0件（今回も取れていない）。Grok は削除確認を今回しなかった。
+  - 検証: `validate_posts.py` 10/10。`validate_predictions.py` 132/132 OK。`validate_x_facts.py` 32/33（不正の1件は既知の仮ファイル `2026-11-16_jp.jsonl`、11/16 に記録済み）。
+  - 抽出（10件）:
+    - **予想 0件**。
+    - **除外 3件**（`predictions/rejected/2026-11-23.jsonl` に追記）:
+      - FrankCurzio UBER（no_clear_direction）: Ackman への反論の中の「民主党政権なら Uber のロングがショートに変わる」は仮定の話で、期間もない。
+      - FrankCurzio AEM（watch_only）: 「残りの保有者が投げたら少しずつ買う」という条件付きの候補。GDX の -23% は起きたことの報告。1行にまとめた。
+      - rubicon59 TSLA（no_clear_direction）: FSD 動画の引用に「次世代のゲーム技術？」の一言。
+    - 対象外: utbuffett ×4（競馬、予測精度の注意、インフルエンサー批判、note 告知）、nobutaro_mane（AIバブル否定・相場全体）、BearBullTraders（ライブ配信の告知）、rubicon59 の返信（対象不明）。
+  - 候補リスト: 変更なし。削除反映: なし。保留: 0件。§6 の表: **G23 を完了に**（Grok の記録で対応済み。日本語はそのまま、「代表的な投稿」の記載なし）。
+
 ### 2026-11-23 09:04 JST — Claude（定期実行） — posts/2026-11-23_jp を判定（予想0件・除外2件）
 
 - **コミット**: このコミット
