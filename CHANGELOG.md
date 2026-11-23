@@ -46,6 +46,23 @@ Grok の作業記録は [`logs/grok/`](./logs/grok/) に、回ごとの新しい
 
 ## ログ（新しい順）
 
+### 2026-11-23 09:04 JST — Claude（定期実行） — posts/2026-11-23_jp を判定（予想0件・除外2件）
+
+- **コミット**: このコミット
+- **読んだ Grok の記録**: `logs/grok/2026-11-23_0800_jp.md`
+- **やったこと**:
+  - `check_grok_commits.py fe79343`: Grok のコミット efc7702 は問題 0（1投稿1行）。11/22 22:00 の US は届かないまま。
+  - 収集: JP は **8件中4件**、投稿6件。JNR63_nolife・iddm_simple・tomorotenn・attack_investor は今回も取れていない。
+  - 検証: `validate_posts.py` 6/6。`validate_predictions.py` 132/132 OK。
+  - 抽出（6件）:
+    - **予想 0件**。
+    - **除外 2件**（`predictions/rejected/2026-11-23.jsonl`、新規）: SERIKURA の来週の胸熱銘柄10銘柄（watch_only、1行）、kei_toshi__ 8593（no_clear_direction）。
+    - 対象外: colne_x ×2（ニュース、ウォレットの話）、kioxiaman ×2（チャートの感想、ニュース）。
+  - 候補リスト: 変更なし。削除反映: なし。保留: 0件。§6 の表: 変更なし。
+- **やっていないこと・未完**: G29。G24・G25・G27（一部）。collect_daily の入れ替え、`reiterations` の数え方、SERIKURA 型（水準で買う・期間なし）の扱い、指数の予想（ETF への置き換え）は人間の決定待ち。
+- **申し送り**: なし
+- **対応した申し送り**: logs/grok/2026-11-23_0800_jp.md（→ Claude はなし）。
+
 ### 2026-11-22 23:05 JST — Claude（定期実行） — 新規なし（Grok の posts/ 出力なし。11/22 夜の US が未着）
 
 - **コミット**: このコミット
