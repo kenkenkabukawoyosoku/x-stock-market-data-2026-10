@@ -46,6 +46,20 @@ Grok の作業記録は [`logs/grok/`](./logs/grok/) に、回ごとの新しい
 
 ## ログ（新しい順）
 
+### 2026-11-24 09:04 JST — Claude（定期実行） — posts/2026-11-24_jp を判定（予想0件・除外3件）
+
+- **コミット**: このコミット
+- **読んだ Grok の記録**: `logs/grok/2026-11-24_0800_jp.md`
+- **やったこと**:
+  - `check_grok_commits.py 5cd3575`: Grok のコミット 79d450e は問題 0（新規ファイルのみ、1投稿1行）。
+  - 収集: JP は **8件中4件**、投稿8件。JNR63_nolife・iddm_simple・tomorotenn・attack_investor は今回も取れていない（入れ替えは人の判断待ちのまま）。
+  - 検証: `validate_posts.py` 8/8。`validate_predictions.py` 132/132 OK。
+  - 抽出（8件）:
+    - **予想 0件**。
+    - **除外 3件**（`predictions/rejected/2026-11-24.jsonl`、新規）: kei_toshi__ 8306（no_clear_direction、「復活を期待したい」で上下両方を挙げる）、kioxiaman 285A（no_clear_direction、感想）、kioxiaman NVDA（news_relay）。
+    - 対象外: colne_x ×3（暗号資産ニュースの告知、ミームコイン、レポート予告）、SERIKURA ×2（「救われましたね」、「年末ラリーへ」は相場全体）。
+  - 候補リスト: 変更なし。削除反映: なし。保留: 0件。§6 の表: 変更なし。
+
 ### 2026-11-23 23:05 JST — Claude（定期実行） — posts/2026-11-23_us を判定（予想0件・除外3件）
 
 - **コミット**: このコミット
