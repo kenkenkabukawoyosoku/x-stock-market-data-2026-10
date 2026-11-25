@@ -46,6 +46,20 @@ Grok の作業記録は [`logs/grok/`](./logs/grok/) に、回ごとの新しい
 
 ## ログ（新しい順）
 
+### 2026-11-25 09:05 JST — Claude（定期実行） — posts/2026-11-25_jp を判定（予想0件・除外3件）
+
+- **コミット**: このコミット
+- **読んだ Grok の記録**: `logs/grok/2026-11-25_0800_jp.md`
+- **やったこと**:
+  - `check_grok_commits.py cf8eaf0`: Grok のコミット 09eaaa5 は問題 0（新規ファイルのみ、1投稿1行）。11/24 22:00 の US は届かないままだった。
+  - 収集: JP は **8件中4件**、投稿4件。JNR63_nolife・iddm_simple・tomorotenn・attack_investor は今回も取れていない（入れ替えは人の判断待ちのまま）。Grok の記録に「G29 は元データ不明のため対応せず」とある（G29 は未着手のまま）。
+  - 検証: `validate_posts.py` 4/4。`validate_predictions.py` 132/132 OK。
+  - 抽出（4件）:
+    - **予想 0件**。
+    - **除外 3件**（`predictions/rejected/2026-11-25.jsonl`、新規）: kei_toshi__ 285A（no_clear_direction）、SERIKURA の「先物急落時は寄りのリバウンド狙い」5銘柄（watch_only、条件付きの一般的な手法で特定の日の予想ではない。1行）、kioxiaman DELL（news_relay、決算ニュース）。
+    - 対象外: colne_x ×1（取引所の招待リンク）。
+  - 候補リスト: 変更なし。削除反映: なし。保留: 0件。§6 の表: 変更なし。
+
 ### 2026-11-24 23:05 JST — Claude（定期実行） — 新規なし（Grok の posts/ 出力なし）
 
 - **コミット**: このコミット
