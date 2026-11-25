@@ -46,6 +46,23 @@ Grok の作業記録は [`logs/grok/`](./logs/grok/) に、回ごとの新しい
 
 ## ログ（新しい順）
 
+### 2026-11-25 23:05 JST — Claude（定期実行） — posts/2026-11-25_us を判定（予想0件・除外6件）
+
+- **コミット**: このコミット
+- **読んだ Grok の記録**: `logs/grok/2026-11-25_2201_us.md`
+- **やったこと**:
+  - `check_grok_commits.py 56e7988`: Grok のコミット 6516f87 は問題 0（新規ファイルのみ、1投稿1行）。
+  - 収集: US は **6件中6件**（KimizqSmile は直近投稿なし）、投稿9件。
+  - 検証: `validate_posts.py` 9/9。`validate_predictions.py` 132/132 OK。
+  - 抽出（9件）:
+    - **予想 0件**。
+    - **除外 6件**（`predictions/rejected/2026-11-25.jsonl` に追記）:
+      - FrankCurzio ANT（watch_only）: IPO 価格割れの報告と「様子を見る」。ロックアップ解除の売りへの言及はあるが、方向・期間の予想としては読まない。
+      - FrankCurzio AMZN（reiteration）: 11/6 の AMZN long（1y explicit、2118678175932981733）の期間中の繰り返し。元レコードの reiterations は 0 のまま。
+      - FrankCurzio NVDA（post_hoc_report）、BearBullTraders ANT（no_clear_direction）、rubicon59 NVDA（no_clear_direction）、rubicon59 CRDO（no_horizon_no_target、「バリュエーションが魅力的」で期間・目標なし）。
+    - 対象外: utbuffett ×3（相づち、他人のキオクシアのポジションの話×2）、nobutaro_mane（今年の相場全体の振り返り）。
+  - 候補リスト: 変更なし。削除反映: なし。保留: 0件。§6 の表: 変更なし。
+
 ### 2026-11-25 09:05 JST — Claude（定期実行） — posts/2026-11-25_jp を判定（予想0件・除外3件）
 
 - **コミット**: このコミット
