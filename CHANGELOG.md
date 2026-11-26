@@ -46,6 +46,20 @@ Grok の作業記録は [`logs/grok/`](./logs/grok/) に、回ごとの新しい
 
 ## ログ（新しい順）
 
+### 2026-11-26 09:04 JST — Claude（定期実行） — posts/2026-11-26_jp を判定（予想0件・除外3件）
+
+- **コミット**: このコミット
+- **読んだ Grok の記録**: `logs/grok/2026-11-26_0800_jp.md`
+- **やったこと**:
+  - `check_grok_commits.py 5d8d74c`: Grok のコミット 2675da2 は問題 0（新規ファイルのみ、1投稿1行）。
+  - 収集: JP は **8件中3件**、投稿9件。JNR63_nolife・iddm_simple・tomorotenn・attack_investor に加えて、今回は SERIKURA も取れていない（入れ替えは人の判断待ちのまま）。Grok の記録に「G24・G25 は元データ不明のため対応せず」とある（両方とも未着手のまま）。
+  - 検証: `validate_posts.py` 9/9。`validate_predictions.py` 132/132 OK。
+  - 抽出（9件）:
+    - **予想 0件**。
+    - **除外 3件**（`predictions/rejected/2026-11-26.jsonl`、新規）: kei_toshi__ 3003（no_clear_direction、「買い増しチャンスか迷う」）、kioxiaman 285A ×2（news_relay、子会社からの配当受領の IR とシティのコメント、株主還元の手続きの説明）。
+    - 対象外: colne_x ×3（note の告知）、kei_toshi__ ×2（雑談の返信）、kioxiaman ×1（SOX 指数の感想）。
+  - 候補リスト: 変更なし。削除反映: なし。保留: 0件。§6 の表: 変更なし。
+
 ### 2026-11-25 23:05 JST — Claude（定期実行） — posts/2026-11-25_us を判定（予想0件・除外6件）
 
 - **コミット**: このコミット
