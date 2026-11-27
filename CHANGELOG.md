@@ -46,6 +46,20 @@ Grok の作業記録は [`logs/grok/`](./logs/grok/) に、回ごとの新しい
 
 ## ログ（新しい順）
 
+### 2026-11-27 09:04 JST — Claude（定期実行） — posts/2026-11-27_jp を判定（予想0件・除外1件）
+
+- **コミット**: このコミット
+- **読んだ Grok の記録**: `logs/grok/2026-11-27_0800_jp.md`
+- **やったこと**:
+  - `check_grok_commits.py 2f3a48e`: Grok のコミット beb2f3a は問題 0（新規ファイルのみ、1投稿1行）。11/26 22:00 の US は届かないままだった（米感謝祭）。
+  - 収集: JP は **8件中3件**、投稿4件。JNR63_nolife・iddm_simple・tomorotenn・attack_investor・SERIKURA が取れていない（SERIKURA は2回続けて）。Grok の記録の「→ Claude」は「一部アカウントで直近24時間の投稿が検索で見つからず」。対応は不要（入れ替えは人の判断待ちのまま）。
+  - 検証: `validate_posts.py` 4/4。`validate_predictions.py` 132/132 OK。
+  - 抽出（4件）:
+    - **予想 0件**。
+    - **除外 1件**（`predictions/rejected/2026-11-27.jsonl`、新規）: kei_toshi__ 8593（no_horizon_no_target、「上がらないうちに集めておきたい」で期間・目標なし）。
+    - 対象外: colne_x ×2（配信・note の告知）、kioxiaman ×1（キオクシアの人気についての冗談）。
+  - 候補リスト: 変更なし。削除反映: なし。保留: 0件。§6 の表: 変更なし。
+
 ### 2026-11-26 23:05 JST — Claude（定期実行） — 新規なし（Grok の posts/ 出力なし）
 
 - **コミット**: このコミット
